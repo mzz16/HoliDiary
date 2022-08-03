@@ -5,43 +5,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDb4vTBtJ5eI4DOAJXj4ov7YSdM066-PQ0&callback=initMap"></script>
-<script src="/thirdproject/jquery-3.1.1.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('button').on('click', function() {
-			window.navigator.geolocation.getCurrentPosition(success, error);
-		})
-	})
-
-	function success(position) {
-		$('div').text(
-				"내 위치 위도 = " + position.coords.latitude + " 내 위치 경도 = "
-						+ position.coords.longitude);
-	}
-	function error(err) {
-		$('div').text("조회 실패 ==>" + err.code);
-	}
-</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script type="module" src="resources/js/mj_mapIndex.js"></script>
+<link rel="stylesheet" type="text/css" href="resources/css/mj_map.css" />
 </head>
 <body>
-	<button>현재위치 조회</button>
-	<div></div>
 
-	<div id="googleMap" style="width: 100%; height: 700px;"></div>
+	<input id="pac-input" class="controls" type="text"
+		placeholder="Search Box" />
+	<div id="map"></div>
 
-	<script>
-		function myMap() {
-			var mapOptions = {
-				center : new google.maps.LatLng(51.508742, -0.120850),
-				zoom : 5
-			};
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDb4vTBtJ5eI4DOAJXj4ov7YSdM066-PQ0&callback=initAutocomplete&libraries=places&v=weekly"
+		defer></script>
 
-			var map = new google.maps.Map(document.getElementById("googleMap"),
-					mapOptions);
-		}
-	</script>
+
 
 </body>
 </html>
