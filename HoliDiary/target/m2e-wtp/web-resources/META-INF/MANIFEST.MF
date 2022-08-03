@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
-Built-By: narin
-=======
 Built-By: kmanv
->>>>>>> 27e001446cd2d83c5791d115aab035c92eca5471
 Build-Jdk: 14
 Created-By: Maven Integration for Eclipse
 
