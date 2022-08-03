@@ -1,5 +1,5 @@
 function popup() {
-	let options = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=1200, height=800, top=0,left=0";
+	let options = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=1000, height=600, top=100, left=270";
 
-	window.open("http://www.naver.com/%22,%22_blank", options);
+	window.open("popup.jsp","_blank", options);
 }
