@@ -6,15 +6,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="resources/js/sm_popupJs"></script>
+<link rel="stylesheet" href="resources/sej_css/index.css">
 </head>
 <body>
-
-	<div>diary 윈도우 열기</div>
-	<button onclick=popup()>popup diary</button>
-
-	<div>map으로 가기</div>
-	<button onclick='location.href="map.go"'>GO</button>
-
-
+	<header id="top_header">
+		<h1>헤더 영역</h1>
+	</header>
+	
+	<div id="main_place">
+	
+	<jsp:include page="${contentPage }"></jsp:include>
+	
+	</div>
+	
+	<footer id="bottom_footer">
+		<h1>푸터 영역</h1>
+	</footer>
+	
 </body>
 </html>
