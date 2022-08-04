@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="resources/sej_css/index.css">
-<script type="text/javascript" src="resources/js/sm_popupJs.js"></script>
+<script type="text/javascript" src="resources/sm_js/sm_popupJs.js"></script>
 <script type="text/javascript" src="resources/jquery.js"></script>
 
 </head>

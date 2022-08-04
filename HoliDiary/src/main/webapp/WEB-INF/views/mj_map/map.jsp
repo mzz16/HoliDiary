@@ -3,8 +3,8 @@
 <title>Place Autocomplete and Directions</title>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
-<link rel="stylesheet" type="text/css" href="resources/css/mj_map.css" />
-<script type="module" src="resources/js/mj_mapIndex.js"></script>
+<link rel="stylesheet" type="text/css" href="resources/mj_css/mj_map.css" />
+<script type="module" src="resources/mj_js/mj_mapIndex.js"></script>
 </head>
 <body>
 
