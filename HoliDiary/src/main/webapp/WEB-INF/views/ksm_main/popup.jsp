@@ -108,7 +108,7 @@
         
       </div>
       <div class="action-buttons-wrapper">
-        <button class="action-buttons btn-upload">포스트 작성</button>
+        <button class="action-buttons btn-upload">포스트 작성1</button>
       </div>
     </div>
     
