@@ -53,14 +53,6 @@
 		<h1>푸터 영역</h1>
 	</footer>
 	</div>
-	<script>
-function openNav() {
-  document.getElementById("menu_bar").style.width = "250px";
-}
-
-function closeNav() {
-  document.getElementById("menu_bar").style.width = "0";
-}
-</script>
+	
 </body>
 </html>
