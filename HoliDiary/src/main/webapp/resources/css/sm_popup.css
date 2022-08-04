@@ -1,0 +1,32 @@
+body{
+	background-color: beige;
+}
+
+.popupTable{
+	width: 930px;
+}
+
+.leftMenu{
+	width: 250px;
+}
+
+.leftMenu-0{
+	width: 250px;
+	height: 100px;
+}
+
+.leftMenu-1{
+	width: 250px;
+	text-align: center;
+}
+
+.leftMenu-2{
+	height: 500px;
+	text-align: center;
+}
+
+.leftMenu-img{
+	width: 70px;
+	height: 70px;
+	border-radius: 10px;
+}
