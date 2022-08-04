@@ -5,8 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="resources/js/sm_popupJs"></script>
+
 <link rel="stylesheet" href="resources/sej_css/index.css">
+<script type="text/javascript" src="resources/js/sm_popupJs.js"></script>
+<script type="text/javascript" src="resources/jquery.js"></script>
+
 </head>
 <body>
 	<div id="background_box">
