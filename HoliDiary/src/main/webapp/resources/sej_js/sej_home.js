@@ -22,7 +22,16 @@ function closeNav() {
 	});
 }*/
 
-
+function mainSliderEvent() {
+	      $('.main_slider').slick({
+	    	  slidesToShow: 1,
+	    	  slidesToScroll: 1,
+	    	  autoplay: true,
+	    	  autoplaySpeed: 2000,
+	    	  arrows : true,         // 옆으로 이동하는 화살표 표시 여부
+	          dots : true, 
+	      });
+}
 
 
 
@@ -31,5 +40,6 @@ function closeNav() {
 $(function() {
 	openNav();
 	closeNav();
-	closeNav2();
+	/*closeNav2();*/
+	mainSliderEvent();
 });
