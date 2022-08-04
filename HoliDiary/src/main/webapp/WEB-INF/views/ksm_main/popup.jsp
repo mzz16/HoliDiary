@@ -21,7 +21,7 @@
         	<a><img src="https://images.unsplash.com/photo-1496340672773-0b29c9b17ed2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt=""></a>
       <details>
           	<summary><span class="profile-name">minji park</span></summary>
-          	<p class="profile-introduce">소개글 칸입니다. 가나다라마바사아자차카타파하</p>
+          	<p class="profile-introduce">소개글칸입니다. 가나다라마바사아자차카타파하</p>
       </details>
       </div>
       
