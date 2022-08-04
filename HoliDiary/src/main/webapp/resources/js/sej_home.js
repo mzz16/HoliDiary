@@ -5,3 +5,16 @@ function openNav() {
 function closeNav() {
   document.getElementById("menu_bar").style.width = "0";
 }
+
+
+
+
+
+
+
+
+
+$(function() {
+	openNav();
+	closeNav();
+});
