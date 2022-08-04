@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="resources/sej_css/index.css">
 <script type="text/javascript" src="resources/sm_js/sm_popupJs.js"></script>
 <script type="text/javascript" src="resources/jquery.js"></script>
-<script type="text/javascript" src="resources/js/sej_home.js"></script>
+<script type="text/javascript" src="resources/sej_js/sej_home.js"></script>
 </head>
 <body>
 	<div id="background_box">
@@ -17,13 +17,22 @@
 	<div id="menu_bar">
 		<label><img class="menu_bar_logo" src="resources/sej_img/slogo1-removebg-preview.png"></label>
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-			<a href="">마이페이지</a>
-			<a href="">홀리 NOW</a>
-			<a href="">Best 홀리</a>
-			<a href="">아이템샵</a>
-			<!-- 임시 연결 용 링크 입니다 -->
-			<a href="">로그인</a>
-			<a href="">회원가입</a>
+			<a class="menu_bar_diary_li" href="">
+			<img class="menu_diary_img" src="resources/sej_img/notebook.png">
+			<!-- <p>My 다이어리</p> -->
+			</a>
+			<a class="menu_bar_li_first" href="">My Diary</a>
+			<span class="menu_bar_border"></span>
+			<a class="menu_bar_li" href="">마이페이지</a>
+			<a class="menu_bar_li" href="">홀리 NOW</a>
+			<a class="menu_bar_li" href="">Best 홀리</a>
+			<a class="menu_bar_li" href="">아이템샵</a>
+			
+			<!-- 로그인 페이지 공간 입니다 -->
+			<%-- <div class="menu_bar_user_place">
+				<jsp:include page="${loginPage }"></jsp:include>
+			</div> --%>
+			
 	</div>
 	
 	<!-- HEADER 영역 -->
@@ -38,11 +47,11 @@
 		<input class="search_input" type="text" placeholder="검색">
 		</div>
 
+		<div class="top_menu_img_box">
+			<a class="top_menu_img_box_a" href="javascript:void(0)" onclick="openNav()"><img class="top_menu_img" src="resources/sej_img/menuIcon_berry.png"></a>
+		</div>
 		</div>
 		
-		<div class="top_menu_img_box">
-			<a href="javascript:void(0)" onclick="openNav()"><img class="top_menu_img" src="resources/sej_img/menuIcon.png"></a>
-		</div>
 		
 		
 	</header>
