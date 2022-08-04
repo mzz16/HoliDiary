@@ -11,6 +11,15 @@
 <body>
 	<div id="background_box">
 	
+	<div id="menu_bar">
+		<label><img class="menu_bar_logo" src="resources/sej_img/slogo1-removebg-preview.png"></label>
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<a href="">마이페이지</a>
+			<a href="">홀리 NOW</a>
+			<a href="">Best 홀리</a>
+			<a href="">아이템샵</a>
+	</div>
+	
 	<!-- HEADER 영역 -->
 	<header id="top_header">
 		<div class="header_contents_box">
@@ -26,18 +35,10 @@
 		</div>
 		
 		<div class="top_menu_img_box">
-			<a href=""><img class="top_menu_img" src="resources/sej_img/menuIcon.png"></a>
+			<a href="javascript:void(0)" onclick="openNav()"><img class="top_menu_img" src="resources/sej_img/menuIcon.png"></a>
 		</div>
 		
-		<div id="menu_bar">
-		<label><img src="resources/sej_img/logo1-removebg-preview.png"></label>
-		<ul>
-			<li>마이페이지</li>
-			<li>홀리 NOW</li>
-			<li>Best 홀리</li>
-			<li>아이템샵</li>
-		</ul>
-	</div>
+		
 	</header>
 	
 	<!-- Main Contents  -->
@@ -52,5 +53,14 @@
 		<h1>푸터 영역</h1>
 	</footer>
 	</div>
+	<script>
+function openNav() {
+  document.getElementById("menu_bar").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("menu_bar").style.width = "0";
+}
+</script>
 </body>
 </html>
