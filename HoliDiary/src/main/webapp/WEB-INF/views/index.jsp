@@ -5,24 +5,57 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet" href="resources/sej_css/index.css">
 <script type="text/javascript" src="resources/js/sm_popupJs.js"></script>
 <script type="text/javascript" src="resources/jquery.js"></script>
-<script>
-function popup() {
-	//let options = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=1000, height=600, top=100, left=270";
 
-	window.open("popup.open", "_blank","width=1000, height=600");
-}
-</script>
 </head>
 <body>
+	<div id="background_box">
+	
+	<div id="menu_bar">
+		<label><img class="menu_bar_logo" src="resources/sej_img/slogo1-removebg-preview.png"></label>
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<a href="">마이페이지</a>
+			<a href="">홀리 NOW</a>
+			<a href="">Best 홀리</a>
+			<a href="">아이템샵</a>
+	</div>
+	
+	<!-- HEADER 영역 -->
+	<header id="top_header">
+		<div class="header_contents_box">
+		
+		<img class="header_logo_img" src="resources/sej_img/logofit-removebg-preview.png">
+		<div class="search_box">
+		<div class="search_img">
+		<img src="resources/sej_img/search_berry.png">
+		</div>
+		<input class="search_input" type="text" placeholder="검색">
+		</div>
 
-	<div>diary 윈도우 열기</div>
-	<button onclick=popup()>popup diary</button>
-
-	<div>map으로 가기</div>
-	<button onclick='location.href="map.go"'>GO</button>
-
-
+		</div>
+		
+		<div class="top_menu_img_box">
+			<a href="javascript:void(0)" onclick="openNav()"><img class="top_menu_img" src="resources/sej_img/menuIcon.png"></a>
+		</div>
+		
+		
+	</header>
+	
+	<!-- Main Contents  -->
+	<div id="main_place">
+	
+	<jsp:include page="${contentPage }"></jsp:include>
+	
+	</div>
+	
+	<!-- FOOTER 영역 -->
+	<footer id="bottom_footer">
+		<h1>푸터 영역</h1>
+	</footer>
+	</div>
+	
 </body>
 </html>
