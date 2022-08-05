@@ -22,7 +22,6 @@
 }
 
 .after_login_box{
-	border: 1px solid black;
   text-align: center;
   margin-left: 45px;
   margin-bottom: 45px;
@@ -34,12 +33,39 @@
   width: 200px; 
 }
 
+.logout_box{
+	text-align: center;
+}
+
+.logout_box button{
+	height: 30px;
+	background-color: #FFDE59;
+	font-family: 'GangwonEdu_OTFBoldA';
+	font-size: 15pt;
+	color: #6667AB;
+	border-radius: 10px;
+	border: none;
+	cursor: pointer;
+	
+}
+
 
 #content_login{
 	position: relative;
 	width: 80%;
 	height: 100%;
 	margin: 0 auto;
+}
+
+#login_page_box{
+	position: absolute;
+	border: 1px solid black;
+	width: 500px;
+	height: 600px;
+	top: 50%;
+	left: 50%;
+	margin-top: -300px;
+	margin-left: -250px;
 }
 
 #login_box{
@@ -110,10 +136,58 @@
 	cursor: pointer;
 }
 
-.social_loing_box{
+.join_btn{
+	width: 80%;
+	height: 30px;
+	text-align: right;
+	margin: 10px auto;
+}
+
+.join_btn button{
+	width: 100px;
+	height: 100%;
+	font-size: 13pt;
+	font-family: 'GangwonEdu_OTFBoldA';
+	background-color: transparent;
+	color: #6667AB;
+	border: none;
+	cursor: pointer;
+}
+
+.social_login_box{
+	border: 1px solid black;
 	position: absolute;
-	top: 70%;
+	width: 200px;
+	height: 200px;
+	top: 50%;
 	left: 50%;
+	margin-left: -100px;
 	
+}
+
+.social_login_box button{
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.missing_user_box{
+	position: absolute;
+	bottom:0;
+	width: 90%;
+	text-align: right;
+	margin: 0 auto;
+}
+
+.missing_user_a{
+	display: inline-block;
+	border-bottom: 2px solid #6667AB;
+	margin-left: 5px;
+}
+
+.missing_user_a a{
+	text-decoration: none;
+	color: #6667AB;
+	font-family: 'GangwonEdu_OTFBoldA';
 }
 

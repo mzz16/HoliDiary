@@ -13,6 +13,10 @@
 <script type="text/javascript" src="resources/sm_js/sm_popupJs.js"></script>
 <script type="text/javascript" src="resources/sej_js/jquery.js"></script>
 <script type="text/javascript" src="resources/sej_js/sej_home.js"></script>
+<<<<<<< HEAD
+=======
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+>>>>>>> 1d5b818aaea9fe47f08ebdc9c9ac0b108a46902f
 <script type="text/javascript" src="resources/sej_js/sej_go.js"></script>
 <script type="text/javascript" src="resources/kjs_js/kjs_user.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

@@ -8,12 +8,7 @@
 </head>
 <body>
 
-	<div class="after_login_box">
-		${sessionScope.loginUser.userNickname }님
-	</div>
-	<div class="logout_box">
-		<button onclick="location.href='logout.do'">로그아웃</button>
-	</div>
+로그인 후 이용 가능한 기능입니다.
 
 </body>
 </html>

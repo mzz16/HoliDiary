@@ -11,6 +11,7 @@
 </head>
 <body>
 
+
 <div class="app-wrapper">
   <div class="left-area hide-on-mobile">
     <div class="app-header">
@@ -18,9 +19,9 @@
     <div class="left-area-content">
     	
       <div class="profile">
-        	<a><img src="https://images.unsplash.com/photo-1496340672773-0b29c9b17ed2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt=""></a>
+        	<a><img src="resources/kjs_profileImg/${sessionScope.loginUser.userImg }" alt=""></a>
       <details>
-          	<summary><span class="profile-name">minji park</span></summary>
+          	<summary><span class="profile-name">${sessionScope.loginUser.userNickname }</span></summary>
           	<p class="profile-introduce">소개글칸입니다. 가나다라마바사아자차카타파하</p>
       </details>
       </div>
@@ -83,8 +84,10 @@
       
       
     </div>
-    <button class="btn-invite" onclick="updateMyPopup">설정</button>
+    <button class="btn-invite" onclick="location.href='updateMyPopup'">설정 관리</button>
+    
   </div>
+
   <div class="right-area">
     <div class="right-area-upper">
       <button class="menu-button">
@@ -93,10 +96,9 @@
           <path d="M3 12h18M3 6h18M3 18h18" />
         </svg>
       </button>
+      
       <div class="search-part-wrapper">
-
         <div class="diary-title-name">다이어리 타이틀</div>
-        
         <button class="more-button">
           <svg width="24" height="20" fill="none" stroke="#51a380" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-more-vertical">
             <defs />
@@ -105,20 +107,21 @@
             <circle cx="12" cy="19" r="1" />
           </svg>
         </button>
-        
       </div>
+      
       <div class="action-buttons-wrapper">
-        <button class="action-buttons btn-upload">포스트 작성1</button>
+        <button class="action-buttons btn-upload">포스트 작성</button>
       </div>
     </div>
     
     <div class="page-right-content"> <!-- 우측 메인 컨텐트 페이지 -->
     
-    	<jsp:include page="${contentPage }"></jsp:include>
+    	<jsp:include page="${popupContentPage }"></jsp:include>
 			
-    </div>
-    
+    </div>   
   </div>
+
+</div>
 
 </body>
 </html>
