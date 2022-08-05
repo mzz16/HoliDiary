@@ -75,6 +75,7 @@ public class UserDAO {
 			if(u.getUserPW().equals(dbUser.getUserPW())) {
 				req.getSession().setAttribute("loginUser", dbUser);
 				req.getSession().setMaxInactiveInterval(60*10);
+				req.setAttribute("r", "로그인 성공");
 			}else {
 				req.setAttribute("r", "로그인 실패(pw오류)");
 			}
@@ -82,6 +83,25 @@ public class UserDAO {
 			req.setAttribute("r", "로그인실패(ID없음)");
 		}
 		
+	}
+
+	public boolean loginCheck(HttpServletRequest req) {
+		
+		User u = (User) req.getSession().getAttribute("loginUser");
+		if(u != null) {
+			req.setAttribute("loginPage", "kjs_user/after_login.jsp");
+			return true;
+		}
+		
+		req.setAttribute("loginPage", "kjs_user/before_login.jsp");
+		return false;
+		
+		
+		
+	}
+
+	public void logout(HttpServletRequest req) {
+		req.getSession().setAttribute("loginUser", null);
 	}
 	
 	

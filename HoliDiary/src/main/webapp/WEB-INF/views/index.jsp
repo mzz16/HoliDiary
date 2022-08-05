@@ -8,9 +8,12 @@
 
 <link rel="stylesheet" href="resources/sej_css/index.css">
 <link rel="stylesheet" href="resources/sej_css/home.css">
+<link rel="stylesheet" href="resources/kjs_css/kjs_join.css">
+<link rel="stylesheet" href="resources/kjs_css/kjs_login.css">
 <script type="text/javascript" src="resources/sm_js/sm_popupJs.js"></script>
 <script type="text/javascript" src="resources/sej_js/jquery.js"></script>
 <script type="text/javascript" src="resources/sej_js/sej_home.js"></script>
+<script type="text/javascript" src="resources/kjs_js/kjs_user.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 </head>
@@ -33,9 +36,9 @@
 			<a class="menu_bar_li" href="#" onclick='location.href="map.go"'>Map(임시)</a>
 			
 			<!-- 로그인 페이지 공간 입니다 -->
-			<%-- <div class="menu_bar_user_place">
+			<div class="menu_bar_user_place">
 				<jsp:include page="${loginPage }"></jsp:include>
-			</div> --%>
+			</div>
 			
 	</div>
 	
