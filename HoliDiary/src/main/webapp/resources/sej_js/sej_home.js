@@ -28,13 +28,96 @@ function mainSliderEvent() {
 	    	  slidesToScroll: 1,
 	    	  autoplay: true,
 	    	  autoplaySpeed: 2000,
-	    	  arrows : true,         // 옆으로 이동하는 화살표 표시 여부
+	    	  arrows : true,      // 옆으로 이동하는 화살표 표시 여부
 	          dots : true, 
 	      });
 }
 
+/*function secondSliderEvent() {
+	$('.second_slider').slick({
+		  dots: true,
+		  arrows : true,
+		  infinite: false,
+		  speed: 300,
+		  slidesToShow: 4,
+		  slidesToScroll: 4,
+		  responsive: [
+		    {
+		      breakpoint: 1024,
+		      settings: {
+		        slidesToShow: 3,
+		        slidesToScroll: 3,
+		        infinite: true,
+		        dots: true
+		      }
+		    },
+		    {
+		      breakpoint: 600,
+		      settings: {
+		        slidesToShow: 2,
+		        slidesToScroll: 2
+		      }
+		    },
+		    {
+		      breakpoint: 480,
+		      settings: {
+		        slidesToShow: 1,
+		        slidesToScroll: 1
+		      }
+		    }
+		    // You can unslick at a given breakpoint now by adding:
+		    // settings: "unslick"
+		    // instead of a settings object
+		  ]
+		});
+}
+*/
+document.addEventListener("DOMContentLoaded", function() {
 
+    var mySwiper = new Swiper('.swiper-container', {
+        slidesPerView: 4,
+        slidesPerGroup: 4,
+        observer: true,
+        observeParents: true,
+        spaceBetween: 24,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            1280: {
+                slidesPerView: 3,
+                slidesPerGroup: 3,
+            },
+            720: {
+                slidesPerView: 1,
+                slidesPerGroup: 1,
+            }
+        }
+    });    
+});
 
+function pp() {
+	/*var img1 = document.getElementById("img1");
+    var img2 = document.getElementById("img2");
+    img1.addEventListener("mousemove", function() {
+    if(Myswiper.zoom.scale < 2)
+      Myswiper.zoom.in()
+    })
+    img1.addEventListener("mouseout", function() {
+      Myswiper.zoom.out()
+    })
+    img2.addEventListener("mousemove", function() {
+      if(Myswiper.zoom.scale < 2)
+      Myswiper.zoom.in()
+    })
+    img2.addEventListener("mouseout", function() {
+      Myswiper.zoom.out()
+    })*/
+	$('.swiper-slide').click(function() {
+		alert('11');
+	});
+}
 
 
 $(function() {
@@ -42,4 +125,6 @@ $(function() {
 	closeNav();*/
 	/*closeNav2();*/
 	mainSliderEvent();
+	secondSliderEvent();
+	pp();
 });
