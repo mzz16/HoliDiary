@@ -15,8 +15,11 @@ body {
 /* 전체 감싸진 영역  */
 #background_box {
 	background-image: url("../../resources/sej_img/back2.jpg");
+	/* height: 2000px; */
 }
-
+#main_place {
+	height: 2000px;
+}
 /* Header 영역 css */
 #top_header {
 	width: 100%;

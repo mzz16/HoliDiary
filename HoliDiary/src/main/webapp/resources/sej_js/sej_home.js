@@ -74,7 +74,7 @@ function mainSliderEvent() {
 */
 document.addEventListener("DOMContentLoaded", function() {
 
-    var mySwiper = new Swiper('.swiper-container', {
+    var mySwiper = new Swiper('.swiper1', {
         slidesPerView: 4,
         slidesPerGroup: 4,
         observer: true,
@@ -97,27 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });    
 });
 
-function pp() {
-	/*var img1 = document.getElementById("img1");
-    var img2 = document.getElementById("img2");
-    img1.addEventListener("mousemove", function() {
-    if(Myswiper.zoom.scale < 2)
-      Myswiper.zoom.in()
-    })
-    img1.addEventListener("mouseout", function() {
-      Myswiper.zoom.out()
-    })
-    img2.addEventListener("mousemove", function() {
-      if(Myswiper.zoom.scale < 2)
-      Myswiper.zoom.in()
-    })
-    img2.addEventListener("mouseout", function() {
-      Myswiper.zoom.out()
-    })*/
-	$('.swiper-slide').click(function() {
-		alert('11');
-	});
-}
+
 
 
 $(function() {
@@ -126,5 +106,5 @@ $(function() {
 	/*closeNav2();*/
 	mainSliderEvent();
 	secondSliderEvent();
-	pp();
+
 });

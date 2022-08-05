@@ -13,11 +13,14 @@
 <script type="text/javascript" src="resources/sm_js/sm_popupJs.js"></script>
 <script type="text/javascript" src="resources/sej_js/jquery.js"></script>
 <script type="text/javascript" src="resources/sej_js/sej_home.js"></script>
+<script type="text/javascript" src="resources/sej_js/sej_go.js"></script>
 <script type="text/javascript" src="resources/kjs_js/kjs_user.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+<script type="text/javascript" src="resources/sej_js/sej_slider_script.js"></script>
+<link rel="stylesheet" href="resources/sej_css/sej_slider_style.css">
 <style type="text/css">
 .swiper-button-next {
   background: url(resources/sej_img/slider/free-icon-right.png) no-repeat;
@@ -69,8 +72,9 @@
 	<!-- HEADER 영역 -->
 	<header id="top_header">
 		<div class="header_contents_box">
-		
+		<a href="javascript:void(0)" onclick="goHome()">
 		<img class="header_logo_img" src="resources/sej_img/logofit-removebg-preview.png">
+		</a>
 		<div class="search_box">
 		<div class="search_img">
 		<img src="resources/sej_img/search_berry.png">
