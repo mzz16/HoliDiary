@@ -11,7 +11,7 @@
 	<div class="after_login_box">
 		${sessionScope.loginUser.userNickname }님
 	</div>
-	<div>
+	<div class="logout_box">
 		<button onclick="location.href='logout.do'">로그아웃</button>
 	</div>
 
