@@ -83,7 +83,7 @@
       
       
     </div>
-    <button class="btn-invite" onclick="updateMyPopup">설정</button>
+    <button class="btn-invite" onclick="updateMyPopup">설정 관리</button>
   </div>
   <div class="right-area">
     <div class="right-area-upper">
@@ -108,7 +108,7 @@
         
       </div>
       <div class="action-buttons-wrapper">
-        <button class="action-buttons btn-upload">포스트 작성1</button>
+        <button class="action-buttons btn-upload">포스트 작성</button>
       </div>
     </div>
     
