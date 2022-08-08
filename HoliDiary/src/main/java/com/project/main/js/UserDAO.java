@@ -247,12 +247,5 @@ public class UserDAO {
 		return ss.getMapper(UserMapper.class).naver(u);
 	}*/
 	
-
-	
-	public void updateDiary(HttpServletRequest req) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	
 }
