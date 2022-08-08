@@ -71,7 +71,7 @@ $(function(){
 			<td><span><h3>Diary Title</h3></span></td>
 		</tr>
 		<tr>
-			<td><input value="" type="text" name="diaryTitle" autocomplete="off"></td>
+			<td><input value="${diary.diaryTitle }" type="text" name="diaryTitle" autocomplete="off"></td>
 		</tr>
 	</table>
 
@@ -80,18 +80,11 @@ $(function(){
 			<td><span><h3>Diary Introduce</h3></span></td>
 		</tr>
 		<tr>
-			<td><input type="text" name="diaryIntroduce" autocomplete="off"></td>
+			<td><input value="${diary.diaryIntroduce }" type="text" name="diaryIntroduce" autocomplete="off"></td>
 		</tr>
 	</table>
 	
-	<!-- <table border="1">
-		<tr>
-			<td><span><h3>Diary Category</h3></span></td>
-		</tr>
-		<tr>
-			<td><input type="text"></td>
-		</tr>
-	</table> -->
+	
 	
 	<table>
 		<tr>

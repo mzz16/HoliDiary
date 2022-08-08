@@ -9,6 +9,10 @@
 	<select id="getUserByID" resultType="com.project.main.js.User">
 		select * from user_table where userID = #{userID}
 	</select>
+	
+<!-- 	<select id="naver" resultType="com.project.main.js.User">
+		select * from user_table where userID = #{}
+	</select> -->
 
 
 </mapper>
