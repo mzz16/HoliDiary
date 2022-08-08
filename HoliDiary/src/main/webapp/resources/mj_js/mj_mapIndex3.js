@@ -26,7 +26,37 @@ function initMap() {
        },
   });
   
+  // Create the search box and link it to the UI element.
+  const input = document.getElementById("pac-input");
+  const searchBox = new google.maps.places.SearchBox(input);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  // Bias the SearchBox results towards current map's viewport.
+  map.addListener("bounds_changed", () => {
+      searchBox.setBounds(map.getBounds());
+  });
   
+  searchBox.addListener("places_changed", () => {
+      const places = searchBox.getPlaces();
+      if (places.length == 0) {
+          return;
+      }
+      // For each place, get the icon, name and location.
+      const bounds = new google.maps.LatLngBounds();
+      places.forEach((place) => {
+          if (!place.geometry || !place.geometry.location) {
+              console.log("Returned place contains no geometry");
+              return;
+          }
+          if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+          }
+          else {
+              bounds.extend(place.geometry.location);
+          }
+      });
+      map.fitBounds(bounds);
+  });
 	  
 	  
   $('#europeGo').on('click', function() {
@@ -87,6 +117,9 @@ function initMap() {
     });
     
     
+    
+    
+
 
 // Adds a marker to the map.
 function addMarker(location, map) {
@@ -99,10 +132,6 @@ function addMarker(location, map) {
         map: map,
     });
 }
-
-
-
-
 
 
 class DeleteMenu extends google.maps.OverlayView {
@@ -191,8 +220,8 @@ google.maps.event.addListener(drawingManager, "contextmenu", (e) => {
 
 
 window.initMap = initMap;
-//window.initialize = initialize;
-//export {};
+window.initialize = initialize;
+export {};
 
 
 
