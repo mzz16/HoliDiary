@@ -8,7 +8,7 @@
 
 
 	<insert id="regInfo" parameterType="com.project.main.mj.MapMemo">
-		insert into map_table values(map_table_seq.nextval, #{map_placeName}, #{map_infoMemo})
+		insert into map_table values(map_table_seq.nextval, #{map_placeName}, #{map_infoMemo}, #{latitude}, #{longitude})
 	</insert>
 
 </mapper>
