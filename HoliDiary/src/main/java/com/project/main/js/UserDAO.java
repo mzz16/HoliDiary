@@ -20,6 +20,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.project.main.sm.DiaryMapper;
 
 @Service
 public class UserDAO {
@@ -38,6 +39,7 @@ public class UserDAO {
 			}
 			
 			if(ss.getMapper(UserMapper.class).join(u) == 1) {
+				ss.getMapper(DiaryMapper.class).diaryInsert(u);
 				req.setAttribute("r", "가입성공");
 				System.out.println("가입성공");
 			}else {
