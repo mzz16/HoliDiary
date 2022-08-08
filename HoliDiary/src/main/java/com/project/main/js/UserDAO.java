@@ -241,15 +241,11 @@ public class UserDAO {
 	 }
 
 
-
-
 	// 네이버 세션 확인
 /*	public int naverGetSession(User u) {
 		
 		return ss.getMapper(UserMapper.class).naver(u);
 	}*/
-	
-
 	
 	
 	
