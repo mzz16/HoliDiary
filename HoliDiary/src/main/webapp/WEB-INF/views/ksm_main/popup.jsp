@@ -84,7 +84,7 @@
       
       
     </div>
-    <button class="btn-invite" onclick="location.href='updateMyPopup'">설정 관리</button>
+    <button class="btn-invite" onclick="location.href='updateMyPopup?diaryUserId=${sessionScope.loginUser.userID }'">설정 관리</button>
     
   </div>
 

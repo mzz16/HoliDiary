@@ -6,26 +6,46 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class DiaryDAO {
 	
 	@Autowired
 	private SqlSession ss;
 
-	// 다이어리 유무 체크
-	public boolean diaryCheck(HttpServletRequest req, Diary d) {
+	// 다이어리 수정 (타이틀, 소개, 컬러)
+	public void updateDiary(HttpServletRequest req, Diary d) {
 
-		if (d != null) { // 다이어리 있음 - 정상 연결
-			return true;
-		} // 다이어리 없음 - 만들어야함 - 만드는 페이지로
-			req.setAttribute("loginPage", "ksm_main/makeDiary");
-			return false;
+		d = (Diary) req.getAttribute("diary");
+
+		try {
 			
-	}
+			String diaryUserId = req.getParameter("diaryUserId");
+			String diaryTitle = req.getParameter("diaryTitle");
+			String diaryIntroduce = req.getParameter("diaryIntroduce");
+			String themeColor = req.getParameter("themeColor");
 
-	// 다이어리 정보 업데이트
-	public void updateDiary(HttpServletRequest req) {
+			System.out.println(diaryUserId);
+			System.out.println(diaryTitle);
+			System.out.println(diaryIntroduce);
+			System.out.println(themeColor);
+			
+			d.setDiaryUserId(diaryUserId);
+			d.setDiaryTitle(diaryTitle);
+			d.setDiaryIntroduce(diaryIntroduce);
+			d.setThemeColor(themeColor);
+
+			
+			if (ss.getMapper(DiaryMapper.class).diaryUpdate(d) == 1) {
+				req.setAttribute("diary", d); // 수정사항이 반영된 m을 다시 넣어줌
+				System.out.println("수정 성공");
+			} else {
+				System.out.println("수정 실패");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("다이어리 수정 실패");
+		}
 
 	}
 
