@@ -6,4 +6,6 @@ public interface UserMapper {
 
 	User getUserByID(User u);
 
+	int naver(User u);
+
 }
