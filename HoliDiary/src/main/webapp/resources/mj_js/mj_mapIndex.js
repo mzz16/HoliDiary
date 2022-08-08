@@ -13,11 +13,11 @@ const bounds = {
 
 const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let labelIndex = 0;
-
+let map, infoWindow
 	
 function initMap() {
 	
-  let map = new google.maps.Map(document.getElementById("map"), {
+  map = new google.maps.Map(document.getElementById("map"), {
     zoom: 13,
     center: latLng,
     restriction: {
@@ -26,26 +26,51 @@ function initMap() {
        },
   });
   
-  
+  infoWindow = new google.maps.InfoWindow();
+  const locationButton = document.createElement("button");
+  locationButton.textContent = "현재위치";
+  locationButton.classList.add("custom-map-control-button");
+  map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(locationButton);
+  locationButton.addEventListener("click", () => {
+      // Try HTML5 geolocation.
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+              const pos = {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude,
+                  zoom: 14,
+              };
+              infoWindow.setPosition(pos);
+              infoWindow.setContent("현재위치를 찾았습니다!" + "<br>" + "(사용자님의 위치와 대략 500m정도 차이가 날 수 있습니다)");
+              infoWindow.open(map);
+              map.setCenter(pos);
+          }, () => {
+              handleLocationError(true, infoWindow, map.getCenter());
+          });
+      }
+      else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+      }
+  });
 	  
-	  
-  $('#europeGo').on('click', function() {
+  $('.europeGo').on('click', function() {
 		map.panTo(europe);
 		map.setZoom(4);
 	});
-  $('#asiaGo').on('click', function() {
+  $('.asiaGo').on('click', function() {
 	  map.panTo(asia);
 	  map.setZoom(3);
   });
-  $('#americaGo').on('click', function() {
+  $('.americaGo').on('click', function() {
 	  map.panTo(america);
 	  map.setZoom(3);
   });
-  $('#oceaniaGo').on('click', function() {
+  $('.oceaniaGo').on('click', function() {
 	  map.panTo(oceania);
 	  map.setZoom(4);
   });
-  $('#africaGo').on('click', function() {
+  $('.africaGo').on('click', function() {
 	  map.panTo(africa);
 	  map.setZoom(3);
   });
@@ -70,8 +95,8 @@ function initMap() {
 		 */
         circleOptions: {
             fillColor: "#ffff00",
-            fillOpacity: 0.5,
-            strokeWeight: 3,
+            fillOpacity: 0.2,
+            strokeWeight: 2,
             clickable: false,
             editable: true,
             zIndex: 1,
@@ -188,11 +213,17 @@ google.maps.event.addListener(drawingManager, "contextmenu", (e) => {
 });
 }
 
-
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation
+        ? "Error: The Geolocation service failed."
+        : "Error: Your browser doesn't support geolocation.");
+    infoWindow.open(map);
+}
 
 window.initMap = initMap;
 //window.initialize = initialize;
-//export {};
+export {};
 
 
 
