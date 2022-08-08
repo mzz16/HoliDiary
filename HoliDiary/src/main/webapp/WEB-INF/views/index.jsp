@@ -101,7 +101,42 @@
 	
 	<!-- FOOTER 영역 -->
 	<footer id="bottom_footer">
-		<h1>푸터 영역</h1>
+		<div class="first_footer">
+			<div class="first_footer_inner">
+				<a href="#">ABOUT US</a> <a href="#">AGREEMENT</a> <a href="#">PRIVACY POLICY</a>
+			</div>
+		</div>
+		<div class="second_footer">
+			<div class="second_footer_inner">
+				<div class="second_footer_logo_box">
+				<a href="https://github.com/Minji802/HoliDiary"><img src="resources/sej_img/slogo1-removebg-preview.png"></a>
+				</div>
+				<div class="second_footer_contentsBox">
+				<div class="second_footer_first_box">
+					<span>CS CENTER</span><br>
+					위 로고를 클릭하면<br>
+					HoliDiary의 GitHub 주소로<br>
+					갈 수 있답니다
+				</div>
+				<div class="second_footer_second_box">
+					<span>BANK INFO</span><br>
+					후원은 저희에게 큰 힘이 됩니다<br>
+					농협 207177-000-0000<br>
+					예금주 : ㅇㅇㅇ/ㅇㅇㅇ/ㅇㅇㅇ
+				</div>
+				<div class="second_footer_third_box">
+					<span>COMPANY INFO</span><br>
+					PROJECT NAME: HoliDiary<br>
+					TEAM MEMBER: 박민지/김수민/김지수/손은주<br>
+					GITHUB ADDRESS: <a href="https://github.com/Minji802/HoliDiary">https://github.com/Minji802/HoliDiary</a><br>
+					♥최선을 다해서 만들었습니다! HoliDiary 팀 예쁘게 봐주세요♥
+				</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer_copyright">
+			Copyright(C) 2022 HOLIDIARY DESIGN ALL RIGHTS REVERVED / Designed by Holidiary
+		</div>
 	</footer>
 	</div>
 	
