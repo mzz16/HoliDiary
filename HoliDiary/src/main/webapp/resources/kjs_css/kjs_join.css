@@ -20,9 +20,8 @@
 	border-radius: 10px;
 	width: 800px;
 	height: 500px;
-	top: 50%;
+	top: 10%;
 	left: 50%;
-	margin-top: -250px;
 	margin-left: -400px;
 	text-align: center;
 }
