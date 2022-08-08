@@ -241,8 +241,6 @@ public class UserDAO {
 	 }
 
 
-
-
 	// 네이버 세션 확인
 /*	public int naverGetSession(User u) {
 		
@@ -251,6 +249,10 @@ public class UserDAO {
 	
 
 	
+	public void updateDiary(HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }
