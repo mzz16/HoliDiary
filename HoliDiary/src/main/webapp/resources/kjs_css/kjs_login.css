@@ -59,7 +59,6 @@
 
 #login_page_box{
 	position: absolute;
-	border: 1px solid black;
 	width: 500px;
 	height: 600px;
 	top: 50%;
@@ -169,7 +168,9 @@
 	border: none;
 	background-color: transparent;
 	cursor: pointer;
+	width: 100%;
 }
+
 
 .missing_user_box{
 	position: absolute;

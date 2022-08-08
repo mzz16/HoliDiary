@@ -29,7 +29,21 @@ public class UserController {
 		uDAO.login(u,req);
 		uDAO.loginCheck(req);
 		
-		req.setAttribute("contentPage", "home.jsp");
+		if(req.getAttribute("r").equals("로그인실패")) {
+			req.setAttribute("contentPage", "kjs_user/login.jsp");
+		}else {
+			req.setAttribute("contentPage", "home.jsp");
+		}
+		
+		return "index";
+	}
+	
+	// 회원가입 옵션 선택
+	@RequestMapping(value = "/join.option", method = RequestMethod.GET)
+	public String joinOption(HttpServletRequest req) {
+		
+		req.setAttribute("contentPage", "kjs_user/join_option.jsp");
+		req.setAttribute("loginPage", "kjs_user/before_login.jsp");
 		return "index";
 	}
 	
@@ -44,12 +58,23 @@ public class UserController {
 	
 	// 회원가입하기
 	@RequestMapping(value = "/join.do", method = RequestMethod.POST)
-	public String joiDo(User u ,HttpServletRequest req) {
+	public String joinDo(User u ,HttpServletRequest req) {
 		
 		uDAO.join(u, req);
 		
-		// 나중에 완성되면 home으로 이동
-		req.setAttribute("contentPage", "kjs_user/join.jsp");
+		// 프로필 사진 등록하러
+		req.setAttribute("contentPage", "kjs_user/join_last.jsp");
+		req.setAttribute("loginPage", "kjs_user/before_login.jsp");
+		return "index";
+	}
+	
+	//프로필 등록 및 주소 생성
+	@RequestMapping(value = "/join.last", method = RequestMethod.POST)
+	public String joinLast(User u ,HttpServletRequest req) {
+		
+		uDAO.joinImg(u, req);
+		
+		req.setAttribute("contentPage", "kjs_user/join_complete.jsp");
 		req.setAttribute("loginPage", "kjs_user/before_login.jsp");
 		return "index";
 	}
@@ -69,10 +94,18 @@ public class UserController {
 	@RequestMapping(value = "/social.go", method = RequestMethod.GET)
 	public String socialGo(HttpServletRequest req) {
 		uDAO.loginCheck(req);
-		req.setAttribute("contentPage", "home.jsp");
+		req.setAttribute("contentPage", "kjs_user/callback.jsp");
 		
 		return "index";
 	}
+	
+	
+	// 네이버 세션 확인
+/*	@RequestMapping(value = "/naver.get.session", method = RequestMethod.GET)
+	public int naverGetSession(User u) {
+		
+		return uDAO.naverGetSession(u);
+	}*/
 	
 	
 

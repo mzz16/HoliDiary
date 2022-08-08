@@ -51,7 +51,7 @@ $(function(){
 </head>
 <body>
 
-<form action="diary.update">
+<form action="">
 	<table border="1">
 		<tr>
 			<td colspan="10"><span><h3>Theme Color</h3></span></td>
@@ -83,6 +83,8 @@ $(function(){
 			<td><input value="${diary.diaryIntroduce }" type="text" name="diaryIntroduce" autocomplete="off"></td>
 		</tr>
 	</table>
+	
+	
 	
 	<table>
 		<tr>

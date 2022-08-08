@@ -12,7 +12,7 @@
 	
 	<!-- 유효성 검사는 마지막에 -->
 		
-		<form action="join.do" method="post" enctype="multipart/form-data">
+		<form action="join.do" method="post">
 			<div id="join_box">
 			회원가입 ${r}
 				<div>
@@ -35,13 +35,6 @@
 				</div>
 				<div>
 					이메일 <input name="userEmail" autocomplete="off">
-				</div>
-				<div>
-					프로필 사진 <input type="file" name="userImg">
-				</div>
-				<div>
-				<!-- http://localhost/main/popup.open -->
-					다이어리 주소 <input name="userDiaryUrl" autocomplete="off">
 				</div>
 				<div>
 					<button>회원가입</button>

@@ -39,6 +39,7 @@ function phoneNumberHyphen(){
 	}
 }
 
+
 // 카카오 소셜 로그인을 위한 초기 설정
 Kakao.init('4341fa67ca594172a2669bd0ccaf89fc');
 console.log('카카오톡 권한 : ' + Kakao.isInitialized());
@@ -49,6 +50,8 @@ function loginWithKakao() {
       redirectUri: 'http://localhost/main/social.go'
     })
   }
+
+
 
 
 // 레디
