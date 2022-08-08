@@ -17,7 +17,7 @@
 	<div class="dropdown">
 		<button onclick="dp_menu()" class="worldGoButton">국가 바로가기</button>
 		<div style="display: none;" id="drop-content">
-			<button id="worldButton" class="europeGo">유럽</button> 
+			<button id="worldButton" class="europeGo">유럽ddd</button> 
 			<button id="worldButton" class="asiaGo">아시아</button> 
 			<button id="worldButton" class="americaGo">아메리카</button>
 			<button id="worldButton" class="oceaniaGo">오세아니아</button>
