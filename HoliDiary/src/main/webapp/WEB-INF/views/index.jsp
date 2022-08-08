@@ -55,7 +55,7 @@
 			<img class="menu_diary_img" src="resources/sej_img/free-icon-travel-1706019.png">
 			<!-- <p>My 다이어리</p> -->
 			</a>
-			<a class="menu_bar_li_first" href="#" onclick=popup()>My Diary</a>
+			<a class="menu_bar_li_first" href="#" id="modal_btn" onclick=popup()>My Diary</a>
 			<span class="menu_bar_border"></span>
 			<a class="menu_bar_li" href="">마이페이지</a>
 			<a class="menu_bar_li" href="">홀리 NOW</a>
