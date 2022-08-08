@@ -240,6 +240,11 @@ public class UserDAO {
 	            e.printStackTrace();
 	       }
 	 }
+
+	public void updateDiary(HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

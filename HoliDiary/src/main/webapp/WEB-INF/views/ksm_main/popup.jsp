@@ -98,7 +98,7 @@
       </button>
       
       <div class="search-part-wrapper">
-        <div class="diary-title-name">다이어리 타이틀</div>
+        <div class="diary-title-name">${sessionScope.loginUser.userNickname }의 다이어리</div>
         <button class="more-button">
           <svg width="24" height="20" fill="none" stroke="#51a380" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-more-vertical">
             <defs />
