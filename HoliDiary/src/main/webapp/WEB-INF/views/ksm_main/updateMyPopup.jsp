@@ -5,26 +5,44 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script type="text/javascript" src="resources/jquery/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
 	
-	$(".test").click(function(){
-		alert($(".test").val());
-		
-		if ($(".test").val()=='night mode') {
-			$('body').css('background-color','black');
-			$('body').css('color','white');
-			$(".test").val("day mode");
-			$(".test").text("day mode");
-		} else {
-			$('body').css('background-color','white');
-			$('body').css('color','black');
-			$(".test").val("night mode");
-			$(".test").text("night mode");
+	$("input[name='themeColor']").change(function(){
+		if($("input[name='themeColor']:checked").val() == 'holi'){
+			$('body').css('background','linear-gradient(to top, #FFDE59, #5D5FB2)');
+			$(".themeColor").val("holi");
+			$(".themeColor").removeClass("selected");
+		}	
+		else if($("input[name='themeColor']:checked").val() == 'white'){
+			$('body').css('background','white');
+			$(".themeColor").val("white");
+			$(".themeColor").removeClass("selected");
 		}
-		
+		else if($("input[name='themeColor']:checked").val() == 'dark'){
+			$('body').css('background','gray');
+			$(".themeColor").val("dark");
+			$(".themeColor").text("dark");
+		}
+		else if($("input[name='themeColor']:checked").val() == 'love'){
+			$('body').css('background','#FF9EBB');
+			$(".themeColor").val("love");
+			$(".themeColor").text("love");
+		}
+		else if($("input[name='themeColor']:checked").val() == 'sky'){
+			$('body').css('background','#99CCFF');
+			$(".themeColor").val("sky");
+			$(".themeColor").text("sky");
+		}
+		else if($("input[name='themeColor']:checked").val() == 'sujin'){
+			$('body').css('background','linear-gradient(to top, #453742, #F7C5EE)');
+			$(".themeColor").val("sujin");
+			$(".themeColor").text("sujin");
+		}
 	});
+	
+	
 	
 });
 
@@ -33,19 +51,18 @@ $(function(){
 </head>
 <body>
 
+<form action="diary.update">
 	<table border="1">
 		<tr>
-			<td><span><h3>Theme</h3></span></td>
+			<td colspan="10"><span><h3>Theme Color</h3></span></td>
 		</tr>
 		<tr>
-			<td><input type="button" class="test" value="holy mode"></td>
-			<td><input type="button" class="test" value="white mode"></td>
-			<td><input type="button" class="test" value="dark mode"></td>
-			<td><input type="button" class="test" value="love mode"></td>
-			<td><label><input type="radio" name="theme" value="theme1">holy</label></td>
-			<td><label><input type="radio" name="theme" value="theme1">white</label></td>
-			<td><label><input type="radio" name="theme" value="theme1">dark</label></td>
-			<td><label><input type="radio" name="theme" value="theme1">love</label></td>
+			<td><label><input type="radio" name="themeColor" class="holi" value="holi" checked/>holi</label></td>
+			<td><label><input type="radio" name="themeColor" class="white" value="white"/>white</label></td>
+			<td><label><input type="radio" name="themeColor" class="dark" value="dark"/>dark</label></td>
+			<td><label><input type="radio" name="themeColor" class="love" value="love"/>love</label></td>
+			<td><label><input type="radio" name="themeColor" class="sky" value="sky"/>sky</label></td>
+			<td><label><input type="radio" name="themeColor" class="sky" value="sujin"/>sujin</label></td>
 		</tr>	
 	</table>
 	
@@ -54,7 +71,7 @@ $(function(){
 			<td><span><h3>Diary Title</h3></span></td>
 		</tr>
 		<tr>
-			<td><input type="text"></td>
+			<td><input value="${diary.diaryTitle }" type="text" name="diaryTitle" autocomplete="off"></td>
 		</tr>
 	</table>
 
@@ -63,19 +80,16 @@ $(function(){
 			<td><span><h3>Diary Introduce</h3></span></td>
 		</tr>
 		<tr>
-			<td><input type="text"></td>
+			<td><input value="${diary.diaryIntroduce }" type="text" name="diaryIntroduce" autocomplete="off"></td>
 		</tr>
 	</table>
 	
-	<table border="1">
+	<table>
 		<tr>
-			<td><span><h3>Diary Category</h3></span></td>
-		</tr>
-		<tr>
-			<td><input type="text"></td>
+			<td><input type="button" value="완료"></td>
 		</tr>
 	</table>
-	
+</form>	
 	
 </body>
 </html>
