@@ -6,13 +6,21 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class DiaryDAO {
 	
 	@Autowired
 	private SqlSession ss;
 
-	
+	// 다이어리 정보 불러오기
+	public void getDiaryInfo(HttpServletRequest req, Diary d) {
+		try {
+			req.setAttribute("diary", ss.getMapper(DiaryMapper.class).getDiaryInfo());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	// 다이어리 수정 (타이틀, 소개, 컬러)
 	public void updateDiary(HttpServletRequest req, Diary d) {
@@ -54,11 +62,6 @@ public class DiaryDAO {
 
 
 
-	// 다이어리 정보 불러오기
-	public void getDiaryInfo(HttpServletRequest req, Diary d) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 }

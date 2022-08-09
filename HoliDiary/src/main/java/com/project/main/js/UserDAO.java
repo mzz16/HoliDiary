@@ -70,8 +70,8 @@ public class UserDAO {
 			}
 				
 			if(ss.getMapper(UserMapper.class).join(u) == 1) {
-				ss.getMapper(DiaryMapper.class).diaryInsert(u);
 				req.setAttribute("r", "가입성공");
+				ss.getMapper(DiaryMapper.class).diaryInsert(u);
 				System.out.println("가입성공");
 			}else {
 				req.setAttribute("r", "가입실패");
