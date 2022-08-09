@@ -12,10 +12,12 @@ public class DiaryDAO {
 	@Autowired
 	private SqlSession ss;
 
+	
+	
 	// 다이어리 수정 (타이틀, 소개, 컬러)
 	public void updateDiary(HttpServletRequest req, Diary d) {
 
-		d = (Diary) req.getAttribute("diary");
+		Diary diary = (Diary) req.getAttribute("diary");
 
 		try {
 			
@@ -36,8 +38,9 @@ public class DiaryDAO {
 
 			
 			if (ss.getMapper(DiaryMapper.class).diaryUpdate(d) == 1) {
-				req.setAttribute("diary", d); // 수정사항이 반영된 m을 다시 넣어줌
+				req.setAttribute("diary", d); // 수정사항이 반영된 d를 다시 넣어줌
 				System.out.println("수정 성공");
+				System.out.println(d);
 			} else {
 				System.out.println("수정 실패");
 			}
@@ -48,5 +51,14 @@ public class DiaryDAO {
 		}
 
 	}
+
+
+
+	// 다이어리 정보 불러오기
+	public void getDiaryInfo(HttpServletRequest req, Diary d) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

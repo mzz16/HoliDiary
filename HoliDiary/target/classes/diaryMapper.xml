@@ -3,7 +3,7 @@
 <mapper namespace="com.project.main.sm.DiaryMapper">
 
 	<insert id="diaryInsert" parameterType="com.project.main.js.User">
-		insert into DIARYTABLE values(5, #{userDiaryUrl}, 555, 666, 777, #{userID}, #{userNickname}, 888, 999)
+		insert into DIARYTABLE values(diarynum_seq.nextval, #{userDiaryUrl}, 555, 666, 777, #{userID}, #{userNickname}, 888, 999)
 	</insert>
 	
 	<update id="diaryUpdate" parameterType="com.project.main.sm.Diary">
