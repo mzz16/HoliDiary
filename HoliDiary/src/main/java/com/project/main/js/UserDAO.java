@@ -29,15 +29,46 @@ public class UserDAO {
 	private SqlSession ss;
 
 	public void join(User u, HttpServletRequest req) {
-
+		String path = req.getSession().getServletContext().getRealPath("resources/kjs_profileImg");
+		System.out.println(path);
+		MultipartRequest mr = null;
 		
 		try {
 			
-			if(req.getParameter("userImg") == null) {
-				u.setUserImg("person-3093152.jpg");
-				u.setUserDiaryUrl("http://localhost/main/popup.open");
-			}
+			mr = new MultipartRequest(req, path, 10 * 1024 * 1024, "utf-8", new DefaultFileRenamePolicy());
 			
+			String name = mr.getParameter("userName");
+			String nickname = mr.getParameter("userNickname");
+			String id = mr.getParameter("userID");
+			String pw = mr.getParameter("userPW");
+			String phone = mr.getParameter("userPhoneNumber");
+			String email = mr.getParameter("userEmail");
+			String img = mr.getFilesystemName("userImg");
+			String url = mr.getParameter("userDiaryUrl");
+			
+			u.setUserNickname(nickname);
+			u.setUserName(name);
+			u.setUserID(id);
+			u.setUserPW(pw);
+			u.setUserPhoneNumber(phone);
+			u.setUserEmail(email);
+			u.setUserDiaryUrl(url+id);
+			
+			/*System.out.println(url+id);
+			System.out.println(nickname);
+			System.out.println(name);
+			System.out.println(id);
+			System.out.println(pw);
+			System.out.println(phone);
+			System.out.println(email);
+			System.out.println(img);*/
+			
+			if(img == null) {
+				u.setUserImg("person-3093152.jpg");
+			}else {
+				u.setUserImg(img);
+			}
+				
 			if(ss.getMapper(UserMapper.class).join(u) == 1) {
 				ss.getMapper(DiaryMapper.class).diaryInsert(u);
 				req.setAttribute("r", "가입성공");
@@ -47,34 +78,13 @@ public class UserDAO {
 				System.out.println("가입실패");
 			}
 			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-	}
-	
-	public void joinImg(User u, HttpServletRequest req) {
-		String path = req.getSession().getServletContext().getRealPath("resources/kjs_profileImg");
-		System.out.println(path);
-		MultipartRequest mr = null;
-		
-		try {
-			mr = new MultipartRequest(req, path, 10 * 1024 * 1024, "utf-8", new DefaultFileRenamePolicy());
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			String fileName = mr.getFilesystemName("userImg");
 			new File(path + "/" + fileName).delete();
 			req.setAttribute("r", "가입실패");
 		}
-		
-		
 	}
-
-
-	
 	
 	public void login(User u, HttpServletRequest req) {
 		

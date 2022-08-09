@@ -62,19 +62,7 @@ public class UserController {
 		
 		uDAO.join(u, req);
 		
-		// 프로필 사진 등록하러
 		req.setAttribute("contentPage", "kjs_user/join_last.jsp");
-		req.setAttribute("loginPage", "kjs_user/before_login.jsp");
-		return "index";
-	}
-	
-	//프로필 등록 및 주소 생성
-	@RequestMapping(value = "/join.last", method = RequestMethod.POST)
-	public String joinLast(User u ,HttpServletRequest req) {
-		
-		uDAO.joinImg(u, req);
-		
-		req.setAttribute("contentPage", "kjs_user/join_complete.jsp");
 		req.setAttribute("loginPage", "kjs_user/before_login.jsp");
 		return "index";
 	}

@@ -10,23 +10,8 @@
 
 <div id="content_join">
 	
-	<!-- 유효성 검사는 마지막에 -->
-		
-		<form action="join.do" method="post" enctype="multipart/form-data">
-			<div id="join_box">
-			회원가입 ${r}
-				<div>
-					프로필 사진 <input type="file" name="userImg">
-				</div>
-				<div>
-				<!-- http://localhost/main/popup.open -->
-					<input type="hidden" name="userDiaryUrl" value="http://localhost/main/popup.open" autocomplete="off">
-				</div>
-				<div>
-					<button>등록하기</button>
-				</div>
-			</div>
-		</form>
+			HOlIDAIRY에 오신걸 환영합니다
+			 ${r}
 	
 	</div>
 
