@@ -21,6 +21,7 @@ public class PopupController {
 	public String popupOpen(HttpServletRequest req) {
 
 		if (uDAO.loginCheck(req)) {
+			dDAO.getDiaryInfo(req);
 			req.setAttribute("popupContentPage", "popupHome.jsp");
 			return "ksm_main/popup";
 		} else {
