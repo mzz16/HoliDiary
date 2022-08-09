@@ -9,7 +9,7 @@
 <body>
 
 	<div id="content_join">
-		<div id="join_box">
+		<div id="join_option_box">
 			<div class="join_site"><button onclick="location.href='join.go'">간편회원가입</button></div>
 			<div class="join_social">
 				소셜 회원가입
