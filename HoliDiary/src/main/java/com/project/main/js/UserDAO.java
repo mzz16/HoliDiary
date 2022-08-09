@@ -5,10 +5,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -43,7 +44,6 @@ public class UserDAO {
 			String pw = mr.getParameter("userPW");
 			String phone = mr.getParameter("userPhoneNumber");
 			String email = mr.getParameter("userEmail");
-			String img = mr.getFilesystemName("userImg");
 			String url = mr.getParameter("userDiaryUrl");
 			
 			u.setUserNickname(nickname);
@@ -53,6 +53,7 @@ public class UserDAO {
 			u.setUserPhoneNumber(phone);
 			u.setUserEmail(email);
 			u.setUserDiaryUrl(url+id);
+			u.setUserImg("person-3093152.jpg");
 			
 			/*System.out.println(url+id);
 			System.out.println(nickname);
@@ -63,19 +64,15 @@ public class UserDAO {
 			System.out.println(email);
 			System.out.println(img);*/
 			
-			if(img == null) {
-				u.setUserImg("person-3093152.jpg");
-			}else {
-				u.setUserImg(img);
-			}
 				
 			if(ss.getMapper(UserMapper.class).join(u) == 1) {
-				req.setAttribute("r", "가입성공");
+				req.getSession().setAttribute("loginUser", u);
+				req.getSession().setMaxInactiveInterval(60*10);
+				System.out.println("세션 등록 성공");
 				ss.getMapper(DiaryMapper.class).diaryInsert(u);
-				System.out.println("가입성공");
+				req.setAttribute("r", "가입성공");
 			}else {
 				req.setAttribute("r", "가입실패");
-				System.out.println("가입실패");
 			}
 			
 		} catch (Exception e) {
@@ -83,6 +80,70 @@ public class UserDAO {
 			String fileName = mr.getFilesystemName("userImg");
 			new File(path + "/" + fileName).delete();
 			req.setAttribute("r", "가입실패");
+		}
+	}
+	
+	// ajax 아이디 체크
+	public int idCheck(User u) {
+		return ss.getMapper(UserMapper.class).idCheck(u);
+	}
+	
+	// ajax 닉네임 체크
+	public int nickCheck(User u) {
+		return ss.getMapper(UserMapper.class).nickCheck(u);
+	}
+	
+	public void fileUpdate(User u, HttpServletRequest req) {
+		String path = req.getSession().getServletContext().getRealPath("resources/kjs_profileImg");
+		MultipartRequest mr = null;
+		User loginUser =  (User) req.getSession().getAttribute("loginUser");
+		String oldFile = loginUser.getUserImg();
+		String newFile = null;
+		try {
+			mr = new MultipartRequest(req, path, 10 * 1024 * 1024, "utf-8", new DefaultFileRenamePolicy());
+			newFile = mr.getFilesystemName("userImg");
+			if (newFile == null) {
+				newFile = oldFile;
+			} else {
+				newFile = URLEncoder.encode(newFile, "utf-8");
+				newFile = newFile.replace("+", " ");
+			}
+			
+			System.out.println(newFile);
+			
+			u.setUserID(loginUser.getUserID());
+			u.setUserImg(newFile);
+			u.setUserDiaryUrl(loginUser.getUserDiaryUrl());
+			u.setUserEmail(loginUser.getUserEmail());
+			u.setUserName(loginUser.getUserName());
+			u.setUserNickname(loginUser.getUserNickname());
+			u.setUserPhoneNumber(loginUser.getUserPhoneNumber());
+			u.setUserPW(loginUser.getUserPW());
+			
+			if (ss.getMapper(UserMapper.class).fileUpdate(u) == 1) {
+				System.out.println("사진 업뎃");
+				req.getSession().setAttribute("loginUser", u);
+				if (!oldFile.equals(newFile)) {
+					oldFile = URLDecoder.decode(oldFile, "utf-8");
+					new File(path + "/" + oldFile).delete();
+				}
+			} else {
+				System.out.println("사진 업뎃 실패");
+				if (!oldFile.equals(newFile)) {
+					newFile = URLDecoder.decode(newFile, "utf-8");
+					new File(path + "/" + newFile).delete();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("수정실패");
+			if (!oldFile.equals(newFile)) {
+				try {
+					newFile = URLDecoder.decode(newFile, "utf-8");
+				} catch (UnsupportedEncodingException e1) {
+				}
+				new File(path + "/" + newFile).delete();
+			}
 		}
 	}
 	
@@ -251,6 +312,12 @@ public class UserDAO {
 	            e.printStackTrace();
 	       }
 	 }
+
+
+
+
+
+
 
 
 	// 네이버 세션 확인

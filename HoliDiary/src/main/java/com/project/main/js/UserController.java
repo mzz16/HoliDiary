@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UserController {
@@ -64,6 +65,31 @@ public class UserController {
 		
 		req.setAttribute("contentPage", "kjs_user/join_last.jsp");
 		req.setAttribute("loginPage", "kjs_user/before_login.jsp");
+		return "index";
+	}
+	
+	// ID체크하기(ajax)
+	@RequestMapping(value = "/id.check", method = RequestMethod.GET)
+	public @ResponseBody int idCheck(User u) {
+		
+		return uDAO.idCheck(u);
+	}
+	
+	// 닉네임 체크하기(ajax)
+	@RequestMapping(value = "/nick.check", method = RequestMethod.GET)
+	public @ResponseBody int nickCheck(User u) {
+		
+		return uDAO.nickCheck(u);
+	}
+	
+	// 마지막 사진 저장
+	@RequestMapping(value = "/join.file.upload", method = RequestMethod.POST)
+	public String joinFileUpload(User u ,HttpServletRequest req) {
+		
+		uDAO.fileUpdate(u, req);
+		
+		uDAO.loginCheck(req);
+		req.setAttribute("contentPage", "home.jsp");
 		return "index";
 	}
 	
