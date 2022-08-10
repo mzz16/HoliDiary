@@ -28,11 +28,11 @@
 				</div>
 				<div class="join_input_box">
 					<span class="join_span">비밀번호<span id="join_pw_error"></span></span> 
-					<input id="join_pw" name="userPW" autocomplete="off" maxlength="16" placeholder="8~16자 대 소문자, 숫자 사용">
+					<input type="password" id="join_pw" name="userPW" autocomplete="off" maxlength="16" placeholder="8~16자 대 소문자, 숫자 사용">
 				</div>
 				<div class="join_input_box">
 					<span class="join_span">비밀번호 확인<span id="join_pwCheck_error"></span></span> 
-					<input id="join_pwCheck" name="pwCheck" autocomplete="off" placeholder="비밀번호를 다시 입력해주세요">
+					<input type="password" id="join_pwCheck" name="pwCheck" autocomplete="off" placeholder="비밀번호를 다시 입력해주세요">
 				</div>
 				<div class="join_input_box">
 					<span class="join_span">핸드폰번호<span id="join_phone_error"></span></span> 

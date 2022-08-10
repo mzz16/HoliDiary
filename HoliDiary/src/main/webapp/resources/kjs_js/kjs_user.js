@@ -46,8 +46,34 @@ console.log('카카오톡 권한 : ' + Kakao.isInitialized());
 
 // 카카오톡으로 로그인 하기
 function loginWithKakao() {
+	
+	$.ajax({
+		url : "id.check",
+		type : "GET",
+		dataType : "text",
+		data : {"kakaoID" : nickVal},
+		success : function(getData){
+			console.log(getData);
+			if(getData == 1){
+				Kakao.Auth.authorize({
+					redirectUri: 'http://localhost/main/social.kakao'
+				})
+			}else if(getData == 0){
+				alert('회원가입을 먼저 진행해주세요');
+			}
+		},
+		error : function(request,status,error) {
+			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+	
+	
+    
+  }
+
+function joinWithKakao() {
     Kakao.Auth.authorize({
-      redirectUri: 'http://localhost/main/social.go'
+      redirectUri: 'http://localhost/main/social.kakao'
     })
   }
 

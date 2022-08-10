@@ -13,7 +13,7 @@
 			<div class="join_site"><button onclick="location.href='join.go'">간편회원가입</button></div>
 			<div class="join_social">
 				소셜 회원가입
-				<button onclick="loginWithKakao()"><img src="./resources/kjs_img/kakao_login_medium_narrow.png"></button>
+				<button onclick="joinWithKakao()"><img src="./resources/kjs_img/kakao_login_medium_narrow.png"></button>
 				<button id="loginWithNaver"><img src="./resources/kjs_img/naver_login.jpg" style="width: 98%;"></button>
 						<!-- 네이버 로그인 버튼 노출 영역 -->
 						  <div id="naver_id_login" style="display: none;"></div>
