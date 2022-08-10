@@ -3,11 +3,19 @@
 <mapper namespace="com.project.main.js.UserMapper">
 
 	<insert id="join" parameterType="com.project.main.js.User">
-		insert into USER_TABLE values(#{userID}, #{userPW}, #{userName}, #{userPhoneNumber}, #{userEmail}, #{userImg}, #{userDiaryUrl}, #{userNickname})
+		insert into USER_TABLE values(#{userID}, #{userPW}, #{userName}, #{userPhoneNumber}, #{userEmail}, #{userImg}, #{userDiaryUrl}, #{userNickname}, null, null)
+	</insert>
+	
+	<insert id="joinWithKakao" parameterType="com.project.main.js.User">
+		insert into USER_TABLE values(#{userID}, #{userPW}, #{userName}, #{userPhoneNumber}, #{userEmail}, #{userImg}, #{userDiaryUrl}, #{userNickname}, #{kakaoID}, null)
 	</insert>
 	
 	<select id="getUserByID" resultType="com.project.main.js.User">
 		select * from user_table where userID = #{userID}
+	</select>
+	
+	<select id="loginWithKakao" resultType="com.project.main.js.User">
+		select * from user_table where kakaoID = #{kakaoID}
 	</select>
 	
 	<update id="fileUpdate">
@@ -20,9 +28,15 @@
 		select count(*) from user_table where userID = #{userID}
 	</select>
 	
+	<select id="idCheckWithKakao" resultType="int">
+		select count(*) from user_table where kakaoID = #{kakaoID}
+	</select>
+	
 	<select id="nickCheck" resultType="int">
 		select count(*) from user_table where userNickname = #{userNickname}
 	</select>
+	
+
 	
 <!-- 	<select id="naver" resultType="com.project.main.js.User">
 		select * from user_table where userID = #{}

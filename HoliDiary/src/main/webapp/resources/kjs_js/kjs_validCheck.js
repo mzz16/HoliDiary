@@ -164,11 +164,7 @@ $(function() {
 			let idVal = $(this).val();
 			let id = $(this);
 			
-			// 아이디 조건
-			if(lessThan(id, 5) || containsHS(id)){
-				$('#join_id_error').text('아이디는 5~20자 영문 소문자, 숫자로 입력해주세요');
-				$('#join_id_error').css('color','red');
-			}
+			
 			
 			
 			// 중복값 확인
@@ -184,9 +180,11 @@ $(function() {
 						$('#join_id_error').css('color','red');
 					}else if(getData == 0){
 						if(isEmpty(id)){
+							// 필수
 							$('#join_id_error').text('아이디를 입력해주세요');
 							$('#join_id_error').css('color','red');
 						}else{
+							// 아이디 조건
 							if(lessThan(id, 5) || containsHS(id)){
 								$('#join_id_error').text('아이디는 5~20자 영문 소문자, 숫자로 입력해주세요');
 								$('#join_id_error').css('color','red');
@@ -202,15 +200,6 @@ $(function() {
 					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				}
 			});
-			
-			// 필수
-			if(isEmpty(id)){
-				$('#join_id_error').text('아이디를 입력해주세요');
-				$('#join_id_error').css('color','red');
-			}else{
-				$('#join_id_error').text('');
-				$('#join_id_error').css('color','blue');
-			}
 		});
 	  
 	  // 비밀번호

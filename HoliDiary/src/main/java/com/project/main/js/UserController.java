@@ -70,9 +70,11 @@ public class UserController {
 	
 	// ID체크하기(ajax)
 	@RequestMapping(value = "/id.check", method = RequestMethod.GET)
-	public @ResponseBody int idCheck(User u) {
+	public @ResponseBody int idCheck(User u, HttpServletRequest req) {
 		
-		return uDAO.idCheck(u);
+		uDAO.loginWithKakao(req);
+		
+		return uDAO.idCheck(u, req);
 	}
 	
 	// 닉네임 체크하기(ajax)
@@ -104,9 +106,14 @@ public class UserController {
 		return "index";
 	}
 	
-	// 카카오톡 인가코드 및 토큰 얻기
-	@RequestMapping(value = "/social.go", method = RequestMethod.GET)
-	public String socialGo(HttpServletRequest req) {
+	// 카카오톡으로 회원가입하기
+	@RequestMapping(value = "/social.kakao", method = RequestMethod.GET)
+	public String kakaoJoin(HttpServletRequest req) {
+		//아이디 체크
+		//있으면 로그인
+		uDAO.loginWithKakao(req);
+		//없으면 회원가입
+		uDAO.joinWithKakao(req);
 		uDAO.loginCheck(req);
 		req.setAttribute("contentPage", "kjs_user/callback.jsp");
 		
