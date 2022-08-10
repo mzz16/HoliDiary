@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="resources/sm_css/sm_popup.css">
 <link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap" rel="stylesheet">
 <script type="text/javascript" src="resources/sm_js/sm_popupJs.js"></script>
@@ -98,7 +99,7 @@
       </button>
       
       <div class="search-part-wrapper">
-        <div class="diary-title-name">${sessionScope.loginUser.userNickname }의 다이어리</div>
+        <div class="diary-title-name">${Diary.diaryTitle }</div>
         <button class="more-button">
           <svg width="24" height="20" fill="none" stroke="#51a380" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-more-vertical">
             <defs />

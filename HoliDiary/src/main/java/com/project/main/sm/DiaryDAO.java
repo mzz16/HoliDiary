@@ -14,9 +14,10 @@ public class DiaryDAO {
 	private SqlSession ss;
 
 	// 다이어리 정보 불러오기
-	public void getDiaryInfo(HttpServletRequest req, Diary d) {
+	public void getDiaryInfo(HttpServletRequest req, Diary d, String user1) {
 		try {
-			req.setAttribute("diary", ss.getMapper(DiaryMapper.class).getDiaryInfo());
+			d.setDiaryUserId(user1);
+			req.setAttribute("Diary", ss.getMapper(DiaryMapper.class).getDiaryInfo(d));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

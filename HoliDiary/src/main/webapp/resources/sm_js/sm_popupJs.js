@@ -1,7 +1,12 @@
 function popup() {
 	let options = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=1000, height=600, top=100, left=270";
-
-	window.open("popup.open","_blank", options);
+	
+	var user0 = document.getElementById("useruser").value;
+	var url = 'popup.open?userId=' +user0;
+	
+	alert(user0);
+	
+	window.open(url,"_blank", options);
 }
 
 $(document).ready(function () {

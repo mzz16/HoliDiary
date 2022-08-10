@@ -59,6 +59,7 @@
 			<!-- <p>My 다이어리</p> -->
 			</a>
 			<a class="menu_bar_li_first" href="#" id="modal_btn" onclick=popup()>My Diary</a>
+			<input type="hidden" value="${sessionScope.loginUser.userID }" id="useruser">
 			<span class="menu_bar_border"></span>
 			<a class="menu_bar_li" href="">마이페이지</a>
 			<a class="menu_bar_li" href="">홀리 NOW</a>

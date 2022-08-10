@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.main.js.UserDAO;
 
@@ -20,11 +21,13 @@ public class PopupController {
 
 	// 팝업창 - 오픈
 	@RequestMapping(value = "/popup.open", method = RequestMethod.GET)
-	public String popupOpen(HttpServletRequest req, Diary d) {
+	public String popupOpen(HttpServletRequest req, Diary d, @RequestParam("userId") String user1) {
 
+		System.out.println(d.getDiaryUserId());
+		System.out.println(user1);
 		
 		if (uDAO.loginCheck(req)) {
-			//dDAO.getDiaryInfo(req, d);
+			dDAO.getDiaryInfo(req, d, user1);
 			req.setAttribute("popupContentPage", "popupHome.jsp");
 			return "ksm_main/popup";
 		} else {
