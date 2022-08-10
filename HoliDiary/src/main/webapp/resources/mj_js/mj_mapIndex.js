@@ -13,19 +13,25 @@ const bounds = {
 
 const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let labelIndex = 0;
-let map, infoWindow
+let map, infoWindow;
 let arr = [];
+
+
+
+
+
+
 function initMap() {
 	
-  map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 13,
-    center: latLng,
-    restriction: {
-           latLngBounds: bounds,
-           strictBounds: false,
-       },
-  });
-  
+	map = new google.maps.Map(document.getElementById("map"), {
+	    zoom: 13,
+	    center: latLng,
+	    restriction: {
+	           latLngBounds: bounds,
+	           strictBounds: false,
+	       },
+	  });
+	
   infoWindow = new google.maps.InfoWindow();
   const locationButton = document.createElement("button");
   locationButton.textContent = "현재위치";
@@ -95,7 +101,7 @@ function initMap() {
             fillColor: "#ffff00",
             fillOpacity: 0.2,
             strokeWeight: 2,
-            clickable: false,
+            clickable: true,
             editable: true,
             zIndex: 1,
         },
@@ -119,7 +125,7 @@ function initMap() {
 	   	// arr.push(e.overlay);
 		// console.log(arr[0]);
 		// drawingManager.setDrawingMode(null);
-		google.maps.event.addListener(e.overlay, 'click', function(event) {
+		google.maps.event.addListener(e.overlay, 'click', function overlayClickListner(event) {
 			e.overlay.setRadius(0);
 			e.overlay.setMap(null);
 		});
@@ -161,7 +167,7 @@ function initMap() {
 	   
 
  // This event listener calls addMarker() when the map is clicked.
-var m = google.maps.event.addListener(map, "click", (event) => {
+google.maps.event.addListener(map, "click", (event) => {
         addMarker(event.latLng, map);
     });
     
@@ -176,19 +182,23 @@ function addMarker(location, map) {
     
 }
 
-/*google.maps.event.addListener(addMarker, 'click', function(m) {
-	alert(11);
-	m.setLabel(null);
-	m.setMap(null);
-});*/
+google.maps.event.addListener(addMarker, "click", (event) => {
+	map.removeOverlay(marker);
+});
 
-(function(addMarker,l){
-    google.maps.event.addListener(addMarker,'click',function(){
-    	alert(11);
-    	l.setMap(this.getMap());
-    });
-  })(addMarker)
+/*
+ * google.maps.event.addListener(addMarker, 'click', function(m) { alert(11);
+ * m.setLabel(null); m.setMap(null); });
+ */
 
+/*
+ * (function(addMarker,l){
+ * google.maps.event.addListener(addMarker,'click',function(){ alert(11);
+ * l.setMap(this.getMap()); }); })(addMarker)
+ */
+
+  
+  
 
 }  // initMap
 
@@ -205,7 +215,11 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.open(map);
 }
 
+
+
 window.initMap = initMap;
+//window.initAutocomplete = initAutocomplete;
+
 // window.initialize = initialize;
 export {};
 
