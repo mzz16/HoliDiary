@@ -73,7 +73,6 @@
 }
 
 .join_span > span{
-	color: red;
 	font-size: 11pt;
 	margin-left: 10px;
 }
@@ -99,7 +98,7 @@
 }
 
 .join_site{
-	width: 150px;
+	width: 180px;
 	height: 40px;
 	margin: 10px auto;
 }
@@ -112,6 +111,8 @@
 	background-color: #6667AB;
 	color: white;
 	cursor: pointer;
+	border: none;
+	border-radius: 3px;
 }
 
 .join_social{

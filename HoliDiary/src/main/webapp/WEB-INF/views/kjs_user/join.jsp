@@ -36,7 +36,7 @@
 				</div>
 				<div class="join_input_box">
 					<span class="join_span">핸드폰번호<span id="join_phone_error"></span></span> 
-					<input id="join_phone" id="phoneNum" name="userPhoneNumber" autocomplete="off" placeholder="전화번호 입력">
+					<input id="join_phone" id="phoneNum" name="userPhoneNumber" maxlength="15" autocomplete="off" placeholder="전화번호 입력">
 				</div>
 				<div class="join_input_box">
 					<span class="join_span">이메일<span id="join_email_error"></span></span> 
