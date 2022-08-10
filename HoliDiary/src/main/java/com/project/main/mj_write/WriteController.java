@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class WriteController {
 	
 	@Autowired
-	private PostDAO pDAO;
+	private DiaryPostDAO pDAO;
 	
 	
 	@RequestMapping(value = "/post.list", method = RequestMethod.GET)

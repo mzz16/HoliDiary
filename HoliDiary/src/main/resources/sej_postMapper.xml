@@ -11,7 +11,7 @@
 		and posttxt like '%'||#{search}||'%'
 	</select>
 
-	<select id="getPost" resultType="com.project.main.PostContent" parameterType="PostSelector">
+	<select id="getPost" resultType="com.project.main.PostContent" parameterType="com.project.main.PostSelector">
 		select *
 		from (
 		select rownum as rn, postnum, posttitle, posttxt, postdate, postwriter, postcategory,
