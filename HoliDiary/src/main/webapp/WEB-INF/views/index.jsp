@@ -81,7 +81,9 @@
 		</a>
 		<div class="search_box">
 		<div class="search_img">
+		<a href="javascript:void(0)" onclick="goSearch()">
 		<img src="resources/sej_img/search_berry.png">
+		</a>
 		</div>
 		<input class="search_input" type="text" placeholder="검색">
 		</div>

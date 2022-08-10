@@ -29,4 +29,13 @@ public class HomeController {
 		return home(req);
 	}
 	
+	@RequestMapping(value = "/index.search", method = RequestMethod.GET)
+	public String indexSearch(HttpServletRequest req) {
+		
+		uDAO.loginCheck(req);
+		
+		req.setAttribute("contentPage", "home_search.jsp");
+		return "index";
+	}
+	
 }
