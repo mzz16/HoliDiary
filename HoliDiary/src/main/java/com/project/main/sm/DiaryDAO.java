@@ -14,9 +14,9 @@ public class DiaryDAO {
 	private SqlSession ss;
 
 	// 다이어리 정보 불러오기
-	public void getDiaryInfo(HttpServletRequest req, Diary d, String user1) {
+	public void getDiaryInfo(HttpServletRequest req, Diary d, String userId) {
 		try {
-			d.setDiaryUserId(user1);
+			d.setDiaryUserId(userId);
 			req.setAttribute("Diary", ss.getMapper(DiaryMapper.class).getDiaryInfo(d));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -24,32 +24,26 @@ public class DiaryDAO {
 	}
 	
 	// 다이어리 수정 (타이틀, 소개, 컬러)
-	public void updateDiary(HttpServletRequest req, Diary d) {
-
-		Diary diary = (Diary) req.getAttribute("diary");
+	public void updateDiary(HttpServletRequest req, Diary d, String userId) {
 
 		try {
 			
-			String diaryUserId = req.getParameter("diaryUserId");
 			String diaryTitle = req.getParameter("diaryTitle");
 			String diaryIntroduce = req.getParameter("diaryIntroduce");
 			String themeColor = req.getParameter("themeColor");
 
-			System.out.println(diaryUserId);
 			System.out.println(diaryTitle);
 			System.out.println(diaryIntroduce);
 			System.out.println(themeColor);
 			
-			d.setDiaryUserId(diaryUserId);
 			d.setDiaryTitle(diaryTitle);
 			d.setDiaryIntroduce(diaryIntroduce);
 			d.setThemeColor(themeColor);
 
 			
 			if (ss.getMapper(DiaryMapper.class).diaryUpdate(d) == 1) {
-				req.setAttribute("diary", d); // 수정사항이 반영된 d를 다시 넣어줌
+				req.setAttribute("Diary", d); // 수정사항이 반영된 d를 다시 넣어줌
 				System.out.println("수정 성공");
-				System.out.println(d);
 			} else {
 				System.out.println("수정 실패");
 			}

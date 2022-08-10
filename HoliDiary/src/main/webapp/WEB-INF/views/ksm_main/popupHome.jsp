@@ -24,10 +24,7 @@
           </div>
         </div>
         
-        
-        
-       <%--  ${diary.diaryIntroduce }
-        ${d.diaryIntroduce } --%>
+       
         
 </div>
 
