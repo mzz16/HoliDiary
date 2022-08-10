@@ -20,7 +20,7 @@ body {
   font-family: "DM Sans", sans-serif;
   font-size: 12px;
   /* background: linear-gradient(to top, #be93c5, #7bc6cc); *//*배경 색깔*/
-  background: linear-gradient(to top, #FFDE59, #5D5FB2);/*배경 색깔*/
+  background: linear-gradient(to top, #FFDE59, #5D5FB2); /*배경 색깔*/
 }
 
 @media screen and (max-width: 900px) {

@@ -84,8 +84,12 @@ public class UserDAO {
 	}
 	
 	// ajax 아이디 체크
-	public int idCheck(User u) {
-		return ss.getMapper(UserMapper.class).idCheck(u);
+	public int idCheck(User u, HttpServletRequest req) {
+		if(req.getParameter("kakaoID") == null) {
+			return ss.getMapper(UserMapper.class).idCheck(u);
+		}
+			
+		return ss.getMapper(UserMapper.class).idCheckWithKakao(u);
 	}
 	
 	// ajax 닉네임 체크
@@ -172,7 +176,7 @@ public class UserDAO {
 		//System.out.println(code);
 		// 카카오로 로그인
 		if(code != null) {
-			kakaoLogin(code,req);
+			getKakaoToken(code,req);
 		}
 		
 		// 일반 로그인 경우
@@ -192,7 +196,7 @@ public class UserDAO {
 	}
 	
 	// 카카오 토근 가져오기 
-	public void kakaoLogin(String code, HttpServletRequest req) {
+	public void getKakaoToken(String code, HttpServletRequest req) {
 		String access_Token = "";
         String refresh_Token = "";
 		String requestURL = "https://kauth.kakao.com/oauth/token";
@@ -208,7 +212,7 @@ public class UserDAO {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=2a81773cdaa73d4aadc2ed8f0c9370ac");
-            sb.append("&redirect_uri=http://localhost/main/social.go");
+            sb.append("&redirect_uri=http://localhost/main/social.kakao");
             sb.append("&code=" + code);
             bw.write(sb.toString());
             bw.flush();
@@ -240,7 +244,7 @@ public class UserDAO {
             br.close();
             bw.close();
 
-            createKakaoUser(access_Token, req);
+            req.setAttribute("access_Token", access_Token);
             
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -248,70 +252,172 @@ public class UserDAO {
 		
 	}
 	
-	// 카카오톡 사용자 정보 가져오기 + 세션 저장
-	public void createKakaoUser(String token, HttpServletRequest req){
+	public void joinWithKakao(HttpServletRequest req) {
+		
+		// 카카오톡 인가코드 받기 (토큰 받기 위함: 세션)
+		String code = req.getParameter("code");
+		//System.out.println(code);
+		
+		// 유저정보 가져오기
+		if(code != null) {
+			getKakaoToken(code,req);
+			
+			String token = (String) req.getAttribute("access_Token");
+			System.out.println(token);
+			
+			String reqURL = "https://kapi.kakao.com/v2/user/me";
 
-		String reqURL = "https://kapi.kakao.com/v2/user/me";
+		    //access_token을 이용하여 사용자 정보 조회
+		    try {
+		       URL url = new URL(reqURL);
+		       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-	    //access_token을 이용하여 사용자 정보 조회
-	    try {
-	       URL url = new URL(reqURL);
-	       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		       conn.setRequestMethod("POST");
+		       conn.setDoOutput(true);
+		       conn.setRequestProperty("Authorization", "Bearer " + token); //전송할 header 작성, access_token전송
 
-	       conn.setRequestMethod("POST");
-	       conn.setDoOutput(true);
-	       conn.setRequestProperty("Authorization", "Bearer " + token); //전송할 header 작성, access_token전송
+		       //결과 코드가 200이라면 성공
+		       int responseCode = conn.getResponseCode();
+		       System.out.println("responseCode : " + responseCode);
 
-	       //결과 코드가 200이라면 성공
-	       int responseCode = conn.getResponseCode();
-	       System.out.println("responseCode : " + responseCode);
+		       //요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+		       BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		       String line = "";
+		       String result = "";
 
-	       //요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
-	       BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-	       String line = "";
-	       String result = "";
+		       while ((line = br.readLine()) != null) {
+		           result += line;
+		       }
+		       System.out.println("response body : " + result);
 
-	       while ((line = br.readLine()) != null) {
-	           result += line;
-	       }
-	       System.out.println("response body : " + result);
+		       //Gson 라이브러리로 JSON파싱
+		       JsonParser parser = new JsonParser();
+		       JsonElement element = parser.parse(result);
 
-	       //Gson 라이브러리로 JSON파싱
-	       JsonParser parser = new JsonParser();
-	       JsonElement element = parser.parse(result);
+		       String kakaoID = element.getAsJsonObject().get("id").getAsString();
+		       String nickname = element.getAsJsonObject().get("properties").getAsJsonObject().get("nickname").getAsString();
+		       String img = element.getAsJsonObject().get("properties").getAsJsonObject().get("profile_image").getAsString();
+		       boolean hasEmail = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("has_email").getAsBoolean();
+		       String email = "";
+		       if(hasEmail){
+		           email = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("email").getAsString();
+		       }
+		       
+		       int idx = email.indexOf("@");
+		       String id = email.substring(0,idx);
 
-	       String id = element.getAsJsonObject().get("id").getAsString();
-	       String nickname = element.getAsJsonObject().get("properties").getAsJsonObject().get("nickname").getAsString();
-	       String img = element.getAsJsonObject().get("properties").getAsJsonObject().get("profile_image").getAsString();
-	       boolean hasEmail = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("has_email").getAsBoolean();
-	       String email = "";
-	       if(hasEmail){
-	           email = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("email").getAsString();
-	       }
+		       // 사용자 정보 추출
+		       System.out.println("kakaoID : " + kakaoID);
+		       System.out.println("id : " + id);
+		       System.out.println("email : " + email);
+		       System.out.println("nickname : " + nickname);
+		       System.out.println("img : " + img);
+		       
+		       // 사용자 정보 User Bean에 저장
+		       User kakaoUser = new User();
+		       kakaoUser.setUserID(id);
+		       kakaoUser.setUserPW("없음");
+		       kakaoUser.setUserName(nickname);
+		       kakaoUser.setUserPhoneNumber("없음");
+		       kakaoUser.setUserNickname(nickname);
+		       kakaoUser.setUserEmail(email);
+		       kakaoUser.setUserImg(img);
+		       kakaoUser.setKakaoID(kakaoID);
+		       kakaoUser.setUserDiaryUrl("http://localhost/main/popup.open?id=" + id);
+		       
+		       br.close();
+		       
+		       System.out.println(kakaoUser.getUserID());
+		       
+		       if(ss.getMapper(UserMapper.class).joinWithKakao(kakaoUser) == 1) {
+					req.getSession().setAttribute("loginUser", kakaoUser);
+					req.getSession().setMaxInactiveInterval(60*10);
+					System.out.println("세션 등록 성공");
+					//ss.getMapper(DiaryMapper.class).diaryInsert(kakaoUser);
+					req.setAttribute("r", "가입성공");
+				}else {
+					req.setAttribute("r", "가입실패");
+				}
 
-	       // 사용자 정보 추출
-	       System.out.println("id : " + id);
-	       System.out.println("email : " + email);
-	       System.out.println("nickname : " + nickname);
-	       System.out.println("img : " + img);
-	       
-	       // 사용자 정보 User Bean에 저장
-	       User kakaoUser = new User();
-	       kakaoUser.setUserNickname(nickname);
-	       kakaoUser.setUserEmail(email);
-	       kakaoUser.setUserID(id);
-	       kakaoUser.setUserImg(img);
-	       
-	       // 세션에 넣어줌
-	       req.getSession().setAttribute("loginUser", kakaoUser);
-	       req.getSession().setMaxInactiveInterval(60*10);
+		       } catch (Exception e) {
+		            e.printStackTrace();
+		       }
+		}
+		
+		
+	}
 
-	       br.close();
+	public void loginWithKakao(HttpServletRequest req) {
+		
+		// 카카오톡 인가코드 받기 (토큰 받기 위함: 세션)
+		String code = req.getParameter("code");
+		//System.out.println(code);
+			
+		// 유저정보 가져오기
+		if(code != null) {
+			getKakaoToken(code,req);
+				
+			String token = (String) req.getAttribute("access_Token");
+			System.out.println(token);
+		
+			String reqURL = "https://kapi.kakao.com/v2/user/me";
 
-	       } catch (Exception e) {
-	            e.printStackTrace();
-	       }
-	 }
+		    //access_token을 이용하여 사용자 정보 조회
+		    try {
+		       URL url = new URL(reqURL);
+		       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		
+		       conn.setRequestMethod("POST");
+		       conn.setDoOutput(true);
+		       conn.setRequestProperty("Authorization", "Bearer " + token); //전송할 header 작성, access_token전송
+
+		       //결과 코드가 200이라면 성공
+		       int responseCode = conn.getResponseCode();
+		       System.out.println("responseCode : " + responseCode);
+
+		       //요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+			   BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			   String line = "";
+			   String result = "";
+
+			   while ((line = br.readLine()) != null) {
+			         result += line;
+			   }
+			   System.out.println("response body : " + result);
+
+			   //Gson 라이브러리로 JSON파싱
+			   JsonParser parser = new JsonParser();
+			   JsonElement element = parser.parse(result);
+
+			   String kakaoID = element.getAsJsonObject().get("id").getAsString();
+
+		       // 사용자 정보 추출
+		       System.out.println("kakaoID : " + kakaoID);
+				       
+			   // 사용자 정보 User Bean에 저장
+		       User kakaoUser = new User();
+		       kakaoUser.setKakaoID(kakaoID);
+				       
+		       br.close();
+				       
+		       User dbUser = (User)ss.getMapper(UserMapper.class).loginWithKakao(kakaoUser);
+			   if(dbUser != null) {
+					req.getSession().setAttribute("loginUser", kakaoUser);
+					req.getSession().setMaxInactiveInterval(60*10);
+					System.out.println("세션 등록 성공");
+					//ss.getMapper(DiaryMapper.class).diaryInsert(kakaoUser);
+					req.setAttribute("r", "가입성공");
+				}else {
+					req.setAttribute("r", "가입실패");
+				}
+
+		       } catch (Exception e) {
+		            e.printStackTrace();
+		       }
+		}		
+	
+		
+	}
 
 
 

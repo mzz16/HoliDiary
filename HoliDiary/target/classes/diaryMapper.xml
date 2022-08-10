@@ -6,13 +6,14 @@
 		insert into DIARYTABLE values(diarynum_seq.nextval, #{userDiaryUrl}, 555, 666, 777, #{userID}, #{userNickname}, 888, 999)
 	</insert>
 	
+	<select id="getDiaryInfo" parameterType="com.project.main.sm.Diary" resultType="com.project.main.sm.Diary">
+		select * from DIARYTABLE where diaryUserId=#{diaryUserId}
+	</select>
+
 	<update id="diaryUpdate" parameterType="com.project.main.sm.Diary">
 		update DIARYTABLE set diaryTitle=#{diaryTitle}, diaryIntroduce=#{diaryIntroduce}, themeColor=#{themeColor} where diaryUserId=#{diaryUserId}
 	</update>
 	
-	<select id="getDiaryInfo" resultType="com.project.main.sm.Diary">
-		select * from DIARYTABLE order by diaryNum
-	</select>
 	
 
 </mapper>

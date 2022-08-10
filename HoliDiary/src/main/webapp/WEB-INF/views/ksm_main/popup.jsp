@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="resources/sm_css/sm_popup.css">
 <link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap" rel="stylesheet">
 <script type="text/javascript" src="resources/sm_js/sm_popupJs.js"></script>
@@ -22,18 +23,18 @@
         	<a><img src="resources/kjs_profileImg/${sessionScope.loginUser.userImg }" alt=""></a>
       <details>
           	<summary><span class="profile-name">${sessionScope.loginUser.userNickname }</span></summary>
-          	<p class="profile-introduce">${diary.diaryIntroduce }</p>
+          	<p class="profile-introduce">${Diary.diaryIntroduce }</p>
       </details>
       </div>
       
       <div class="page-link-list">
-        <a href="popupHomeGo" class="item-link" id="pageLink">
+        <a href="popupHomeGo?userId=${sessionScope.loginUser.userID }" class="item-link" id="pageLink">
           <svg class="link-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-home" viewBox="0 0 24 24">
             <defs />
             <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
             <path d="M9 22V12h6v10" /></svg>
           Home</a>
-        <a href="popupScheduleGo" class="item-link" id="pageLink">
+        <a href="popupScheduleGo?userId=${sessionScope.loginUser.userID }" class="item-link" id="pageLink">
           <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
             <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
           </svg>
@@ -89,7 +90,7 @@
       
       
     </div>
-    <button class="btn-invite" onclick="location.href='updateMyPopup?diaryUserId=${sessionScope.loginUser.userID }'">설정 관리</button>
+    <button class="btn-invite" onclick="location.href='updateMyPopup?userId=${sessionScope.loginUser.userID }'">설정 관리</button>
     
   </div>
 
@@ -103,7 +104,7 @@
       </button>
       
       <div class="search-part-wrapper">
-        <div class="diary-title-name">${sessionScope.loginUser.userNickname }의 다이어리</div>
+        <div class="diary-title-name">${Diary.diaryTitle }</div>
         <button class="more-button">
           <svg width="24" height="20" fill="none" stroke="#51a380" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-more-vertical">
             <defs />

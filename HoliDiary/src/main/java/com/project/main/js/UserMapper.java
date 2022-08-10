@@ -14,5 +14,12 @@ public interface UserMapper {
 
 	int nickCheck(User u);
 
+	int joinWithKakao(User kakaoUser);
+
+	int idCheckWithKakao(User u);
+
+	User loginWithKakao(User kakaoUser);
+
+
 
 }

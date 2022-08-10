@@ -59,6 +59,7 @@
 			<!-- <p>My 다이어리</p> -->
 			</a>
 			<a class="menu_bar_li_first" href="#" id="modal_btn" onclick=popup()>My Diary</a>
+			<input type="hidden" value="${sessionScope.loginUser.userID }" id="userID">
 			<span class="menu_bar_border"></span>
 			<a class="menu_bar_li" href="">마이페이지</a>
 			<a class="menu_bar_li" href="">홀리 NOW</a>
@@ -81,7 +82,9 @@
 		</a>
 		<div class="search_box">
 		<div class="search_img">
+		<a href="javascript:void(0)" onclick="goSearch()">
 		<img src="resources/sej_img/search_berry.png">
+		</a>
 		</div>
 		<input class="search_input" type="text" placeholder="검색">
 		</div>

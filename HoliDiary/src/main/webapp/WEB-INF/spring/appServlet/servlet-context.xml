@@ -47,6 +47,7 @@
 				<beans:value>classpath:userMapper.xml</beans:value>
 				<beans:value>classpath:diaryMapper.xml</beans:value>
 				<beans:value>classpath:postMapper.xml</beans:value>
+				<beans:value>classpath:sej_postMapper.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
@@ -55,5 +56,11 @@
 		<beans:constructor-arg name="sqlSessionFactory"
 			ref="sqlSessionFactory" />
 	</beans:bean>
-
+	
+	<beans:bean id="so" class="com.project.main.SiteOption">
+		<beans:constructor-arg value="3"></beans:constructor-arg>
+	</beans:bean>
+	
+	
+	
 </beans:beans>
