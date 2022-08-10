@@ -1,16 +1,16 @@
-package com.project.main;
+package com.project.main.sej;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class SiteOption {
+public class HomeSiteOption {
 
 	private int postCountPerpage;	// 한 페이지당 sns 개수
 	
-	public SiteOption() {
+	public HomeSiteOption() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SiteOption(int postCountPerpage) {
+	public HomeSiteOption(int postCountPerpage) {
 		super();
 		this.postCountPerpage = postCountPerpage;
 	}

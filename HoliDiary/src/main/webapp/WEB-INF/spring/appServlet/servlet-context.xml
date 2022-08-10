@@ -56,7 +56,7 @@
 			ref="sqlSessionFactory" />
 	</beans:bean>
 	
-	<beans:bean id="so" class="com.project.main.SiteOption">
+	<beans:bean id="so" class="com.project.main.sej.HomeSiteOption">
 		<beans:constructor-arg value="3"></beans:constructor-arg>
 	</beans:bean>
 	

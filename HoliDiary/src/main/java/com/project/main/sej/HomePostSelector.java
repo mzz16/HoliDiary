@@ -1,18 +1,18 @@
-package com.project.main;
+package com.project.main.sej;
 
 import java.math.BigDecimal;
 
-public class PostSelector {
+public class HomePostSelector {
 
 	private String search;
 	private BigDecimal start;
 	private BigDecimal end;
 	
-	public PostSelector() {
+	public HomePostSelector() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PostSelector(String search, BigDecimal start, BigDecimal end) {
+	public HomePostSelector(String search, BigDecimal start, BigDecimal end) {
 		super();
 		this.search = search;
 		this.start = start;
