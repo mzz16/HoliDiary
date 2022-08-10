@@ -15,6 +15,9 @@ public class HomeController {
 	@Autowired
 	private UserDAO uDAO;
 	
+	@Autowired
+	private PostDAO pDAO;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest req) {
 		
@@ -30,10 +33,11 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/index.search", method = RequestMethod.GET)
-	public String indexSearch(HttpServletRequest req) {
-		
+	public String indexSearch(PostSelector pSel,HttpServletRequest req) {
+		TokenMaker.make(req);
 		uDAO.loginCheck(req);
-		
+		pDAO.searchPost(pSel, req);
+		pDAO.getPost(1, req);
 		req.setAttribute("contentPage", "home_search.jsp");
 		return "index";
 	}
