@@ -3,12 +3,16 @@
 <mapper namespace="com.project.main.sm.DiaryMapper">
 
 	<insert id="diaryInsert" parameterType="com.project.main.js.User">
-		insert into DIARYTABLE values(5, #{userDiaryUrl}, 555, 666, 777, #{userID}, #{userNickname}, 888, 999)
+		insert into DIARYTABLE values(diarynum_seq.nextval, #{userDiaryUrl}, 555, 666, 777, #{userID}, #{userNickname}, 888, 999)
 	</insert>
 	
 	<update id="diaryUpdate" parameterType="com.project.main.sm.Diary">
 		update DIARYTABLE set diaryTitle=#{diaryTitle}, diaryIntroduce=#{diaryIntroduce}, themeColor=#{themeColor} where diaryUserId=#{diaryUserId}
 	</update>
+	
+	<select id="getDiaryInfo" resultType="com.project.main.sm.Diary">
+		select * from DIARYTABLE order by diaryNum
+	</select>
 	
 
 </mapper>

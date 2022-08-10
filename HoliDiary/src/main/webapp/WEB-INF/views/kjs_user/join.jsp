@@ -11,33 +11,47 @@
 	<div id="content_join">
 	
 	<!-- 유효성 검사는 마지막에 -->
-		
-		<form action="join.do" method="post">
+		<div id="join_title_box"><span>회원가입</span></div>
+		<form action="join.do" method="post" enctype="multipart/form-data" name="joinForm" onsubmit="return joinCheck()">
 			<div id="join_box">
-			회원가입 ${r}
-				<div>
-					이름 <input name="userName" autocomplete="off">
+				<div class="join_input_box">
+					<span class="join_span">이름<span id="join_name_error"></span></span> 
+					<input id="join_name" name="userName" autocomplete="off" placeholder="필수">
+				</div>
+				<div class="join_input_box">
+					<span class="join_span">닉네임<span id="join_nickname_error"></span></span> 
+					<input id="join_nickname" name="userNickname" autocomplete="off" placeholder="필수">
+				</div>
+				<div class="join_input_box">
+					<span class="join_span">아이디<span id="join_id_error"></span></span> 
+					<input id="join_id" name="userID" autocomplete="off" maxlength="20" placeholder="5~20자 영문 소문자, 숫자">
+				</div>
+				<div class="join_input_box">
+					<span class="join_span">비밀번호<span id="join_pw_error"></span></span> 
+					<input id="join_pw" name="userPW" autocomplete="off" maxlength="16" placeholder="8~16자 대 소문자, 숫자 사용">
+				</div>
+				<div class="join_input_box">
+					<span class="join_span">비밀번호 확인<span id="join_pwCheck_error"></span></span> 
+					<input id="join_pwCheck" name="pwCheck" autocomplete="off" placeholder="비밀번호를 다시 입력해주세요">
+				</div>
+				<div class="join_input_box">
+					<span class="join_span">핸드폰번호<span id="join_phone_error"></span></span> 
+					<input id="join_phone" id="phoneNum" name="userPhoneNumber" autocomplete="off" placeholder="전화번호 입력">
+				</div>
+				<div class="join_input_box">
+					<span class="join_span">이메일<span id="join_email_error"></span></span> 
+					<input id="join_email" name="userEmail" autocomplete="off" placeholder="필수">
+				</div>
+				<div class="join_file_box">
+					<span >프로필 사진</span> 
+					<input type="file" name="userImg">
 				</div>
 				<div>
-					닉네임 <input name="userNickname" autocomplete="off">
+				<!-- http://localhost/main/popup.open -->
+					<input type="hidden" name="userDiaryUrl" value="http://localhost/main/popup.open?id=" autocomplete="off">
 				</div>
-				<div>
-					아이디 <input name="userID" autocomplete="off">
-				</div>
-				<div>
-					비밀번호 <input name="userPW" autocomplete="off">
-				</div>
-				<div>
-					비밀번호 확인 <input name="pwCheck" autocomplete="off">
-				</div>
-				<div>
-					핸드폰번호 <input id="phoneNum" name="userPhoneNumber" autocomplete="off">
-				</div>
-				<div>
-					이메일 <input name="userEmail" autocomplete="off">
-				</div>
-				<div>
-					<button>회원가입</button>
+				<div class="join_btn_box">
+					<button>가입하기</button>
 				</div>
 			</div>
 		</form>

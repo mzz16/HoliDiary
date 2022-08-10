@@ -23,6 +23,12 @@
             <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2240&q=80" alt="SlideShow">
           </div>
         </div>
+        
+        
+        
+       <%--  ${diary.diaryIntroduce }
+        ${d.diaryIntroduce } --%>
+        
 </div>
 
 

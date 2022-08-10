@@ -14,7 +14,7 @@ const bounds = {
 const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let labelIndex = 0;
 let map, infoWindow
-	
+let arr = [];
 function initMap() {
 	
   map = new google.maps.Map(document.getElementById("map"), {
@@ -89,10 +89,8 @@ function initMap() {
                 google.maps.drawing.OverlayType.RECTANGLE,
             ],
         },
-        /*
-		 * markerOptions: { icon:
-		 * "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png", },
-		 */
+        
+		
         circleOptions: {
             fillColor: "#ffff00",
             fillOpacity: 0.2,
@@ -103,115 +101,101 @@ function initMap() {
         },
     });
     drawingManager.setMap(map);
-
+   
+    
+ 
+ google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
+	 if (e.type == google.maps.drawing.OverlayType.MARKER) {
+		// arr.push(e.overlay);
+		// console.log(arr[0]);
+		// drawingManager.setDrawingMode(null);
+		google.maps.event.addListener(e.overlay, 'click', function(event) {
+			e.overlay.setMap(null);
+		});
+		
+		
+		 // drawingManager.setMap(null);
+   } else if (e.type == google.maps.drawing.OverlayType.CIRCLE) {
+	   	// arr.push(e.overlay);
+		// console.log(arr[0]);
+		// drawingManager.setDrawingMode(null);
+		google.maps.event.addListener(e.overlay, 'click', function(event) {
+			e.overlay.setRadius(0);
+			e.overlay.setMap(null);
+		});
+		
+   } else if (e.type == google.maps.drawing.OverlayType.POLYGON) {
+		// arr.push(e.overlay);
+		// console.log(arr[0]);
+		drawingManager.setDrawingMode(null);
+		google.maps.event.addListener(e.overlay, 'click', function(event) {
+			e.overlay.setMap(null);
+		});
+		
+   } else if (e.type == google.maps.drawing.OverlayType.POLYLINE) {
+		// arr.push(e.overlay);
+		// console.log(arr[0]);
+		drawingManager.setDrawingMode(null);
+		google.maps.event.addListener(e.overlay, 'click', function(event) {
+			e.overlay.setMap(null);
+		});
+		
+  } else {
+	// arr.push(e.overlay);
+		// console.log(arr[0]);
+		drawingManager.setDrawingMode(null);
+		google.maps.event.addListener(e.overlay, 'click', function(event) {
+			e.overlay.setMap(null);
+		});
+		
+  }
+	 
+	 
+	 
+  });
+    
+ google.maps.event.addListener(drawingManager, 'click', function(e) {
+	 if (e.overlay == arr[0]) {
+	 }
+})
 	   
 
  // This event listener calls addMarker() when the map is clicked.
-    google.maps.event.addListener(map, "click", (event) => {
+var m = google.maps.event.addListener(map, "click", (event) => {
         addMarker(event.latLng, map);
     });
     
     
 
-// Adds a marker to the map.
 function addMarker(location, map) {
-    // Add the marker at the clicked location, and add the next-available
-	// label
-    // from the array of alphabetical characters.
     new google.maps.Marker({
         position: location,
         label: labels[labelIndex++ % labels.length],
         map: map,
     });
+    
 }
 
+/*google.maps.event.addListener(addMarker, 'click', function(m) {
+	alert(11);
+	m.setLabel(null);
+	m.setMap(null);
+});*/
+
+(function(addMarker,l){
+    google.maps.event.addListener(addMarker,'click',function(){
+    	alert(11);
+    	l.setMap(this.getMap());
+    });
+  })(addMarker)
+
+
+}  // initMap
 
 
 
 
 
-class DeleteMenu extends google.maps.OverlayView {
-    constructor() {
-        super();
-        this.div_ = document.createElement("div");
-        this.div_.className = "delete-menu";
-        this.div_.innerHTML = "Delete";
-        const menu = this;
-        google.maps.event.addDomListener(this.div_, "click", () => {
-            menu.removeVertex();
-        });
-    }
-    onAdd() {
-        const deleteMenu = this;
-        const map = this.getMap();
-        this.getPanes().floatPane.appendChild(this.div_);
-        // mousedown anywhere on the map except on the menu div will close
-		// the
-        // menu.
-        this.divListener_ = google.maps.event.addDomListener(map.getDiv(), "mousedown", (e) => {
-            if (e.target != deleteMenu.div_) {
-                deleteMenu.close();
-            }
-        }, true);
-    }
-    onRemove() {
-        if (this.divListener_) {
-            google.maps.event.removeListener(this.divListener_);
-        }
-        this.div_.parentNode.removeChild(this.div_);
-        // clean up
-        this.set("position", null);
-        this.set("path", null);
-        this.set("vertex", null);
-    }
-    close() {
-        this.setMap(null);
-    }
-    draw() {
-        const position = this.get("position");
-        const projection = this.getProjection();
-        if (!position || !projection) {
-            return;
-        }
-        const point = projection.fromLatLngToDivPixel(position);
-        this.div_.style.top = point.y + "px";
-        this.div_.style.left = point.x + "px";
-    }
-    /**
-	 * Opens the menu at a vertex of a given path.
-	 */
-    open(map, path, vertex) {
-        this.set("position", path.getAt(vertex));
-        this.set("path", path);
-        this.set("vertex", vertex);
-        this.setMap(map);
-        this.draw();
-    }
-    /**
-	 * Deletes the vertex from the path.
-	 */
-    removeVertex() {
-        const path = this.get("path");
-        const vertex = this.get("vertex");
-        if (!path || vertex == undefined) {
-            this.close();
-            return;
-        }
-        path.removeAt(vertex);
-        this.close();
-    }
-}
-
-
-const deleteMenu = new DeleteMenu();
-google.maps.event.addListener(drawingManager, "contextmenu", (e) => {
-    // Check if click was on a vertex control point
-    if (e.vertex == undefined) {
-        return;
-    }
-    deleteMenu.open(map, drawingManager.getPath(), e.vertex);
-});
-}
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
@@ -222,7 +206,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 window.initMap = initMap;
-//window.initialize = initialize;
+// window.initialize = initialize;
 export {};
 
 

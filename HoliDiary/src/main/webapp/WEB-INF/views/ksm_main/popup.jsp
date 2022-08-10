@@ -22,7 +22,7 @@
         	<a><img src="resources/kjs_profileImg/${sessionScope.loginUser.userImg }" alt=""></a>
       <details>
           	<summary><span class="profile-name">${sessionScope.loginUser.userNickname }</span></summary>
-          	<p class="profile-introduce">소개글칸입니다. 가나다라마바사아자차카타파하</p>
+          	<p class="profile-introduce">${diary.diaryIntroduce }</p>
       </details>
       </div>
       

@@ -8,4 +8,11 @@ public interface UserMapper {
 
 	int naver(User u);
 
+	int fileUpdate(User u);
+
+	int idCheck(User u);
+
+	int nickCheck(User u);
+
+
 }

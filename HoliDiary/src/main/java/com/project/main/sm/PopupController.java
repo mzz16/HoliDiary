@@ -14,19 +14,24 @@ public class PopupController {
 
 	@Autowired
 	private UserDAO uDAO;
+	
+	@Autowired
 	private DiaryDAO dDAO;
 
 	// 팝업창 - 오픈
 	@RequestMapping(value = "/popup.open", method = RequestMethod.GET)
-	public String popupOpen(HttpServletRequest req) {
+	public String popupOpen(HttpServletRequest req, Diary d) {
 
+		
 		if (uDAO.loginCheck(req)) {
+			//dDAO.getDiaryInfo(req, d);
 			req.setAttribute("popupContentPage", "popupHome.jsp");
 			return "ksm_main/popup";
 		} else {
 			req.setAttribute("popupContentPage", "popupBack.jsp");
 			return "ksm_main/popupBack";
 		}
+
 	}
 
 	// 팝업창 - 홈
@@ -46,7 +51,7 @@ public class PopupController {
 		req.setAttribute("popupContentPage", "popupSchedule.jsp");
 		return "ksm_main/popup";
 	}
-	
+
 	// 팝업창 - 설정 관리 들어가기
 	@RequestMapping(value = "/updateMyPopup", method = RequestMethod.GET)
 	public String updateMyPopup(HttpServletRequest req) {
