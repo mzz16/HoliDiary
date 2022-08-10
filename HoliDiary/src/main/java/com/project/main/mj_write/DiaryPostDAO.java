@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PostDAO {
+public class DiaryPostDAO {
 
 	@Autowired
 	private SqlSession ss;
