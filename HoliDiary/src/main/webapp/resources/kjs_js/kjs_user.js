@@ -31,7 +31,7 @@ function phoneNumberHyphen(){
 	}
 
 
-	var phoneNum = document.getElementById('phoneNum');
+	var phoneNum = document.joinForm.userPhoneNumber;
 
 	phoneNum.onkeyup = function(){
 	  console.log(this.value);

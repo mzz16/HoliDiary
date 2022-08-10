@@ -4,15 +4,17 @@ function loginIsNotEmpty(){
 	let id = document.loginForm.userID
 	let pw = document.loginForm.userPW
 
-	if(isEmptyForLogin(id)){
-		alert('아이디를 입력해주세요');
+	if(isEmptyForJS(id)){
 		id.focus();
+		$('#login_error').text('아이디를 입력해주세요');
+		$('#login_error').css('color','red');
 		return false;
 	}
 	
-	if(isEmptyForLogin(pw)){
-		alert('비밀번호를 입력해주세요');
+	if(isEmptyForJS(pw)){
 		pw.focus();
+		$('#login_error').text('비밀번호를 입력해주세요');
+		$('#login_error').css('color','red');
 		return false;
 	}
 	
@@ -30,16 +32,66 @@ function joinCheck(){
 	let phone = document.joinForm.userPhoneNumber;
 	let email = document.joinForm.userEmail;
 	
-/*	if(isEmptyForJS(name)){
+	let nameError = $('#join_name_error').css("color");
+	let nickError = $('#join_nickname_error').css("color");
+	let idError = $('#join_id_error').css("color");
+	let pwError = $('#join_pw_error').css("color");
+	let pwcheckError = $('#join_pwCheck_error').css("color");
+	let phoneError = $('#join_phone_error').css("color");
+	let emailError = $('#join_email_error').css("color");
+	
+	if(isEmptyForJS(name) || nameError == 'rgb(255, 0, 0)'){
 		name.focus();
+		if(isEmptyForJS(name)){
+			$('#join_name_error').text('이름을 입력해주세요');
+			$('#join_name_error').css('color','red');
+		}
 		return false;
-	}else if(isEmptyForJS(nickname)){
+	} else if (isEmptyForJS(nickname) || nickError == 'rgb(255, 0, 0)'){
 		nickname.focus();
+		if(isEmptyForJS(nickname)){
+			$('#join_nickname_error').text('닉네임을 입력해주세요');
+			$('#join_nickname_error').css('color','red');
+		}
 		return false;
-	}else if()
+	} else if (isEmptyForJS(id) || idError == 'rgb(255, 0, 0)'){
+		id.focus();
+		if(isEmptyForJS(id)){
+			$('#join_id_error').text('아이디를 입력해주세요');
+			$('#join_id_error').css('color','red');
+		}
+		return false;
+	} else if (isEmptyForJS(pw) || pwError == 'rgb(255, 0, 0)'){
+		pw.focus();
+		if(isEmptyForJS(pw)){
+			$('#join_pw_error').text('비밀번호를 입력해주세요');
+			$('#join_pw_error').css('color','red');
+		}
+		return false;
+	} else if(isEmptyForJS(pwCheck) || pwcheckError == 'rgb(255, 0, 0)'){
+		pwCheck.focus();
+		if(isEmptyForJS(pwCheck)){
+			$('#join_pwCheck_error').text('재확인 비밀번호를 입력해주세요');
+			$('#join_pwCheck_error').css('color','red');
+		}
+		return false;
+	} else if(isEmptyForJS(phone) || phoneError == 'rgb(255, 0, 0)'){
+		phone.focus();
+		if(isEmptyForJS(phone)){
+			$('#join_phone_error').text('전화번호를 입력해주세요');
+			$('#join_phone_error').css('color','red');
+		}
+		return false;
+	} else if(isEmptyForJS(email) || emailError == 'rgb(255, 0, 0)'){
+		email.focus();
+		if(isEmptyForJS(email)){
+			$('#join_email_error').text('이메일을 입력해주세요');
+			$('#join_email_error').css('color','red');
+		}
+		return false;
+	}
 	
-	
-	return true;*/
+	return true;
 }
 
 
@@ -54,8 +106,10 @@ $(function() {
 			
 			if(isEmpty(name)){
 				$('#join_name_error').text('이름을 입력해주세요');
+				$('#join_name_error').css('color','red');
 			}else{
 				$('#join_name_error').text('');
+				$('#join_name_error').css('color','blue');
 			}
 			
 			});
@@ -65,6 +119,7 @@ $(function() {
 			
 			let nick = $(this);
 			let nickVal = $(this).val();
+			
 			
 			// 닉네임 중복확인
 			$.ajax({
@@ -78,7 +133,7 @@ $(function() {
 						$('#join_nickname_error').text('이미 사용중인 닉네임입니다');
 						$('#join_nickname_error').css('color','red');
 					}else if(getData == 0){
-						if(isEmpty(id)){
+						if(isEmpty(nick)){
 							$('#join_nickname_error').text('닉네임을 입력해주세요');
 							$('#join_nickname_error').css('color','red');
 						}else{
@@ -95,8 +150,10 @@ $(function() {
 			 // 닉네임 필수
 			if(isEmpty(nick)){
 				$('#join_nickname_error').text('닉네임을 입력해주세요');
+				$('#join_nickname_error').css('color','red');
 			}else{
 				$('#join_nickname_error').text('');
+				$('#join_nickname_error').css('color','blue');
 			}
 			
 			});
@@ -108,11 +165,9 @@ $(function() {
 			let id = $(this);
 			
 			// 아이디 조건
-			if(lessThan(id, 5)){
+			if(lessThan(id, 5) || containsHS(id)){
 				$('#join_id_error').text('아이디는 5~20자 영문 소문자, 숫자로 입력해주세요');
-			}
-			if(containsHS(id)){
-				$('#join_id_error').text('아이디는 5~20자 영문 소문자, 숫자로 입력해주세요');
+				$('#join_id_error').css('color','red');
 			}
 			
 			
@@ -151,8 +206,10 @@ $(function() {
 			// 필수
 			if(isEmpty(id)){
 				$('#join_id_error').text('아이디를 입력해주세요');
+				$('#join_id_error').css('color','red');
 			}else{
 				$('#join_id_error').text('');
+				$('#join_id_error').css('color','blue');
 			}
 		});
 	  
@@ -163,8 +220,10 @@ $(function() {
 		// 비번 필수
 		if(isEmpty(pw)){
 			$('#join_pw_error').text('비밀번호를 입력해주세요');
+			$('#join_pw_error').css('color','red');
 		}else{
 			$('#join_pw_error').text('');
+			$('#join_pw_error').css('color','blue');
 		}
 		
 		//비번 조건
@@ -188,6 +247,7 @@ $(function() {
 			// 비번 필수
 			if(isEmpty(pwCheck)){
 				$('#join_pwCheck_error').text('비밀번호를 입력해주세요');
+				$('#join_pwCheck_error').css('color','red');
 			}else{
 				//비번 확인
 				if(notEquals(pw, pwCheck)){
@@ -207,8 +267,10 @@ $(function() {
 			// 필수
 			if(isEmpty(phone)){
 				$('#join_phone_error').text('전화번호를 입력해주세요');
+				$('#join_phone_error').text('비밀번호를 입력해주세요');
 			}else{
 				$('#join_phone_error').text('');
+				$('#join_phone_error').css('color','blue');
 			}
 			
 		});
@@ -220,8 +282,10 @@ $(function() {
 			// 필수
 			if(isEmpty(email)){
 				$('#join_email_error').text('이메일을 입력해주세요');
+				$('#join_email_error').text('비밀번호를 입력해주세요');
 			}else{
 				$('#join_email_error').text('');
+				$('#join_email_error').css('color','blue');
 			}
 			
 		});

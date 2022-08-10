@@ -28,6 +28,7 @@
 					<div class="login_btn">
 						<button>로그인</button>
 					</div>
+					<div><span id="login_error"></span></div>
 					<c:if test="${r eq '로그인실패'}">
 						<div><span style="color: red;">아이디 또는 비밀번호 입력이 잘못 되었습니다.</span></div>
 					</c:if>
