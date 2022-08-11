@@ -1,4 +1,4 @@
-package com.project.main;
+package com.project.main.sej;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,25 +10,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.project.main.js.UserDAO;
 
 @Controller
-public class HomeController {
-	
+public class Sej_SearchController {
+
 	@Autowired
 	private UserDAO uDAO;
 	
+	@Autowired
+	private HomePostDAO pDAO;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(HttpServletRequest req) {
-		
+	@RequestMapping(value = "/home.search", method = RequestMethod.GET)
+	public String homeSearch(HomePostSelector pSel,HttpServletRequest req) {
+		TokenMaker.make(req);
 		uDAO.loginCheck(req);
-		
-		req.setAttribute("contentPage", "home.jsp");
+		pDAO.searchPost(pSel, req);
+		pDAO.getPost(1, req);
+		req.setAttribute("contentPage", "sej_search/home_search.jsp");
 		return "index";
 	}
-	
-	@RequestMapping(value = "/index.go", method = RequestMethod.GET)
-	public String indexGo(HttpServletRequest req) {
-		return home(req);
-	}
-	
-	
 }

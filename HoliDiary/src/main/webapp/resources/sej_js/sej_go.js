@@ -5,5 +5,5 @@ function goHome() {
 function goSearch() {
 	let search = document.getElementsByClassName("search_input")[0].value
 	
-	location.href='index.search?search='+ search;
+	location.href='home.search?search='+ search;
 }

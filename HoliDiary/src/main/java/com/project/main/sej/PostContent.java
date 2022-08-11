@@ -1,4 +1,4 @@
-package com.project.main;
+package com.project.main.sej;
 
 import java.util.Date;
 
