@@ -18,6 +18,7 @@ public class DiaryDAO {
 		try {
 			d.setDiaryUserId(userId);
 			req.setAttribute("Diary", ss.getMapper(DiaryMapper.class).getDiaryInfo(d));
+			ss.getMapper(DiaryMapper.class).diaryTheme(d);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
