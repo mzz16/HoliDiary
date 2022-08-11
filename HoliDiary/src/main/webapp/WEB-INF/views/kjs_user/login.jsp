@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 <!-- 로그인 관련 기능 전체 감싸는 div : 가운데 정렬 위한 div-->
 	<div id="content_login">
 		<div id="login_page_box">
@@ -42,15 +43,15 @@
 					  <div id="naver_id_login" style="display: none;"></div>
 					  <!-- //네이버 로그인 버튼 노출 영역 -->
 					  <script type="text/javascript">
-					  	var naver_id_login = new naver_id_login("rX3BsIpQkj6CJiShI2rn", "http://localhost/main/social.go");
+					  	var naver_id_login = new naver_id_login("rX3BsIpQkj6CJiShI2rn", "http://localhost/main/callback.login.naver");
 					  	var state = naver_id_login.getUniqState();
-					  	naver_id_login.setButton("green", 1,40);
 					  	naver_id_login.setDomain("http://localhost/main");
 					  	naver_id_login.setState(state);
+					  	naver_id_login.setPopup();
 					  	naver_id_login.init_naver_id_login();
 					  	
+					  	
 					  	$("#loginWithNaver").click(function(){ 
-					  		console.log('dd');
 							var btnNaverLogin = document.getElementById("naver_id_login").firstChild;
 							btnNaverLogin.click();
 					  	});

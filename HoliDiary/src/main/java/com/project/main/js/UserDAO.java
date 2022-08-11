@@ -10,6 +10,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -86,11 +88,28 @@ public class UserDAO {
 	// ajax 아이디 체크
 	public int idCheck(User u, HttpServletRequest req) {
 		System.out.println(req.getParameter("kakaoID"));
-		if(req.getParameter("kakaoID") == null) {
-			return ss.getMapper(UserMapper.class).idCheck(u);
+		System.out.println(req.getParameter("naverID"));
+		System.out.println(req.getParameter("userID"));
+		
+		if(req.getParameter("naverID") != null) {
+			if(ss.getMapper(UserMapper.class).idCheck(u) == 1) {
+				if(ss.getMapper(UserMapper.class).idCheckWithNaver(u) == 0) {
+					return 2;
+				}
+			}
+			return ss.getMapper(UserMapper.class).idCheckWithNaver(u);
 		}
-			
-		return ss.getMapper(UserMapper.class).idCheckWithKakao(u);
+		
+		if(req.getParameter("kakaoID") != null) {
+			if(ss.getMapper(UserMapper.class).idCheck(u) == 1) {
+				if(ss.getMapper(UserMapper.class).idCheckWithKakao(u) == 0) {
+					return 2;
+				}
+			}
+			return ss.getMapper(UserMapper.class).idCheckWithKakao(u);
+		}
+		
+		return ss.getMapper(UserMapper.class).idCheck(u);
 	}
 	
 	// ajax 닉네임 체크
@@ -315,7 +334,7 @@ public class UserDAO {
 		       kakaoUser.setUserEmail(email);
 		       kakaoUser.setUserImg(img);
 		       kakaoUser.setKakaoID(kakaoID);
-		       kakaoUser.setUserDiaryUrl("http://localhost/main/popup.open?id=" + id);
+		       kakaoUser.setUserDiaryUrl("http://localhost/main/popup.open?userId=" + id);
 		       
 		       br.close();
 		       
@@ -392,7 +411,7 @@ public class UserDAO {
 				       
 		       br.close();
 				       
-		       User dbUser = (User)ss.getMapper(UserMapper.class).loginWithKakao(kakaoUser);
+		       User dbUser = (User)ss.getMapper(UserMapper.class).getUserByKakaoID(kakaoUser);
 		       
 			   if(dbUser != null) {
 					req.getSession().setAttribute("loginUser", dbUser);
@@ -413,18 +432,45 @@ public class UserDAO {
 		
 	}
 
-
-
-
-
-
-
-
-	// 네이버 세션 확인
-/*	public int naverGetSession(User u) {
+	public int joinWithNaver(User u, HttpServletRequest req) {
 		
-		return ss.getMapper(UserMapper.class).naver(u);
-	}*/
+		if(ss.getMapper(UserMapper.class).joinWithNaver(u) == 1) {
+			
+			User dbUser = ss.getMapper(UserMapper.class).getUserByID(u);
+			
+			req.getSession().setAttribute("loginUser", dbUser);
+			req.getSession().setMaxInactiveInterval(60*10);
+			
+			return 1;
+		}
+		
+		return 0;
+	}
+
+	public boolean loginWithNaver(User u, HttpServletRequest req) {
+		
+		User dbUser = (User)ss.getMapper(UserMapper.class).getUserByNaverID(u);
+	       
+		   if(dbUser != null) {
+				req.getSession().setAttribute("loginUser", dbUser);
+				req.getSession().setMaxInactiveInterval(60*10);
+				System.out.println("세션 등록 성공");
+				//ss.getMapper(DiaryMapper.class).diaryInsert(kakaoUser);
+				System.out.println("로그인 성공");
+				
+				return true;
+		   }else {
+				joinWithKakao(req);
+				System.out.println("가입성공");
+				
+				return false;
+			}
+		
+	}
+
+	
+
+
 	
 	
 }
