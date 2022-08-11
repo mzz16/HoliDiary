@@ -24,7 +24,18 @@
 	</table>
 	
 	<div>
+		<button>좋아요</button>
+		<button>수정하기</button>
 		<button onclick="history.go(-1)">목록으로</button>
+	</div>
+	
+	<hr>
+	
+	<div>
+		<div><h3>Commnet</h3></div>
+		<div>작성자</div>
+		<div><textarea name="commentTxt" id="commentTxt"></textarea>
+		<button>등록</button> </div>
 	</div>
 
 

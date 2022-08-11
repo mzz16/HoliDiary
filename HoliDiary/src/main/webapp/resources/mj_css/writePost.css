@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+#writePostTitle {
+	width: 100%;
+	height: 30px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+#editorTxt {
+	width: 100%;
+	height: 500px;
+	margin-top: 50px;
+}
