@@ -30,7 +30,7 @@
 					</div>
 					<div><span id="login_error" style="font-family:'GangwonEdu_OTFBoldA';"></span></div>
 					<c:if test="${r eq '로그인실패'}">
-						<div><span style="color: red;">아이디 또는 비밀번호 입력이 잘못 되었습니다.</span></div>
+						<div><span style="color: red; font-family: 'GangwonEdu_OTFBoldA';">아이디 또는 비밀번호 입력이 잘못 되었습니다.</span></div>
 					</c:if>
 					</form>
 					<!-- 소셜 로그인 기능 -->

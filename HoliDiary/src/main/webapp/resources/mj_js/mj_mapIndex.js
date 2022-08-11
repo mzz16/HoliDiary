@@ -217,6 +217,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 
 
+
 window.initMap = initMap;
 //window.initAutocomplete = initAutocomplete;
 

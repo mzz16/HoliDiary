@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+#postDetail {
+	width: 100%;
+	height: 500px;
+}
+
+.postDetailTitle {
+	font-size: 20pt;
+}

@@ -8,7 +8,46 @@
 </head>
 <body>
 
-
+<script type="text/javascript">
+  var naver_id_login = new naver_id_login("rX3BsIpQkj6CJiShI2rn", "http://localhost/main/social.go");
+  // 접근 토큰 값 출력
+  alert(naver_id_login.oauthParams.access_token);
+  // 네이버 사용자 프로필 조회
+  naver_id_login.get_naver_userprofile("naverSignInCallback()");
+  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+  function naverSignInCallback() {
+    alert(naver_id_login.getProfileData('name'));
+    alert(naver_id_login.getProfileData('nickname'));
+    alert(naver_id_login.getProfileData('id'));
+    alert(naver_id_login.getProfileData('email'));
+    alert(naver_id_login.getProfileData('mobile'));
+    alert(naver_id_login.getProfileData('profile_image'));
+    
+    let name = naver_id_login.getProfileData('name');
+    let nickname = naver_id_login.getProfileData('nickname');
+    let id = naver_id_login.getProfileData('id');
+    let email = naver_id_login.getProfileData('email');
+    let mobile = naver_id_login.getProfileData('mobile');
+    let profile_image = naver_id_login.getProfileData('profile_image');
+    
+    // 아이디가 없으면 튕김
+    
+    // 아이디가 있으면 로그인
+    
+   /*  $.ajax({
+		url : "join.do",
+		type : "POST",
+		dataType : "json",
+		data : {"l_id" : idInput},
+		success : function(getData){
+			console.log(getData);
+		},
+		error : function(request,status,error) {
+			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+     */
+  }
+</script>
 	<div class="main_slider">
 		<div>
 			<img src="resources/sej_img/slider/eiffel-tower-768501.jpg">
