@@ -10,11 +10,11 @@
 </head>
 <body>
 	<c:if test="${curPage != 1 }">
-		<a href="sns.page.change?p=${curPage - 1 }" id="snsL">&lt;</a>
+		<a href="search.page.change?p=${curPage - 1 }&search=${search}" id="snsL">&lt;</a>
 	</c:if>
 	<c:if test="${curPage != pageCount }">
-		<a href="sns.page.change?p=${curPage + 1 }" id="snsR">&gt;</a>
-	</c:if>
+		<a href="search.page.change?p=${curPage + 1 }&search=${search}" id="snsR">&gt;</a>
+	</c:if> 
 	
 	<c:forEach var="c" items="${contents }">
 		<div style="background-color: salmon; width: 200px; height: 200px;">
