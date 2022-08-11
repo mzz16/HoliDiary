@@ -16,9 +16,9 @@
   margin: 10px auto;
   background: #04b6e2;
   padding: 60px 40px 80px 40px;
-  width: 95%;
-  max-width: 600px;
-  height: 400px;
+  width: 100%;
+  max-width: 800px;
+  height: 500px;
   border-radius: 5px;
   box-shadow: 0px 2px 6px rgba(2,2,2,0.2);
   position: relative;
@@ -399,7 +399,7 @@ input.add-event-edit:-ms-input-placeholder {
 }
 .footer{
   width: 100%;
-  bottom: 50px;
+  bottom: 20px;
   left: 0;
   position: absolute;
   font-size: 14px;

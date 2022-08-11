@@ -8,4 +8,6 @@ public interface Sej_postMapper {
 
 	List<PostContent> getPost(HomePostSelector pSel);
 
+	int getPostCountBeta(HomePostSelector pSel);
+
 }
