@@ -20,6 +20,7 @@ public class UserController {
 		
 		req.setAttribute("contentPage", "kjs_user/login.jsp");
 		req.setAttribute("loginPage", "kjs_user/before_login.jsp");
+		
 		return "index";
 	}
 	
@@ -30,7 +31,7 @@ public class UserController {
 		uDAO.login(u,req);
 		uDAO.loginCheck(req);
 		
-		if(req.getAttribute("r").equals("로그인실패")) {
+		if(!uDAO.loginCheck(req)) {
 			req.setAttribute("contentPage", "kjs_user/login.jsp");
 		}else {
 			req.setAttribute("contentPage", "home.jsp");
@@ -72,8 +73,6 @@ public class UserController {
 	@RequestMapping(value = "/id.check", method = RequestMethod.GET)
 	public @ResponseBody int idCheck(User u, HttpServletRequest req) {
 		
-		uDAO.loginWithKakao(req);
-		
 		return uDAO.idCheck(u, req);
 	}
 	
@@ -108,22 +107,68 @@ public class UserController {
 	
 	// 카카오톡으로 회원가입 및 로그인하기
 	@RequestMapping(value = "/social.kakao", method = RequestMethod.GET)
-	public String kakaoJoin(HttpServletRequest req) {
+	public String socialKakao(HttpServletRequest req) {
 		uDAO.loginWithKakao(req);
 		uDAO.loginCheck(req);
-		req.setAttribute("contentPage", "kjs_user/callback.jsp");
+		req.setAttribute("contentPage", "home.jsp");
 		
 		
 		return "index";
 	}
 	
-	
-	// 네이버 세션 확인
-/*	@RequestMapping(value = "/naver.get.session", method = RequestMethod.GET)
-	public int naverGetSession(User u) {
+	// 네이버 콜백 주소(회원가입)
+	@RequestMapping(value = "/callback.join.naver", method = RequestMethod.GET)
+	public String callbackJoinNaver(User u, HttpServletRequest req) {
+
+		uDAO.loginCheck(req);
 		
-		return uDAO.naverGetSession(u);
-	}*/
+		req.setAttribute("contentPage", "kjs_user/naver_callback_join.jsp");
+		
+		return "index";
+	}
+	
+	// 네이버 콜백 주소(로그인)
+	@RequestMapping(value = "/callback.login.naver", method = RequestMethod.GET)
+	public String callbackLoginNaver(User u, HttpServletRequest req) {
+
+		uDAO.loginCheck(req);
+
+		req.setAttribute("contentPage", "kjs_user/naver_callback_login.jsp");
+		
+		return "index";
+	}
+	
+	// 네이버 (회원가입: DB저장)
+	@RequestMapping(value = "/social.join.naver", method = RequestMethod.GET)
+	public String socialJoinNaver(User u, HttpServletRequest req) {
+		
+		//uDAO.loginWithNaver(u,req);
+		uDAO.loginCheck(req);
+		req.setAttribute("contentPage", "home.jsp");
+		
+		return "index";
+	}
+	
+	// 네이버 (로그인)
+	@RequestMapping(value = "/social.login.naver", method = RequestMethod.GET)
+	public String socialLoginNaver(User u, HttpServletRequest req) {
+		
+		uDAO.loginWithNaver(u,req);
+		if(uDAO.loginCheck(req)) {
+			req.setAttribute("contentPage", "home.jsp");
+		}else {
+			req.setAttribute("contentPage", "kjs_user/login.jsp");
+		}
+		
+		return "index";
+	}
+	
+	// 네이버 회원가입
+	@RequestMapping(value = "/join.naver", method = RequestMethod.POST)
+	public @ResponseBody int joinNaver(User u, HttpServletRequest req) {
+		
+		return uDAO.joinWithNaver(u, req);
+	}
 	
 	
 

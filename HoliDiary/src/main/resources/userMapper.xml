@@ -10,12 +10,20 @@
 		insert into USER_TABLE values(#{userID}, #{userPW}, #{userName}, #{userPhoneNumber}, #{userEmail}, #{userImg}, #{userDiaryUrl}, #{userNickname}, #{kakaoID}, null)
 	</insert>
 	
+	<insert id="joinWithNaver" parameterType="com.project.main.js.User">
+		insert into USER_TABLE values(#{userID}, #{userPW}, #{userName}, #{userPhoneNumber}, #{userEmail}, #{userImg}, #{userDiaryUrl}, #{userNickname}, null, #{naverID})
+	</insert>
+	
 	<select id="getUserByID" resultType="com.project.main.js.User">
 		select * from user_table where userID = #{userID}
 	</select>
 	
-	<select id="loginWithKakao" resultType="com.project.main.js.User">
+	<select id="getUserByKakaoID" resultType="com.project.main.js.User">
 		select * from user_table where kakaoID = #{kakaoID}
+	</select>
+	
+	<select id="getUserByNaverID" resultType="com.project.main.js.User">
+		select * from user_table where naverID = #{naverID}
 	</select>
 	
 	<update id="fileUpdate">
@@ -30,6 +38,10 @@
 	
 	<select id="idCheckWithKakao" resultType="int">
 		select count(*) from user_table where kakaoID = #{kakaoID}
+	</select>
+	
+	<select id="idCheckWithNaver" resultType="int">
+		select count(*) from user_table where naverID = #{naverID}
 	</select>
 	
 	<select id="nickCheck" resultType="int">

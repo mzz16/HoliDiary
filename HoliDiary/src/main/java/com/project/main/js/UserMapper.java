@@ -6,19 +6,28 @@ public interface UserMapper {
 
 	User getUserByID(User u);
 
+	User getUserByKakaoID(User kakaoUser);
+
+	User getUserByNaverID(User u);
+
 	int naver(User u);
 
 	int fileUpdate(User u);
 
 	int idCheck(User u);
 
+	int idCheckWithKakao(User u);
+	
+	int idCheckWithNaver(User u);
+
 	int nickCheck(User u);
 
 	int joinWithKakao(User kakaoUser);
 
-	int idCheckWithKakao(User u);
+	int joinWithNaver(User u);
 
-	User loginWithKakao(User kakaoUser);
+
+
 
 
 

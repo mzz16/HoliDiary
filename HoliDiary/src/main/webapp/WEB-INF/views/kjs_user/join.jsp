@@ -48,7 +48,7 @@
 				</div>
 				<div>
 				<!-- http://localhost/main/popup.open -->
-					<input type="hidden" name="userDiaryUrl" value="http://localhost/main/popup.open?id=" autocomplete="off">
+					<input type="hidden" name="userDiaryUrl" value="http://localhost/main/popup.open?userId=" autocomplete="off">
 				</div>
 				<div class="join_btn_box">
 					<button>가입하기</button>
