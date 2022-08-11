@@ -26,70 +26,55 @@ $(document).ready(function () {
 	  $(".more-button").click(function () {
 	    $(".more-menu-list").toggle("hide");
 	  });
-
-	  var owl = $("#owl-slider-1");
-	  $("#owl-slider-1").owlCarousel({
-	    navigation: true,
-	    slideSpeed: 400,
-	    paginationSpeed: 400,
-	    items: 1,
-	    itemsDesktop: false,
-	    itemsDesktopSmall: false,
-	    itemsTablet: false,
-	    itemsMobile: false,
-	    autoplay: true,
-	    autoPlaySpeed: 200,
-	    autoPlayTimeout: 100,
-	    autoplayHoverPause: true
-	  });
-	  // Custom Navigation Events
-	  $(".owl-next").click(function () {
-	    owl.trigger("owl.next");
-	  });
-	  $(".owl-prev").click(function () {});
-
-	  $(".play").click(function () {
-	    owl.trigger("owl.play", 100);
-	  });
-	  $(".stop").click(function () {
-	    owl.trigger("owl.stop");
-	  });
-
-	  var owl = $("#owl-slider-2");
-	  owl.owlCarousel({
-	    navigation: true,
-	    slideSpeed: 400,
-	    paginationSpeed: 400,
-	    responsive: {
-	      0: {
-	        items: 1
-	      },
-	      600: {
-	        items: 2
-	      },
-	      1000: {
-	        items: 4
-	      }
+	  
+	  //Show contextmenu:
+	  $(document).contextmenu(function(e){
+	    //Get window size:
+	    var winWidth = $(document).width();
+	    var winHeight = $(document).height();
+	    //Get pointer position:
+	    var posX = e.pageX;
+	    var posY = e.pageY;
+	    //Get contextmenu size:
+	    var menuWidth = $(".contextmenu").width();
+	    var menuHeight = $(".contextmenu").height();
+	    //Security margin:
+	    var secMargin = 10;
+	    //Prevent page overflow:
+	    if(posX + menuWidth + secMargin >= winWidth
+	    && posY + menuHeight + secMargin >= winHeight){
+	      //Case 1: right-bottom overflow:
+	      posLeft = posX - menuWidth - secMargin + "px";
+	      posTop = posY - menuHeight - secMargin + "px";
 	    }
-	  });
-
-	  var owl = $("#owl-slider-3");
-	  owl.owlCarousel({
-	    navigation: true,
-	    slideSpeed: 400,
-	    paginationSpeed: 400,
-	    responsive: {
-	      0: {
-	        items: 1
-	      },
-	      600: {
-	        items: 2
-	      },
-	      1000: {
-	        items: 4
-	      }
+	    else if(posX + menuWidth + secMargin >= winWidth){
+	      //Case 2: right overflow:
+	      posLeft = posX - menuWidth - secMargin + "px";
+	      posTop = posY + secMargin + "px";
 	    }
+	    else if(posY + menuHeight + secMargin >= winHeight){
+	      //Case 3: bottom overflow:
+	      posLeft = posX + secMargin + "px";
+	      posTop = posY - menuHeight - secMargin + "px";
+	    }
+	    else {
+	      //Case 4: default values:
+	      posLeft = posX + secMargin + "px";
+	      posTop = posY + secMargin + "px";
+	    };
+	    //Display contextmenu:
+	    $(".contextmenu").css({
+	      "left": posLeft,
+	      "top": posTop
+	    }).show();
+	    //Prevent browser default contextmenu.
+	    return false;
 	  });
-	});
+	  //Hide contextmenu:
+	  $(document).click(function(){
+	    $(".contextmenu").hide();
+	  });
+	  
 
+})
 

@@ -9,8 +9,47 @@
 <link rel="stylesheet" href="resources/sm_css/sm_popup.css">
 <link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap" rel="stylesheet">
 <script type="text/javascript" src="resources/sm_js/sm_popupJs.js"></script>
+ 
+<script type="text/javascript">
+$(function () {
+	  document.addEventListener("contextmenu", function(e) {
+
+		    e.preventDefault(); // 원래 있던 오른쪽 마우스 이벤트를 무효화한다.
+
+		    var x = e.pageX + 'px'; // 현재 마우스의 X좌표
+		    var y = e.pageY + 'px'; // 현재 마우스의 Y좌표
+		    
+		    const popMenu = document.getElementById('popMenu'); // 팝업창을 담아옴
+
+		    /*
+		        스타일 지정, 우클릭 한 위치에 팝업창 띄워줌..
+		    */
+		    popMenu.style.position = 'relative'; 
+		    popMenu.style.left = x;
+		    popMenu.style.top = y;
+		    popMenu.style.display = 'block';
+	})
+	 document.addEventListener("click", function(e) {
+
+	        // 노출 초기화
+	        popMenu.style.display = 'none';   
+	        popMenu.style.top = null;
+	        popMenu.style.left = null;
+	        
+	    });
+});
+</script>
 </head>
-<body>
+<body style="background: ${Diary.themeColor}">
+
+  <ul class="contextmenu">
+  <li><a href="#">Simple link</a></li>
+  <li><a href="#">Link to somewhere</a></li>
+  <li><a href="#">Another link</a></li>
+  <li><a href="#">Link to nowhere</a></li>
+  <li><a href="#">Random link</a></li>
+</ul>
+
 
 
 <div class="app-wrapper">
