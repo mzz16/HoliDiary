@@ -85,6 +85,7 @@ public class UserDAO {
 	
 	// ajax 아이디 체크
 	public int idCheck(User u, HttpServletRequest req) {
+		System.out.println(req.getParameter("kakaoID"));
 		if(req.getParameter("kakaoID") == null) {
 			return ss.getMapper(UserMapper.class).idCheck(u);
 		}
@@ -171,15 +172,6 @@ public class UserDAO {
 
 	public boolean loginCheck(HttpServletRequest req) {
 		
-		// 카카오톡 인가코드 받기 (토큰 받기 위함: 세션)
-		String code = req.getParameter("code");
-		//System.out.println(code);
-		// 카카오로 로그인
-		if(code != null) {
-			getKakaoToken(code,req);
-		}
-		
-		// 일반 로그인 경우
 		User u = (User) req.getSession().getAttribute("loginUser");
 		if(u != null) {
 			req.setAttribute("loginPage", "kjs_user/after_login.jsp");
@@ -401,14 +393,16 @@ public class UserDAO {
 		       br.close();
 				       
 		       User dbUser = (User)ss.getMapper(UserMapper.class).loginWithKakao(kakaoUser);
+		       
 			   if(dbUser != null) {
-					req.getSession().setAttribute("loginUser", kakaoUser);
+					req.getSession().setAttribute("loginUser", dbUser);
 					req.getSession().setMaxInactiveInterval(60*10);
 					System.out.println("세션 등록 성공");
 					//ss.getMapper(DiaryMapper.class).diaryInsert(kakaoUser);
-					req.setAttribute("r", "가입성공");
-				}else {
-					req.setAttribute("r", "가입실패");
+					System.out.println("로그인 성공");
+			   }else {
+					joinWithKakao(req);
+					System.out.println("가입성공");
 				}
 
 		       } catch (Exception e) {

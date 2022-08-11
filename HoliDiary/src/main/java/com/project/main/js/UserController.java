@@ -106,16 +106,13 @@ public class UserController {
 		return "index";
 	}
 	
-	// 카카오톡으로 회원가입하기
+	// 카카오톡으로 회원가입 및 로그인하기
 	@RequestMapping(value = "/social.kakao", method = RequestMethod.GET)
 	public String kakaoJoin(HttpServletRequest req) {
-		//아이디 체크
-		//있으면 로그인
 		uDAO.loginWithKakao(req);
-		//없으면 회원가입
-		uDAO.joinWithKakao(req);
 		uDAO.loginCheck(req);
 		req.setAttribute("contentPage", "kjs_user/callback.jsp");
+		
 		
 		return "index";
 	}
