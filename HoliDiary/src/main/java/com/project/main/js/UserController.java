@@ -197,12 +197,12 @@ public class UserController {
 	}
 	
 	// 탈퇴하기
-	@RequestMapping(value = "/delete.user", method = RequestMethod.POST)
-	public String DeleteUser(User u ,HttpServletRequest req) {
+	@RequestMapping(value = "/delete.user", method = RequestMethod.GET)
+	public String DeleteUser(HttpServletRequest req) {
 		
-		uDAO.join(u, req);
+		uDAO.delete(req);
 		
-		req.setAttribute("contentPage", "kjs_user/join_last.jsp");
+		req.setAttribute("contentPage", "home.jsp");
 		req.setAttribute("loginPage", "kjs_user/before_login.jsp");
 		return "index";
 	}
