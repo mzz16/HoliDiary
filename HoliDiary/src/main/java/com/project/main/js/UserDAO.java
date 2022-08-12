@@ -88,11 +88,28 @@ public class UserDAO {
 	// ajax 아이디 체크
 	public int idCheck(User u, HttpServletRequest req) {
 		System.out.println(req.getParameter("kakaoID"));
-		if(req.getParameter("kakaoID") == null) {
-			return ss.getMapper(UserMapper.class).idCheck(u);
+		System.out.println(req.getParameter("naverID"));
+		System.out.println(req.getParameter("userID"));
+		
+		if(req.getParameter("naverID") != null) {
+			if(ss.getMapper(UserMapper.class).idCheck(u) == 1) {
+				if(ss.getMapper(UserMapper.class).idCheckWithNaver(u) == 0) {
+					return 2;
+				}
+			}
+			return ss.getMapper(UserMapper.class).idCheckWithNaver(u);
 		}
-			
-		return ss.getMapper(UserMapper.class).idCheckWithKakao(u);
+		
+		if(req.getParameter("kakaoID") != null) {
+			if(ss.getMapper(UserMapper.class).idCheck(u) == 1) {
+				if(ss.getMapper(UserMapper.class).idCheckWithKakao(u) == 0) {
+					return 2;
+				}
+			}
+			return ss.getMapper(UserMapper.class).idCheckWithKakao(u);
+		}
+		
+		return ss.getMapper(UserMapper.class).idCheck(u);
 	}
 	
 	// ajax 닉네임 체크
@@ -154,7 +171,7 @@ public class UserDAO {
 		}
 	}
 	
-	public void login(User u, HttpServletRequest req) {
+	public boolean login(User u, HttpServletRequest req) {
 		
 		User dbUser = ss.getMapper(UserMapper.class).getUserByID(u);
 		
@@ -163,12 +180,15 @@ public class UserDAO {
 				req.getSession().setAttribute("loginUser", dbUser);
 				req.getSession().setMaxInactiveInterval(60*10);
 				req.setAttribute("r", "로그인 성공");
+				return true;
 			}else {
 				req.setAttribute("r", "로그인실패");
 			}
 		} else {
 			req.setAttribute("r", "로그인실패");
 		}
+		
+		return false;
 		
 	}
 
@@ -246,6 +266,7 @@ public class UserDAO {
 		
 	}
 	
+	// 카카오 정보 DB저장
 	public void joinWithKakao(HttpServletRequest req) {
 		
 		// 카카오톡 인가코드 받기 (토큰 받기 위함: 세션)
@@ -317,7 +338,7 @@ public class UserDAO {
 		       kakaoUser.setUserEmail(email);
 		       kakaoUser.setUserImg(img);
 		       kakaoUser.setKakaoID(kakaoID);
-		       kakaoUser.setUserDiaryUrl("http://localhost/main/popup.open?id=" + id);
+		       kakaoUser.setUserDiaryUrl("http://localhost/main/popup.open?userId=" + id);
 		       
 		       br.close();
 		       
@@ -341,6 +362,7 @@ public class UserDAO {
 		
 	}
 
+	// 카카오 정보 세션 저장
 	public void loginWithKakao(HttpServletRequest req) {
 		
 		// 카카오톡 인가코드 받기 (토큰 받기 위함: 세션)
@@ -394,7 +416,7 @@ public class UserDAO {
 				       
 		       br.close();
 				       
-		       User dbUser = (User)ss.getMapper(UserMapper.class).loginWithKakao(kakaoUser);
+		       User dbUser = (User)ss.getMapper(UserMapper.class).getUserByKakaoID(kakaoUser);
 		       
 			   if(dbUser != null) {
 					req.getSession().setAttribute("loginUser", dbUser);
@@ -415,18 +437,86 @@ public class UserDAO {
 		
 	}
 
-
-
-
-
-
-
-
-	// 네이버 세션 확인
-/*	public int naverGetSession(User u) {
+	// 네이버 정보 DB저장
+	public int joinWithNaver(User u, HttpServletRequest req) {
 		
-		return ss.getMapper(UserMapper.class).naver(u);
-	}*/
+		if(ss.getMapper(UserMapper.class).joinWithNaver(u) == 1) {
+			
+			User dbUser = ss.getMapper(UserMapper.class).getUserByID(u);
+			
+			req.getSession().setAttribute("loginUser", dbUser);
+			req.getSession().setMaxInactiveInterval(60*10);
+			
+			return 1;
+		}
+		
+		return 0;
+	}
+
+	// 네이버 로그인 세션 저장
+	public boolean loginWithNaver(User u, HttpServletRequest req) {
+		
+		User dbUser = (User)ss.getMapper(UserMapper.class).getUserByNaverID(u);
+	       
+		   if(dbUser != null) {
+				req.getSession().setAttribute("loginUser", dbUser);
+				req.getSession().setMaxInactiveInterval(60*10);
+				System.out.println("세션 등록 성공");
+				//ss.getMapper(DiaryMapper.class).diaryInsert(kakaoUser);
+				System.out.println("로그인 성공");
+				
+				return true;
+		   }else {
+				joinWithKakao(req);
+				System.out.println("가입성공");
+				
+				return false;
+			}
+		
+	}
+
+	// 아이디 찾기
+	public String searchID(User u) {
+		return ss.getMapper(UserMapper.class).searchID(u);
+	}
+
+	public void searchPW(User u) {
+		
+		if(ss.getMapper(UserMapper.class).searchPW(u) == 1) {
+			// 이메일 돌리기
+			
+		} else {
+			// 회원정보를 찾을 수 없음.
+		}
+		
+	}
+
+	public void delete(HttpServletRequest req) {
+		try {
+			User u = (User) req.getSession().getAttribute("loginUser");
+
+			if (ss.getMapper(UserMapper.class).deleteUser(u) == 1) {
+				req.setAttribute("result", "탈퇴성공");
+
+				String path = req.getSession().getServletContext().getRealPath("resources/kjs_profileImg");
+				String photo = u.getUserImg();
+				photo = URLDecoder.decode(photo, "utf-8");
+				new File(path + "/" + photo).delete();
+
+				logout(req);
+				//loginCheck(req);
+			} else {
+				req.setAttribute("result", "탈퇴실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			req.setAttribute("result", "탈퇴실패");
+		}
+	}
+
+	
+
+
 	
 	
 }

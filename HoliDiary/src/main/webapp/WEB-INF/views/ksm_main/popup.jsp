@@ -99,19 +99,16 @@
 							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
 							class="feather feather-play">
             <path d="M5 3l14 9-14 9V3z" />
-          </svg> Map
-					</a>
-				</div>
-				<div class="list-header">
-					<span class="category-item">Public</span>
-
-				</div>
-				<div>
-					<a href="post.list" class="item-link" id="pageLink"> <svg
-							class="link-icon" xmlns="http://www.w3.org/2000/svg" width="16"
-							height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-							class="feather feather-list">
+          </svg>
+          Map</a>
+       </div>
+       <div class="list-header">
+        <span class="category-item">Public</span>
+       
+      </div>
+       <div>
+        <a href="post-list?postWriter=${sessionScope.loginUser.userID }" class="item-link" id="pageLink">
+          <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list">
             <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
           </svg> POST
 					</a> 
@@ -165,7 +162,7 @@
 
 				<div class="action-buttons-wrapper">
 					<button class="action-buttons btn-upload"
-						onclick="location.href='write.go'">포스트 작성</button>
+						onclick="location.href='write.go?postWriter=${sessionScope.loginUser.userID }'">포스트 작성</button>
 				</div>
 			</div>
 

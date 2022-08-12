@@ -2,23 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.main.sej.Sej_postMapper">
 
-	<select id="getPostCount"
+	<!-- <select id="getPostCount"
 		parameterType="com.project.main.sej.HomePostSelector"
 		resultType="java.lang.Integer">
 		select count(*)
 		from post, user_table
 		where postwriter = userid
 		and posttxt like '%'||#{search}||'%'
-	</select>
+	</select> -->
 
+	<select id="getPostCountBeta"
+		parameterType="com.project.main.sej.HomePostSelector"
+		resultType="java.lang.Integer">
+		select count(*)
+		from post
+		where posttitle like '%'||#{search}||'%' or postwriter like '%'||#{search}||'%' 
+		or posttxt like '%'||#{search}||'%' or postcountry like '%'||#{search}||'%'or postcategory like '%'||#{search}||'%'
+	</select>
+	
 	<select id="getPost" resultType="com.project.main.sej.PostContent" parameterType="HomePostSelector">
 		select *
 		from (
 		select rownum as rn, postnum, posttitle, posttxt, postdate, postwriter, postcategory,
-		postcountry, postrecommend, postimg, postmap, postweather
+		postcountry, postrecommend, postimg, postweather
 		from (
-		select * from post, user_table
-		where postwriter = userid and posttxt like '%'||#{search}||'%'
+		select * from post
+		where posttitle like '%'||#{search}||'%' or postwriter like '%'||#{search}||'%' 
+		or posttxt like '%'||#{search}||'%' or postcountry like '%'||#{search}||'%'or postcategory like '%'||#{search}||'%'
 		order by postdate desc
 		)
 		)

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.main.mj_write.DiaryPostMapper">
+
+	<select id="showAllPostList" resultType="com.project.main.mj_write.DiaryPost">
+		select * from post where postWriter = #{postWriter} order by postDate
+	</select>
+	
+	<select id="detailPost" resultType="com.project.main.mj_write.DiaryPost">
+		select * from post where postNum = #{postNum}
+	</select>
+	
+	<insert id="regPost" parameterType="com.project.main.mj_write.DiaryPost">
+		insert into post (postNum, postTitle, postTxt, postDate, postWriter, postCategory, postCountry) 
+		values(postNum_seq.nextval, #{postTitle}, #{postTxt}, sysdate, #{postWriter}, #{postCategory}, #{postCountry})
+	</insert>
+
+</mapper>

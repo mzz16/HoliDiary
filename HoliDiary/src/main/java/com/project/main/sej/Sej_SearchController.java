@@ -22,9 +22,18 @@ public class Sej_SearchController {
 	public String homeSearch(HomePostSelector pSel,HttpServletRequest req) {
 		TokenMaker.make(req);
 		uDAO.loginCheck(req);
-		pDAO.searchPost(pSel, req);
-		pDAO.getPost(1, req);
-		req.setAttribute("contentPage", "sej_search/home_search.jsp");
+		pDAO.searchPost(1, pSel, req);
+		/*pDAO.getPost(1, req);*/
+		/*req.setAttribute("contentPage", "sej_search/home_search.jsp");*/
+		return "index";
+	}
+	
+	@RequestMapping(value = "search.page.change", method = RequestMethod.GET)
+	public String searchPageChange(HomePostSelector pSel, HttpServletRequest req) {
+		TokenMaker.make(req);
+		int p = Integer.parseInt(req.getParameter("p"));
+		uDAO.loginCheck(req);
+		pDAO.searchPost(p, pSel, req);
 		return "index";
 	}
 }

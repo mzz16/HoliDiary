@@ -8,6 +8,7 @@
 
 <link rel="stylesheet" href="resources/sej_css/index.css">
 <link rel="stylesheet" href="resources/sej_css/home.css">
+<link rel="stylesheet" href="resources/sej_css/home_search.css">
 <link rel="stylesheet" href="resources/kjs_css/kjs_join.css">
 <link rel="stylesheet" href="resources/kjs_css/kjs_login.css">
 <script type="text/javascript" src="resources/sm_js/sm_popupJs.js"></script>
@@ -17,6 +18,7 @@
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="resources/sej_js/sej_go.js"></script>
 <script type="text/javascript" src="resources/kjs_js/kjs_user.js"></script>
+<script type="text/javascript" src="resources/kjs_js/kjs_mypage.js"></script>
 <script type="text/javascript" src="resources/kjs_js/kjs_valid.js"></script>
 <script type="text/javascript" src="resources/kjs_js/kjs_validCheck.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -61,7 +63,7 @@
 			<a class="menu_bar_li_first" href="#" id="modal_btn" onclick=popup()>My Diary</a>
 			<input type="hidden" value="${sessionScope.loginUser.userID }" id="userID">
 			<span class="menu_bar_border"></span>
-			<a class="menu_bar_li" href="">마이페이지</a>
+			<a class="menu_bar_li" href="mypage.go" onclick="return mypageCheckUser();" id="mypage_btn">마이페이지</a>
 			<a class="menu_bar_li" href="">홀리 NOW</a>
 			<a class="menu_bar_li" href="">Best 홀리</a>
 			<a class="menu_bar_li" href="">아이템샵</a>

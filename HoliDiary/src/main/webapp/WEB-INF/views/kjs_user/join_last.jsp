@@ -17,6 +17,7 @@
 	</div>
 		<div class="join_go_home_box">
 			<button onclick="goHome()">나중에 등록하기</button>
+			<button onclick="popup()">나의 다이어리로 바로 가기</button>
 		</div>
 		${r}
 		
