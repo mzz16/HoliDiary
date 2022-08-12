@@ -1,0 +1,151 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'GangwonEdu_OTFBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    src: url('../../resources/sej_font/NotoSansKR-Medium.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Noto Sans Light';
+    src: url('../../resources/sej_font/NotoSansKR-Light.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../../resources/sej_font/Montserrat-Medium.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Montserrat-Thin';
+    src: url('../../resources/sej_font/Montserrat-Thin.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'sans-serif';
+    src: url('../../resources/sej_font/SansSerifFLF.otf') format('opentype');
+}
+
+#home_search_inner_place {
+	width: 1400px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 150px;
+	display: flex;
+}
+
+#home_search_pageL, #home_search_pageR {
+	width: 45px;
+	heigh: 45px;
+	position: relative;
+}
+
+#home_search_pageL {
+	left: 10px;
+	top: 205px;
+}
+
+#home_search_pageR {
+	right: 0px;
+	top: 205px;
+}
+
+.home_search_content {
+	width: 250px;
+	height: 600px;
+	font-family: 'Noto Sans Light','sans-serif';
+	/* border-bottom: 1px solid black; */
+	margin-right: 50px;
+}
+
+
+#home_search_content_place {
+	width: 1200px;
+	display: flex;
+	position: relative;
+	left: 30px;
+}
+
+.leftPageBox {
+	width: 100px;
+}
+
+.rightPageBox {
+	width: 100px;
+}
+
+.home_search_content_title {
+	font-family: 'Noto Sans Light','sans-serif';
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.home_search_content_img {
+	width: 250px;
+	height: 300px;
+}
+
+.home_search_content_img img {
+	display: block;
+  	width: 100%;
+  	height: 100%;
+  	object-fit: fill;
+  	box-shadow: 3px 2px 5px #c5c5c5;
+}
+
+.home_search_content_title_box {
+	display: flex;
+	width: 250px;
+	letter-spacing: 0.8px;
+}
+
+.home_search_content_title_box span {
+	display: inline-block;
+	position: relative;
+	left: 165px;
+	top: 18px;
+}
+
+.home_search_text_box {
+	margin-bottom: 120px;
+	letter-spacing: 1.5px;
+    line-height: 20px;
+    text-align: justify;
+}
+
+.home_search_recommend {
+	margin-left: 148px;
+}
+
+.home_search_category {
+	position: relative;
+	top: -470px;
+	left: 250px;
+	width: 50px;
+	color: #FFDE59;
+	font-weight: bold;
+	background-color: #6667AB;
+	padding: 10px;
+	font-size: 13px;
+	letter-spacing: 0.2px;
+}
+
+.home_search_country {
+	position: relative;
+	top: -430px;
+	left: 170px;
+	width: 50px;
+	color: #FFDE59;
+	font-weight: bold;
+	background-color: #6667AB;
+	padding: 10px;
+	font-size: 13px;
+	letter-spacing: 0.2px;
+}
+
+

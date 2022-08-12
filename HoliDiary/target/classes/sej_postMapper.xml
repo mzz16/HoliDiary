@@ -24,7 +24,7 @@
 		select *
 		from (
 		select rownum as rn, postnum, posttitle, posttxt, postdate, postwriter, postcategory,
-		postcountry, postrecommend, postimg, postmap, postweather
+		postcountry, postrecommend, postimg, postweather
 		from (
 		select * from post
 		where posttitle like '%'||#{search}||'%' or postwriter like '%'||#{search}||'%' 
