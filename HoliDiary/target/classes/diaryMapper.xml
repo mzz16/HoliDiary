@@ -7,7 +7,9 @@
 	</insert>
 	
 	<select id="getDiaryInfo" parameterType="com.project.main.sm.Diary" resultType="com.project.main.sm.Diary">
-		select * from DIARYTABLE where diaryUserId=#{diaryUserId}
+		select *
+		from diarytable d, category c
+		where d.diaryuserid = c.categoryuserid
 	</select>
 
 	<update id="diaryUpdate" parameterType="com.project.main.sm.Diary">

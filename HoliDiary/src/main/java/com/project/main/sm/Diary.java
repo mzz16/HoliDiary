@@ -10,14 +10,16 @@ public class Diary {
 	private String diaryUserId;
 	private String diaryUserNickname;
 	private String themeColor;
-	private String diaryCategory;
+	private String categories;
+	private String[] categoriesArray;
 	
 	public Diary() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Diary(String diaryNum, String diaryUrl, String diaryTitle, String diaryIntroduce, String diaryImg,
-			String diaryUserId, String diaryUserNickname, String themeColor, String diaryCategory) {
+			String diaryUserId, String diaryUserNickname, String themeColor, String categories,
+			String[] categoriesArray) {
 		super();
 		this.diaryNum = diaryNum;
 		this.diaryUrl = diaryUrl;
@@ -27,7 +29,8 @@ public class Diary {
 		this.diaryUserId = diaryUserId;
 		this.diaryUserNickname = diaryUserNickname;
 		this.themeColor = themeColor;
-		this.diaryCategory = diaryCategory;
+		this.categories = categories;
+		this.categoriesArray = categoriesArray;
 	}
 
 	public String getDiaryNum() {
@@ -94,13 +97,22 @@ public class Diary {
 		this.themeColor = themeColor;
 	}
 
-	public String getDiaryCategory() {
-		return diaryCategory;
+	public String getCategories() {
+		return categories;
 	}
 
-	public void setDiaryCategory(String diaryCategory) {
-		this.diaryCategory = diaryCategory;
+	public void setCategories(String categories) {
+		this.categories = categories;
 	}
+
+	public String[] getCategoriesArray() {
+		return categoriesArray;
+	}
+
+	public void setCategoriesArray(String[] categoriesArray) {
+		this.categoriesArray = categoriesArray;
+	}
+
 	
 	
 }

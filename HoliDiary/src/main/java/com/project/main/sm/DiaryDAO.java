@@ -17,11 +17,21 @@ public class DiaryDAO {
 	public void getDiaryInfo(HttpServletRequest req, Diary d, String userId) {
 		try {
 			d.setDiaryUserId(userId);
-			req.setAttribute("Diary", ss.getMapper(DiaryMapper.class).getDiaryInfo(d));
+			Diary dd = (Diary) ss.getMapper(DiaryMapper.class).getDiaryInfo(d);
+			dd.setCategoriesArray(makeCategory(dd.getCategories()));
+			req.setAttribute("Diary", dd);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	// 다이어리 카테고리 만들기
+	public String[] makeCategory(String dd) {
+		String categories[] = dd.split("!");
+		return categories;
+	}
+	
+	
 	
 	// 다이어리 수정 (타이틀, 소개, 컬러)
 	public void updateDiary(HttpServletRequest req, Diary d, String userId) {

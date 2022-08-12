@@ -15,17 +15,20 @@ public class PopupController {
 
 	@Autowired
 	private UserDAO uDAO;
-	
+
 	@Autowired
 	private DiaryDAO dDAO;
+	
+	@Autowired
+	private CategoryDAO cDAO;
 
 	// 팝업창 - 오픈
 	@RequestMapping(value = "/popup.open", method = RequestMethod.GET)
 	public String popupOpen(HttpServletRequest req, Diary d, @RequestParam("userId") String userId) {
 
-		//System.out.println(d.getDiaryUserId());
-		//System.out.println(userId);
-		
+		// System.out.println(d.getDiaryUserId());
+		// System.out.println(userId);
+
 		if (uDAO.loginCheck(req)) {
 			dDAO.getDiaryInfo(req, d, userId);
 			req.setAttribute("popupContentPage", "popupHome.jsp");
@@ -57,7 +60,7 @@ public class PopupController {
 		return "ksm_main/popup";
 	}
 
-	// 팝업창 - 설정 관리 들어가기
+	// 다이어리 - 설정 관리 들어가기
 	@RequestMapping(value = "/updateMyPopup", method = RequestMethod.GET)
 	public String updateMyPopup(HttpServletRequest req, Diary d, @RequestParam("userId") String userId) {
 
@@ -71,7 +74,6 @@ public class PopupController {
 	@RequestMapping(value = "/diary.update", method = RequestMethod.GET)
 	public String updateMyDiary(HttpServletRequest req, Diary d, @RequestParam("diaryUserId") String userId) {
 
-		
 		if (uDAO.loginCheck(req)) {
 			dDAO.updateDiary(req, d, userId);
 			dDAO.getDiaryInfo(req, d, userId);
@@ -83,5 +85,33 @@ public class PopupController {
 
 		return "ksm_main/popup";
 	}
+
+	// 다이어리 - 카테고리 업데이트 들어가기
+	@RequestMapping(value = "/updateCategory", method = RequestMethod.GET)
+	public String updateCategory(HttpServletRequest req, Diary d, @RequestParam("userId") String userId) {
+
+		uDAO.loginCheck(req);
+		dDAO.getDiaryInfo(req, d, userId);
+		req.setAttribute("popupContentPage", "updateCategory.jsp");
+		return "ksm_main/popup";
+	}
+	
+	// 다이어리 - 카테고리 업데이트 (추가)
+	@RequestMapping(value = "/category.add", method = RequestMethod.GET)
+	public String updateCategoryAdd(HttpServletRequest req, Diary d, @RequestParam("diaryUserId") String userId, Category c) {
+		
+		if (uDAO.loginCheck(req)) {
+			dDAO.updateDiary(req, d, userId);
+//			cDAO.updateCategoryAdd(req, d, userId, c);
+			dDAO.getDiaryInfo(req, d, userId);
+			req.setAttribute("popupContentPage", "popupHome.jsp");
+		} else {
+			req.setAttribute("popupContentPage", "popupBack.jsp");
+			return "ksm_main/popupBack";
+		}
+		
+		return "ksm_main/popup";
+	}
+	
 
 }
