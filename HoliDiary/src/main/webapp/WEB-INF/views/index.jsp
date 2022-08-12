@@ -8,6 +8,7 @@
 
 <link rel="stylesheet" href="resources/sej_css/index.css">
 <link rel="stylesheet" href="resources/sej_css/home.css">
+<link rel="stylesheet" href="resources/sej_css/home_search.css">
 <link rel="stylesheet" href="resources/kjs_css/kjs_join.css">
 <link rel="stylesheet" href="resources/kjs_css/kjs_login.css">
 <script type="text/javascript" src="resources/sm_js/sm_popupJs.js"></script>

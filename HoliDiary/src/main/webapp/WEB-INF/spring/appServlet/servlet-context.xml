@@ -60,7 +60,7 @@
 	</beans:bean>
 	
 	<beans:bean id="so" class="com.project.main.sej.HomeSiteOption">
-		<beans:constructor-arg value="3"></beans:constructor-arg>
+		<beans:constructor-arg value="4"></beans:constructor-arg>
 	</beans:bean>
 	
 	

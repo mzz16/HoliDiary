@@ -9,24 +9,40 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:if test="${curPage != 1 }">
-		<a href="search.page.change?p=${curPage - 1 }&search=${search}" id="snsL">&lt;</a>
-	</c:if>
-	<c:if test="${curPage != pageCount }">
-		<a href="search.page.change?p=${curPage + 1 }&search=${search}" id="snsR">&gt;</a>
-	</c:if> 
 	
+	<div id="home_search_inner_place">
+	<div class="leftPageBox">
+	<c:if test="${curPage != 1 }">
+		<a href="search.page.change?p=${curPage - 1 }&search=${search}"><img id="home_search_pageL" src="resources/sej_img/slider/free-icon-left-yellow.png"></a>
+	</c:if>
+	</div>
+	<div id="home_search_content_place">
 	<c:forEach var="c" items="${contents }">
-		<div style="background-color: salmon; width: 200px; height: 200px;">
-			<p>작성자: ${c.postwriter }</p>
-			<p>내용: ${c.posttxt }</p>
-			<span>카테고리: ${c.postcategory }</span><br>
-			<span>국가: ${c.postcountry }</span><br>
-			<span>추천수: ${c.postrecommend }</span><br>
-			<span>이미지: ${c.postimg }</span><br>
-			<span>날씨: ${c.postweather }</span>
+			<div class="home_search_content">
+			<div class="home_search_content_title_box">
+			<h3 class="home_search_content_title">${c.posttitle }</h3>
+			<span>${c.postweather }</span>
+			</div> 
+			<div>
+			<span>${c.postmap }</span>
+			<p class="home_search_content_img"><%-- ${c.postimg } --%><img src="resources/sej_img/search_testing/a78c82f1bd248f89b536c8b849a96ced.jpg"></p>
+			</div>
+			<div>
+			<p class="home_search_text_box">${c.posttxt }</p>
+			<span class="home_search_writer">${c.postwriter }</span> 
+			<span class="home_search_recommend">추천수: ${c.postrecommend }</span>
+			</div>
+			<span class="home_search_category">${c.postcategory }</span>
+			<span class="home_search_country">${c.postcountry }</span>
 		</div>
 		
 	</c:forEach>
+	</div>
+	<div class="rightPageBox">
+	<c:if test="${curPage != pageCount }">
+		<a href="search.page.change?p=${curPage + 1 }&search=${search}"><img id="home_search_pageR" src="resources/sej_img/slider/free-icon-right-yellow.png"></a>
+	</c:if> 
+	</div>
+	</div>
 </body>
 </html>
