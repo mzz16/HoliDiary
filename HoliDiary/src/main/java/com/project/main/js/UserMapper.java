@@ -26,6 +26,12 @@ public interface UserMapper {
 
 	int joinWithNaver(User u);
 
+	String searchID(User u);
+
+	int searchPW(User u);
+
+
+
 
 
 

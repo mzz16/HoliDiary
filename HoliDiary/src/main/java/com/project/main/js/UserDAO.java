@@ -171,7 +171,7 @@ public class UserDAO {
 		}
 	}
 	
-	public void login(User u, HttpServletRequest req) {
+	public boolean login(User u, HttpServletRequest req) {
 		
 		User dbUser = ss.getMapper(UserMapper.class).getUserByID(u);
 		
@@ -180,12 +180,15 @@ public class UserDAO {
 				req.getSession().setAttribute("loginUser", dbUser);
 				req.getSession().setMaxInactiveInterval(60*10);
 				req.setAttribute("r", "로그인 성공");
+				return true;
 			}else {
 				req.setAttribute("r", "로그인실패");
 			}
 		} else {
 			req.setAttribute("r", "로그인실패");
 		}
+		
+		return false;
 		
 	}
 
@@ -263,6 +266,7 @@ public class UserDAO {
 		
 	}
 	
+	// 카카오 정보 DB저장
 	public void joinWithKakao(HttpServletRequest req) {
 		
 		// 카카오톡 인가코드 받기 (토큰 받기 위함: 세션)
@@ -358,6 +362,7 @@ public class UserDAO {
 		
 	}
 
+	// 카카오 정보 세션 저장
 	public void loginWithKakao(HttpServletRequest req) {
 		
 		// 카카오톡 인가코드 받기 (토큰 받기 위함: 세션)
@@ -432,6 +437,7 @@ public class UserDAO {
 		
 	}
 
+	// 네이버 정보 DB저장
 	public int joinWithNaver(User u, HttpServletRequest req) {
 		
 		if(ss.getMapper(UserMapper.class).joinWithNaver(u) == 1) {
@@ -447,6 +453,7 @@ public class UserDAO {
 		return 0;
 	}
 
+	// 네이버 로그인 세션 저장
 	public boolean loginWithNaver(User u, HttpServletRequest req) {
 		
 		User dbUser = (User)ss.getMapper(UserMapper.class).getUserByNaverID(u);
@@ -465,6 +472,22 @@ public class UserDAO {
 				
 				return false;
 			}
+		
+	}
+
+	// 아이디 찾기
+	public String searchID(User u) {
+		return ss.getMapper(UserMapper.class).searchID(u);
+	}
+
+	public void searchPW(User u) {
+		
+		if(ss.getMapper(UserMapper.class).searchPW(u) == 1) {
+			// 이메일 돌리기
+			
+		} else {
+			// 회원정보를 찾을 수 없음.
+		}
 		
 	}
 

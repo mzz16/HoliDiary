@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
 <script type="text/javascript">
@@ -38,13 +38,12 @@
 		success : function(getData){
 			console.log(getData);
 			if(getData == 1){
-				alert('로그인성공')
+				alert('로그인성공');
 				window.close();
-					window.opener.location.href = "http://localhost/main/";
+				window.opener.location.href = "http://localhost/main/social.login.naver?naverID=" + naverID;
 			}else{
 				alert('회원가입을 먼저 진행해주세요');
 				window.close();
-				window.opener.location.href = "http://localhost/main/login.go";
 			}
 			},
 		error : function(request,status,error) {
