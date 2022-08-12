@@ -10,7 +10,7 @@
 
 mypage
 
-<button>탈퇴</button>
+<button onclick="deleteUser()">탈퇴</button>
 
 </body>
 </html>

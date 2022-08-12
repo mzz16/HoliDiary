@@ -30,6 +30,8 @@ public interface UserMapper {
 
 	int searchPW(User u);
 
+	int deleteUser(User u);
+
 
 
 

@@ -10,8 +10,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -489,6 +487,29 @@ public class UserDAO {
 			// 회원정보를 찾을 수 없음.
 		}
 		
+	}
+
+	public void delete(HttpServletRequest req) {
+		try {
+			User u = (User) req.getSession().getAttribute("loginUser");
+
+			if (ss.getMapper(UserMapper.class).deleteUser(u) == 1) {
+				req.setAttribute("result", "탈퇴성공");
+
+				String path = req.getSession().getServletContext().getRealPath("resources/kjs_profileImg");
+				String photo = u.getUserImg();
+				photo = URLDecoder.decode(photo, "utf-8");
+				new File(path + "/" + photo).delete();
+
+				logout(req);
+				//loginCheck(req);
+			} else {
+				req.setAttribute("result", "탈퇴실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			req.setAttribute("result", "탈퇴실패");
+		}
 	}
 
 	
