@@ -1,12 +1,5 @@
 @charset "UTF-8";
 
-@font-face {
-    font-family: 'GangwonEdu_OTFBoldA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
 #content_join{
 	position: relative;
 	width: 80%;
@@ -17,11 +10,28 @@
 #join_option_box{
 	position: absolute;
 	border-radius: 10px;
-	width: 600px;
+	border: 3px solid #6667AB;
+	width: 350px;
 	height: 400px;
 	top: 10%;
 	left: 50%;
-	margin-left: -300px;
+	margin-left: -175px;
+}
+
+.go_back_login{
+	position: absolute;
+	top: 8%;
+	left: 40%;
+	width: 110px;
+	height: 30px;
+	text-align: center;
+}
+
+.go_back_login a{
+	text-decoration: none;
+	font-family: 'GangwonEdu_OTFBoldA';
+	font-size: 13pt;
+	color: #6667AB;
 }
 
 #join_box{
@@ -97,16 +107,19 @@
 	cursor: pointer;
 }
 
-.join_site{
-	width: 180px;
-	height: 40px;
-	margin: 10px auto;
+.join_page{
+	position: absolute;
+	width: 200px;
+	height: 50px;
+	top: 15%;
+	left: 50%;
+	margin-left: -100px;
 }
 
-.join_site button{
+.join_page button{
 	width: 100%;
 	height: 100%;
-	font-size: 15pt;
+	font-size: 18pt;
 	font-family: 'GangwonEdu_OTFBoldA';
 	background-color: #6667AB;
 	color: white;
@@ -115,12 +128,28 @@
 	border-radius: 3px;
 }
 
-.join_social{
-	border: 1px solid black;
+.join_social_info{
 	position: absolute;
 	width: 200px;
 	height: 200px;
-	top: 40%;
+	top: 35%;
+	left: 50%;
+	margin-left: -100px;
+	text-align: center;
+	border-top: 3px dashed #6667AB;
+	padding-top: 11px;
+}
+
+.join_social_info span{
+	font-family: 'GangwonEdu_OTFBoldA';
+	font-size: 13pt;
+}
+
+.join_social{
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	top: 50%;
 	left: 50%;
 	margin-left: -100px;
 }
@@ -130,6 +159,7 @@
 	background-color: transparent;
 	cursor: pointer;
 	width: 100%;
+	margin-bottom: 5px;
 }
 
 .join_file_upload_box{

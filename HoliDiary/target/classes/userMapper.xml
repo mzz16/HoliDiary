@@ -48,11 +48,12 @@
 		select count(*) from user_table where userNickname = #{userNickname}
 	</select>
 	
-
+	<select id="searchID" resultType="String">
+		select userID from user_table where userName = #{userName} and userPhoneNumber = #{userPhoneNumber}
+	</select>
 	
-<!-- 	<select id="naver" resultType="com.project.main.js.User">
-		select * from user_table where userID = #{}
-	</select> -->
-
+	<select id="searchPW" resultType="int">
+		select count(*) from user_table where userID = #{userID} and userEmail = #{userEmail}
+	</select>
 
 </mapper>

@@ -1,20 +1,61 @@
 
 // 로그인에 쓸 유효성 검사
-function loginIsNotEmpty(){
-	let id = document.loginForm.userID
-	let pw = document.loginForm.userPW
+function loginValidCheck(){
+	let id = $("#loginID");
+	let pw = $("#loginPW");
 
-	if(isEmptyForJS(id)){
+	if(isEmpty(id)){
 		id.focus();
 		$('#login_error').text('아이디를 입력해주세요');
 		$('#login_error').css('color','red');
 		return false;
 	}
 	
-	if(isEmptyForJS(pw)){
+	if(isEmpty(pw)){
 		pw.focus();
 		$('#login_error').text('비밀번호를 입력해주세요');
 		$('#login_error').css('color','red');
+		return false;
+	}
+	
+	if(!isEmpty(id) && !isEmpty(pw)){
+		$.ajax({
+			url : 'login.do',
+			type : 'POST',
+			dataType : 'text',
+			data : {'userID' : id.val(), 'userPW' : pw.val()},
+			success : function(data) {
+				//console.log(data);
+				if(data == 'true'){
+					console.log('로그인 성공')
+					location.href='http://localhost/main/'
+				}else{
+					console.log('로그인 실패')
+					$('#login_error').text('아이디 또는 비밀번호 입력이 잘못 되었습니다');
+					$('#login_error').css('color','red');
+				}
+			}
+		});
+	}
+	
+	
+}
+
+function pwSearchValidCheck(){
+	let id = $("#pw_search_id");
+	let email = $("#pw_search_email");
+	
+	if(isEmpty(id)){
+		id.focus();
+		$('#pw_search_error').text('아이디를 입력해주세요');
+		$('#pw_search_error').css('color','red');
+		return false;
+	}
+
+	if(isEmpty(email)){
+		email.focus();
+		$('#pw_search_error').text('이메일을 입력해주세요');
+		$('#pw_search_error').css('color','red');
 		return false;
 	}
 	

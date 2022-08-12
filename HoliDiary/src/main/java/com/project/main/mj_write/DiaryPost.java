@@ -1,6 +1,6 @@
 package com.project.main.mj_write;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class DiaryPost {
 	
@@ -11,7 +11,7 @@ public class DiaryPost {
 	private String postWriter;
 	private String postCategory;
 	private String postCountry;
-	private String postRecommend;
+	private int postRecommend;
 	private String postImg;
 	private String postWeather;
 	
@@ -19,8 +19,8 @@ public class DiaryPost {
 		// TODO Auto-generated constructor stub
 	}
 
-	public DiaryPost(int postNum, String postTitle, String postTxt, Date postDate, String postWriter, String postCategory,
-			String postCountry, String postRecommend, String postImg, String postWeather) {
+	public DiaryPost(int postNum, String postTitle, String postTxt, Date postDate, String postWriter,
+			String postCategory, String postCountry, int postRecommend, String postImg, String postWeather) {
 		super();
 		this.postNum = postNum;
 		this.postTitle = postTitle;
@@ -34,87 +34,86 @@ public class DiaryPost {
 		this.postWeather = postWeather;
 	}
 
-	public int getPostNum() {
+	public final int getPostNum() {
 		return postNum;
 	}
 
-	public void setPostNum(int postNum) {
+	public final void setPostNum(int postNum) {
 		this.postNum = postNum;
 	}
 
-	public String getPostTitle() {
+	public final String getPostTitle() {
 		return postTitle;
 	}
 
-	public void setPostTitle(String postTitle) {
+	public final void setPostTitle(String postTitle) {
 		this.postTitle = postTitle;
 	}
 
-	public String getPostTxt() {
+	public final String getPostTxt() {
 		return postTxt;
 	}
 
-	public void setPostTxt(String postTxt) {
+	public final void setPostTxt(String postTxt) {
 		this.postTxt = postTxt;
 	}
 
-	public Date getPostDate() {
+	public final Date getPostDate() {
 		return postDate;
 	}
 
-	public void setPostDate(Date postDate) {
+	public final void setPostDate(Date postDate) {
 		this.postDate = postDate;
 	}
 
-	public String getPostWriter() {
+	public final String getPostWriter() {
 		return postWriter;
 	}
 
-	public void setPostWriter(String postWriter) {
+	public final void setPostWriter(String postWriter) {
 		this.postWriter = postWriter;
 	}
 
-	public String getPostCategory() {
+	public final String getPostCategory() {
 		return postCategory;
 	}
 
-	public void setPostCategory(String postCategory) {
+	public final void setPostCategory(String postCategory) {
 		this.postCategory = postCategory;
 	}
 
-	public String getPostCountry() {
+	public final String getPostCountry() {
 		return postCountry;
 	}
 
-	public void setPostCountry(String postCountry) {
+	public final void setPostCountry(String postCountry) {
 		this.postCountry = postCountry;
 	}
 
-	public String getPostRecommend() {
+	public final int getPostRecommend() {
 		return postRecommend;
 	}
 
-	public void setPostRecommend(String postRecommend) {
+	public final void setPostRecommend(int postRecommend) {
 		this.postRecommend = postRecommend;
 	}
 
-	public String getPostImg() {
+	public final String getPostImg() {
 		return postImg;
 	}
 
-	public void setPostImg(String postImg) {
+	public final void setPostImg(String postImg) {
 		this.postImg = postImg;
 	}
 
-	public String getPostWeather() {
+	public final String getPostWeather() {
 		return postWeather;
 	}
 
-	public void setPostWeather(String postWeather) {
+	public final void setPostWeather(String postWeather) {
 		this.postWeather = postWeather;
 	}
 
-	
 	
 	
 	

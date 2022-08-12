@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
 
@@ -43,9 +45,10 @@
 			console.log(getData);
 			if(getData == 1){
 				alert('이미 등록된 회원입니다');
-				location.href= "http://localhost/main/join.option";
+				window.close();
 				}else if(getData == 2){
 					alert('카카오로 이미 등록된 회원입니다. 아닌 경우 간편회원가입 이용후, 네이버연동을 이용해주세요.');
+					window.close();
 				}else{
 					// 회원가입을 시킨다
 	 				$.ajax({
@@ -66,13 +69,14 @@
 							console.log(result);
 							if(result == 1){
 								alert('회원가입 성공');
-								location.href= "http://localhost/main/";
+								window.close();
+								window.opener.location.href= "http://localhost/main/social.login.naver?naverID=" + naverID;
 							}
 						},
 						error : function(request, status, error) {
 							console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 								alert('회원가입에 실패했습니다. 간편회원가입을 이용해주세요.');
-								location.href= "http://localhost/main/join.option";
+								window.close();
 							
 						}
 					}); 
