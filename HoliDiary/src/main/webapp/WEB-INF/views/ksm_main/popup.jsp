@@ -186,7 +186,7 @@
 
 				<div class="action-buttons-wrapper">
 					<button class="action-buttons btn-upload"
-						onclick="location.href='write.go'">포스트 작성</button>
+						onclick="location.href='write.go?postWriter=${sessionScope.loginUser.userID }'">포스트 작성</button>
 				</div>
 			</div>
 

@@ -9,5 +9,10 @@
 	<select id="detailPost" resultType="com.project.main.mj_write.DiaryPost">
 		select * from post where postNum = #{postNum}
 	</select>
+	
+	<insert id="regPost" parameterType="com.project.main.mj_write.DiaryPost">
+		insert into post (postNum, postTitle, postTxt, postDate, postWriter, postCategory, postCountry) 
+		values(postNum_seq.nextval, #{postTitle}, #{postTxt}, sysdate, #{postWriter}, #{postCategory}, #{postCountry})
+	</insert>
 
 </mapper>

@@ -12,22 +12,21 @@
 <body>
 
 	<h1>POST</h1>
-
 	<table id="postListTbl" border=1 style="width: 100%; text-align: center;">
 		<tr class="postTbl">
-			<td class="postNo" style="width: 15%">글번호</td>
 			<td class="postTitle" style="width: 30%">글제목</td>
 			<td class="postWriter" style="width: 20%">작성자</td>
 			<td class="postDate" style="width: 25%">작성날짜</td>
 			<td class="postLike" style="width: 10%">좋아요</td>
+			<td class="postNo" style="width: 15%">조회수</td>
 		</tr>
 		<c:forEach var="posts" items="${posts }">
 			<tr class="postList">
-				<td class="postNo">${posts.postNum }</td>
 				<td class="postTitle"><a href='post.detail.go?postNum=${posts.postNum }'>${posts.postTitle }</a></td>
 				<td class="postWriter">${posts.postWriter }</td>
 				<td class="postDate">${posts.postDate }</td>
 				<td class="postDate">${posts.postRecommend }</td>
+				<td class="postViewCount">조회수</td>
 			</tr>
 		</c:forEach>
 	</table>
