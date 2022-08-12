@@ -32,7 +32,7 @@
 	<hr>
 	
 	<div>
-		<div><h3>Commnet</h3></div>
+		<div><h3>Comment</h3></div>
 		<div>작성자</div>
 		<div><textarea name="commentTxt" id="commentTxt"></textarea>
 		<button>등록</button> </div>

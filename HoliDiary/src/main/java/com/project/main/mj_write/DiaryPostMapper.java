@@ -8,4 +8,6 @@ public interface DiaryPostMapper {
 
 	public DiaryPost detailPost(DiaryPost p);
 
+	public int regPost(DiaryPost p);
+
 }

@@ -1,12 +1,20 @@
 package com.project.main.mj_write;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.parsing.GenericTokenParser;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Service
 public class DiaryPostDAO {
@@ -33,41 +41,31 @@ public class DiaryPostDAO {
 		req.setAttribute("posts", posts);
 	}
 
-	/*public void regPost(DiaryPost p, HttpServletRequest req) {
-
-		String path = req.getSession().getServletContext().getRealPath("resources/images");
-		MultipartRequest mr = null;
-		String token = null;
-		
+	public void regPost(DiaryPost p, HttpServletRequest req, String userId, String postTitle, 
+			String postTxt, String postCategory, String postCountry) {
+		System.out.println("유저아이디" + userId);
+		System.out.println("2" + postTitle);
+		System.out.println("3" + postTxt);
+		System.out.println("4" + postCategory);
+		System.out.println("5" + postCountry);
 		try {
-			mr = new MultipartRequest(req, path, 1500 * 1024 * 1024, "utf-8", new DefaultFileRenamePolicy());
-			token = mr.getParameter("token");
-			String successToken = (String) req.getSession().getAttribute("successToken");
-			if (successToken != null && token.equals(successToken)) {
-				String fileName = mr.getFilesystemName("g_file");
-				new File(path + "/" + fileName).delete();
-				return;
+			p.setPostWriter(userId);
+			p.setPostTitle(postTitle);
+			p.setPostTxt(postTxt);
+			p.setPostCategory(postCategory);
+			p.setPostCountry(postCountry);
+			
+			if(ss.getMapper(DiaryPostMapper.class).regPost(p) == 1) {
+				System.out.println("등록성공");
+			} else {
+				System.out.println("등록실패");
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return;
 		}
-		
-		
-		try {
-			User u = (User) req.getSession().getAttribute("loginUser");
-			
-			p.setPostWriter(u.getUserID());
-			p.setPostTitle(mr.getParameter("postTitle"));
-			p.setPostTxt(mr.getParameter("postTxt"));
-			p.setPostDate(mr.getParameter("postDate"));
-			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-	}*/
+	}
 
+	
+	
 }
