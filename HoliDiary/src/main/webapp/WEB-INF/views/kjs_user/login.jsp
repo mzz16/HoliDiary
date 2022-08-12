@@ -26,7 +26,7 @@
 						<input type="password" placeholder="비밀번호" name="userPW" autocomplete="off" id="loginPW">
 					</div>
 					<div class="login_btn">
-						<button onclick="loginValidCheck()">로그인</button>
+						<button id="login_btn_11">로그인</button>
 					</div>
 					<div><span id="login_error" style="font-family:'GangwonEdu_OTFBoldA';"></span></div>
 					<!-- 소셜 로그인 기능 -->

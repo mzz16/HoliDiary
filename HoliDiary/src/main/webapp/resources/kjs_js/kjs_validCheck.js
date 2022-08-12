@@ -1,6 +1,6 @@
 
 // 로그인에 쓸 유효성 검사
-function loginValidCheck(){
+function loginCheckCheck(){
 	let id = $("#loginID");
 	let pw = $("#loginPW");
 
@@ -139,6 +139,10 @@ function joinCheck(){
 
 // 회원가입에 쓸 레디문
 $(function() {
+	
+	$("#login_btn_11").click(function() {
+		loginCheckCheck();
+	});
 	
 	//이름 필수
 	  $('#join_name').blur(function() {
