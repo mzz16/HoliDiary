@@ -21,6 +21,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.project.main.sm.CategoryMapper;
 import com.project.main.sm.DiaryMapper;
 
 @Service
@@ -70,6 +71,7 @@ public class UserDAO {
 				req.getSession().setMaxInactiveInterval(60*10);
 				System.out.println("세션 등록 성공");
 				ss.getMapper(DiaryMapper.class).diaryInsert(u);
+				ss.getMapper(CategoryMapper.class).categoryUserInsert(u);
 				req.setAttribute("r", "가입성공");
 			}else {
 				req.setAttribute("r", "가입실패");

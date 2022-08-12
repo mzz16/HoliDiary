@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,11 +46,10 @@
 <body style="background: ${Diary.themeColor}">
 
 	<ul class="contextmenu">
-		<li><a href="#">Simple link</a></li>
-		<li><a href="#">Link to somewhere</a></li>
-		<li><a href="#">Another link</a></li>
-		<li><a href="#">Link to nowhere</a></li>
-		<li><a href="#">Random link</a></li>
+		<li><a href="">포스트 작성</a></li>
+		<li><a href="updateCategory?userId=${sessionScope.loginUser.userID }">카테고리 편집</a></li>
+		<li><a href="updateMyPopup?userId=${sessionScope.loginUser.userID }">다이어리 설정</a></li>
+		<li><a href="#">도움말</a></li>
 	</ul>
 
 
@@ -63,13 +63,17 @@
 					<a><img
 						src="resources/kjs_profileImg/${sessionScope.loginUser.userImg }"
 						alt=""></a>
+						
 					<details>
 						<summary>
 							<span class="profile-name">${sessionScope.loginUser.userNickname }</span>
 						</summary>
 						<p class="profile-introduce">${Diary.diaryIntroduce }</p>
 					</details>
+					
 				</div>
+				
+				<input type="button" style="background-color: gray;" value="구독">
 
 				<div class="page-link-list">
 					<a href="popupHomeGo?userId=${sessionScope.loginUser.userID }"
@@ -110,56 +114,28 @@
 							class="feather feather-list">
             <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
           </svg> POST
-					</a> <a href="#" class="item-link" id="pageLink"> <svg
+					</a> 
+					
+					<!--   ====== 카테고리 수정 &삭제 & 추가 -->
+					
+					
+					<c:forEach var="category" varStatus="status" items="${Diary.categoriesArray }">
+					<a href="#" class="item-link il-${status.count }" id="pageLink"> <svg
 							class="link-icon" xmlns="http://www.w3.org/2000/svg" width="16"
 							height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
 							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
 							class="feather feather-list">
             <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
-          </svg> 2020 Trip
-					</a> <a href="#" class="item-link" id="pageLink"> <svg
-							class="link-icon" xmlns="http://www.w3.org/2000/svg" width="16"
-							height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-							class="feather feather-list">
-            <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
-          </svg> 2021 Trip
-					</a> <a href="#" class="item-link" id="pageLink"> <svg
-							class="link-icon" xmlns="http://www.w3.org/2000/svg" width="16"
-							height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-							class="feather feather-list">
-            <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
-          </svg> 2022 Trip
+          </svg> ${category }
 					</a>
+					
+					</c:forEach>
 				</div>
-				<div class="list-header">
-					<span class="category-item">Private</span>
-
-				</div>
-				<a href="#" class="item-link" id="pageLink"> <svg
-						class="link-icon" xmlns="http://www.w3.org/2000/svg" width="20"
-						height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-						stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-						class="feather feather-lock">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-          <path d="M7 11V7a5 5 0 0110 0v4" />
-        </svg> Personal 1
-				</a> <a href="#" class="item-link" id="pageLink"> <svg
-						class="link-icon" xmlns="http://www.w3.org/2000/svg" width="20"
-						height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-						stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-						class="feather feather-lock">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-          <path d="M7 11V7a5 5 0 0110 0v4" />
-        </svg> Personal 2
-				</a>
-
+				
 
 			</div>
 			<button class="btn-invite"
-				onclick="location.href='updateMyPopup?userId=${sessionScope.loginUser.userID }'">설정
-				관리</button>
+				onclick="location.href='updateMyPopup?userId=${sessionScope.loginUser.userID }'">다이어리 설정</button>
 
 		</div>
 

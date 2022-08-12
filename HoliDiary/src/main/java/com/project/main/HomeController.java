@@ -20,7 +20,6 @@ public class HomeController {
 	public String home(HttpServletRequest req) {
 		
 		uDAO.loginCheck(req);
-		
 		req.setAttribute("contentPage", "home.jsp");
 		return "index";
 	}

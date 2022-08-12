@@ -48,6 +48,7 @@
 				<beans:value>classpath:diaryMapper.xml</beans:value>
 				<beans:value>classpath:postMapper.xml</beans:value>
 				<beans:value>classpath:sej_postMapper.xml</beans:value>
+				<beans:value>classpath:categoryMapper.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
