@@ -18,22 +18,17 @@
 			</div>
 				<div id="login_box">
 			<!-- 로그인 기능 -->
-			<form action="login.do" method="post" onsubmit="return loginIsNotEmpty()" name="loginForm">
 					<div class="login_id">
-						<input placeholder="아이디" name="userID" autocomplete="off">
+						<input placeholder="아이디" name="userID" autocomplete="off" id="loginID">
 					</div>
 					
 					<div class="login_pw">
-						<input type="password" placeholder="비밀번호" name="userPW" autocomplete="off">
+						<input type="password" placeholder="비밀번호" name="userPW" autocomplete="off" id="loginPW">
 					</div>
 					<div class="login_btn">
-						<button>로그인</button>
+						<button onclick="loginValidCheck()">로그인</button>
 					</div>
 					<div><span id="login_error" style="font-family:'GangwonEdu_OTFBoldA';"></span></div>
-					<c:if test="${r eq '로그인실패'}">
-						<div><span style="color: red; font-family: 'GangwonEdu_OTFBoldA';">아이디 또는 비밀번호 입력이 잘못 되었습니다.</span></div>
-					</c:if>
-					</form>
 					<!-- 소셜 로그인 기능 -->
 				<div class="social_login_box">
 					<div class="social_login_info"><span>소셜 아이디로 로그인하기</span></div>
@@ -60,10 +55,10 @@
 				</div>
 			<div class="missing_user_box">
 				<div class="missing_user_a">
-				<a href="">아이디 찾기</a>
+				<a href="id.search.go">아이디 찾기</a>
 				</div>
 				<div class="missing_user_a">
-				<a href="">비밀번호 찾기</a>
+				<a href="pw.search.go">비밀번호 찾기</a>
 				</div>
 			</div>
 			

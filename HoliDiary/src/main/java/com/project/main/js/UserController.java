@@ -26,18 +26,9 @@ public class UserController {
 	
 	// 로그인 하기
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String loginDo(User u ,HttpServletRequest req) {
+	public @ResponseBody boolean loginDo(User u ,HttpServletRequest req) {
 		
-		uDAO.login(u,req);
-		uDAO.loginCheck(req);
-		
-		if(!uDAO.loginCheck(req)) {
-			req.setAttribute("contentPage", "kjs_user/login.jsp");
-		}else {
-			req.setAttribute("contentPage", "home.jsp");
-		}
-		
-		return "index";
+		return uDAO.login(u,req);
 	}
 	
 	// 회원가입 옵션 선택
@@ -120,40 +111,36 @@ public class UserController {
 	@RequestMapping(value = "/callback.join.naver", method = RequestMethod.GET)
 	public String callbackJoinNaver(User u, HttpServletRequest req) {
 
-		uDAO.loginCheck(req);
-		
-		req.setAttribute("contentPage", "kjs_user/naver_callback_join.jsp");
-		
-		return "index";
+		return "kjs_user/naver_callback_join";
 	}
 	
 	// 네이버 콜백 주소(로그인)
 	@RequestMapping(value = "/callback.login.naver", method = RequestMethod.GET)
 	public String callbackLoginNaver(User u, HttpServletRequest req) {
 
-		uDAO.loginCheck(req);
-
-		req.setAttribute("contentPage", "kjs_user/naver_callback_login.jsp");
-		
-		return "index";
+		return "kjs_user/naver_callback_login";
 	}
 	
-	// 네이버 (회원가입: DB저장)
+	// 네이버 회원가입 콜백
 	@RequestMapping(value = "/social.join.naver", method = RequestMethod.GET)
 	public String socialJoinNaver(User u, HttpServletRequest req) {
 		
-		//uDAO.loginWithNaver(u,req);
 		uDAO.loginCheck(req);
 		req.setAttribute("contentPage", "home.jsp");
 		
 		return "index";
 	}
 	
-	// 네이버 (로그인)
+	// 네이버 (로그인: 세션저장)
 	@RequestMapping(value = "/social.login.naver", method = RequestMethod.GET)
 	public String socialLoginNaver(User u, HttpServletRequest req) {
 		
-		uDAO.loginWithNaver(u,req);
+		//System.out.println(req.getParameter("naverID"));
+		
+		if(req.getParameter("naverID") != null) {
+			uDAO.loginWithNaver(u,req);
+		}
+		
 		if(uDAO.loginCheck(req)) {
 			req.setAttribute("contentPage", "home.jsp");
 		}else {
@@ -163,13 +150,61 @@ public class UserController {
 		return "index";
 	}
 	
-	// 네이버 회원가입
+	// 네이버 (회원가입: DB저장)
 	@RequestMapping(value = "/join.naver", method = RequestMethod.POST)
 	public @ResponseBody int joinNaver(User u, HttpServletRequest req) {
 		
 		return uDAO.joinWithNaver(u, req);
 	}
 	
+	// 아이디찾기 페이지 이동
+	@RequestMapping(value = "/id.search.go", method = RequestMethod.GET)
+	public String idSearchGo(HttpServletRequest req) {
+		
+		req.setAttribute("contentPage", "kjs_user/id_search.jsp");
+		req.setAttribute("loginPage", "kjs_user/before_login.jsp");
+		
+		return "index";
+	}
 	
+	// 아이디찾기
+	@RequestMapping(value = "/id.search.do", method = RequestMethod.POST)
+	public @ResponseBody String idSearchDo(User u) {
+		
+		return uDAO.searchID(u);
+	}
+	
+	// 비번찾기 페이지 이동
+	@RequestMapping(value = "/pw.search.go", method = RequestMethod.GET)
+	public String pwSearchGo(HttpServletRequest req) {
+		
+		req.setAttribute("contentPage", "kjs_user/pw_search.jsp");
+		req.setAttribute("loginPage", "kjs_user/before_login.jsp");
+		
+		return "index";
+	}
+	
+	// 비번찾기 페이지 이동
+	@RequestMapping(value = "/pw.search.do", method = RequestMethod.POST)
+	public String pwSearchDo(User u, HttpServletRequest req) {
+		
+		uDAO.searchPW(u);
+		
+		req.setAttribute("contentPage", "kjs_user/pw_search_result.jsp");
+		req.setAttribute("loginPage", "kjs_user/before_login.jsp");
+		
+		return "index";
+	}
+	
+	// 탈퇴하기
+	@RequestMapping(value = "/delete.user", method = RequestMethod.POST)
+	public String DeleteUser(User u ,HttpServletRequest req) {
+		
+		uDAO.join(u, req);
+		
+		req.setAttribute("contentPage", "kjs_user/join_last.jsp");
+		req.setAttribute("loginPage", "kjs_user/before_login.jsp");
+		return "index";
+	}
 
 }
