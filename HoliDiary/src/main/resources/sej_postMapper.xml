@@ -26,7 +26,7 @@
 		select rownum as rn, postnum, posttitle, posttxt, postdate, postwriter, postcategory,
 		postcountry, postrecommend, postimg, postmap, postweather
 		from (
-		select * from post, user_table
+		select * from post
 		where posttitle like '%'||#{search}||'%' or postwriter like '%'||#{search}||'%' 
 		or posttxt like '%'||#{search}||'%' or postcountry like '%'||#{search}||'%'or postcategory like '%'||#{search}||'%'
 		order by postdate desc
