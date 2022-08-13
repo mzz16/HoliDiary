@@ -87,9 +87,9 @@ public class UserDAO {
 	
 	// ajax 아이디 체크
 	public int idCheck(User u, HttpServletRequest req) {
-		System.out.println(req.getParameter("kakaoID"));
-		System.out.println(req.getParameter("naverID"));
-		System.out.println(req.getParameter("userID"));
+		//System.out.println(req.getParameter("kakaoID"));
+		//System.out.println(req.getParameter("naverID"));
+		//System.out.println(req.getParameter("userID"));
 		
 		if(req.getParameter("naverID") != null) {
 			if(ss.getMapper(UserMapper.class).idCheck(u) == 1) {

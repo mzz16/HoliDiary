@@ -1,6 +1,6 @@
 
 // 로그인에 쓸 유효성 검사
-function loginCheckCheck(){
+function loginValidCheck(){
 	let id = $("#loginID");
 	let pw = $("#loginPW");
 
@@ -41,6 +41,7 @@ function loginCheckCheck(){
 	
 }
 
+// 비번찾기 유효성검사
 function pwSearchValidCheck(){
 	let id = $("#pw_search_id");
 	let email = $("#pw_search_email");
@@ -135,13 +136,59 @@ function joinCheck(){
 	return true;
 }
 
+//아이디 유효성검사 및 찾기
+function searchID(){
+
+	let name = $('#id_search_name');
+	let phone = $('#id_search_phone');
+	
+	if(isEmpty(name)){
+		name.focus();
+		$('#userID_show').text('아이디를 입력해주세요');
+		$('#userID_show').css('color','red');
+		return false;
+	}
+		
+	if(isEmpty(phone)){
+		phone.focus();
+		$('#userID_show').text('전화번호를 입력해주세요');
+		$('#userID_show').css('color','red');
+		return false;
+	}
+		
+	if(!isEmpty(name) && !isEmpty(phone)){
+		console.log('빈칸은 없음')
+		$.ajax({
+			url : 'id.search.do',
+			type : 'POST',
+			dataType : 'text',
+			data : {'userName' : name.val(), 'userPhoneNumber' : phone.val()},
+			success : function(getID) {
+				//console.log(getID);
+				if(getID != ''){
+					//console.log('아이디 찾음');
+					$('#userID_show').text(getID);
+					$('#userID_show').css('color','red');
+				}else{
+					//console.log('아이디 없음')
+					$('#userID_show').text('회원정보를 찾을 수 없습니다. 입력사항을 다시 확인해주세요.');
+					$('#userID_show').css('color','red');
+				}
+			},
+			error : function(request,status,error) {
+       			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+       		}
+		});
+	}
+}
 
 
 // 회원가입에 쓸 레디문
 $(function() {
 	
-	$("#login_btn_11").click(function() {
-		loginCheckCheck();
+	// 로그인 유효성검사
+	$("#login_btn").click(function() {
+		loginValidCheck();
 	});
 	
 	//이름 필수
@@ -301,7 +348,7 @@ $(function() {
 			// 필수
 			if(isEmpty(phone)){
 				$('#join_phone_error').text('전화번호를 입력해주세요');
-				$('#join_phone_error').text('비밀번호를 입력해주세요');
+				$('#join_phone_error').css('color','red');
 			}else{
 				$('#join_phone_error').text('');
 				$('#join_phone_error').css('color','blue');
@@ -324,7 +371,70 @@ $(function() {
 			
 		});
 	  
+	// 하이픈 생성(아이디 찾기 전화번호)
+	$("#id_search_phone").keyup(function() {
+		var autoHypenPhone = function(str){
+		      str = str.replace(/[^0-9]/g, '');
+		      var tmp = '';
+		      if( str.length < 4){
+		          return str;
+		      }else if(str.length < 7){
+		          tmp += str.substr(0, 3);
+		          tmp += '-';
+		          tmp += str.substr(3);
+		          return tmp;
+		      }else if(str.length < 11){
+		          tmp += str.substr(0, 3);
+		          tmp += '-';
+		          tmp += str.substr(3, 3);
+		          tmp += '-';
+		          tmp += str.substr(6);
+		          return tmp;
+		      }else{              
+		          tmp += str.substr(0, 3);
+		          tmp += '-';
+		          tmp += str.substr(3, 4);
+		          tmp += '-';
+		          tmp += str.substr(7);
+		          return tmp;
+		      }
+		  
+		      return str;
+		}
+		
+		this.value = autoHypenPhone( this.value ); 
+	})
 	
-	
-	
+	// 하이픈 생성(회원가입 전화번호)
+	$("#join_phone").keyup(function() {
+		var autoHypenPhone = function(str){
+		      str = str.replace(/[^0-9]/g, '');
+		      var tmp = '';
+		      if( str.length < 4){
+		          return str;
+		      }else if(str.length < 7){
+		          tmp += str.substr(0, 3);
+		          tmp += '-';
+		          tmp += str.substr(3);
+		          return tmp;
+		      }else if(str.length < 11){
+		          tmp += str.substr(0, 3);
+		          tmp += '-';
+		          tmp += str.substr(3, 3);
+		          tmp += '-';
+		          tmp += str.substr(6);
+		          return tmp;
+		      }else{              
+		          tmp += str.substr(0, 3);
+		          tmp += '-';
+		          tmp += str.substr(3, 4);
+		          tmp += '-';
+		          tmp += str.substr(7);
+		          return tmp;
+		      }
+		  
+		      return str;
+		}
+		this.value = autoHypenPhone( this.value );
+	})
 });
