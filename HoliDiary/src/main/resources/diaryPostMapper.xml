@@ -14,5 +14,5 @@
 		insert into post (postNum, postTitle, postTxt, postDate, postWriter, postCategory, postCountry) 
 		values(postNum_seq.nextval, #{postTitle}, #{postTxt}, sysdate, #{postWriter}, #{postCategory}, #{postCountry})
 	</insert>
-
+	
 </mapper>
