@@ -116,67 +116,7 @@ public class WriteController {
 		return "ksm_main/popup";
 	}
 
-	/*// 이미지 업로드
-	@ResponseBody
-	@RequestMapping(value = "/fileupload.do")
-	public void communityImageUpload(HttpServletRequest req, HttpServletResponse resp,
-			MultipartHttpServletRequest multiFile) throws Exception {
-		JsonObject jsonObject = new JsonObject();
-		PrintWriter printWriter = null;
-		OutputStream out = null;
-		MultipartFile file = multiFile.getFile("upload");
-
-		if (file != null) {
-			if (file.getSize() > 0 && StringUtils.isNotBlank(file.getName())) {
-				if (file.getContentType().toLowerCase().startsWith("image/")) {
-					try {
-
-						String fileName = file.getOriginalFilename();
-						byte[] bytes = file.getBytes();
-
-						String uploadPath = req.getSession().getServletContext().getRealPath("/resources/images/"); // 저장경로
-						System.out.println("uploadPath:" + uploadPath);
-
-						File uploadFile = new File(uploadPath);
-						if (!uploadFile.exists()) {
-							uploadFile.mkdir();
-						}
-						
-						DiaryPost p = new DiaryPost();
-						String fileName2 = UUID.randomUUID().toString();
-						uploadPath = uploadPath + "/" + fileName2 + fileName;
-
-						p.setPostImg(fileName2);
-						out = new FileOutputStream(new File(uploadPath));
-						out.write(bytes);
-
-						printWriter = resp.getWriter();
-						String fileUrl = req.getContextPath() + "/resources/images/" + fileName2 + fileName; // url경로
-						System.out.println("fileUrl :" + fileUrl);
-						JsonObject json = new JsonObject();
-						json.addProperty("uploaded", 1);
-						json.addProperty("fileName", fileName);
-						json.addProperty("url", fileUrl);
-						printWriter.print(json);
-						System.out.println(json);
-
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-						if (out != null) {
-							out.close();
-						}
-						if (printWriter != null) {
-							printWriter.close();
-						}
-					}
-				}
-
-			}
-
-		}
-	}*/
-
+	
 	// 지도 만들기
 	@RequestMapping(value = "/map.open", method = RequestMethod.GET)
 	public String mapOpen(HttpServletRequest req) {

@@ -34,7 +34,7 @@ public class DiaryPostDAO {
 			p.setPostWriter(userId);
 			DiaryPostMapper pm = ss.getMapper(DiaryPostMapper.class);
 			List<DiaryPost> posts = pm.showAllPostList(p);
-			req.setAttribute("posts", posts);
+			req.setAttribute("DiaryPost", posts);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,32 +44,10 @@ public class DiaryPostDAO {
 	public void detailPost(DiaryPost p, HttpServletRequest req) {
 		DiaryPostMapper pm = ss.getMapper(DiaryPostMapper.class);
 		DiaryPost posts = pm.detailPost(p);
-		req.setAttribute("posts", posts);
+		req.setAttribute("DiaryPost", posts);
 	}
 	
-	public JsonObject SummerNoteImageFile(MultipartFile file) {
-		JsonObject jsonObject = new JsonObject();
-		String fileRoot = "C:\\summernoteImg\\";
-		String originalFileName = file.getOriginalFilename();
-		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
-		
-		String saveFileName = UUID.randomUUID()+extension;
-			
-		File targetFile = new File(fileRoot+saveFileName);
-		
-		try {
-			InputStream fileStream = file.getInputStream();
-			FileUtils.copyInputStreamToFile(fileStream, targetFile);
-			jsonObject.addProperty("url", "/summernoteImg/"+saveFileName);
-			jsonObject.addProperty("responseCode", "succcess");
-		} catch(Exception e) {
-			FileUtils.deleteQuietly(targetFile);
-			jsonObject.addProperty("responseCode", "error");
-			e.printStackTrace();
-		}	
-		return jsonObject;
-	}
-
+	
 	public void regPost(DiaryPost p, HttpServletRequest req, String userId, String postTitle, 
 			String postTxt, String postCategory, String postCountry) {
 		System.out.println("유저아이디" + userId);
@@ -94,6 +72,31 @@ public class DiaryPostDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public JsonObject SummerNoteImageFile(MultipartFile file) {
+		JsonObject jsonObject = new JsonObject();
+		String fileRoot = "C:\\summernoteImg\\";
+		String originalFileName = file.getOriginalFilename();
+		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
+		
+		String saveFileName = UUID.randomUUID()+extension;
+			
+		File targetFile = new File(fileRoot+saveFileName);
+		
+		try {
+			InputStream fileStream = file.getInputStream();
+			FileUtils.copyInputStreamToFile(fileStream, targetFile);
+			jsonObject.addProperty("url", "/summernoteImg/"+saveFileName);
+			jsonObject.addProperty("responseCode", "succcess");
+		} catch(Exception e) {
+			FileUtils.deleteQuietly(targetFile);
+			jsonObject.addProperty("responseCode", "error");
+			e.printStackTrace();
+		}	
+		return jsonObject;
+	}
+
 
 	
 	

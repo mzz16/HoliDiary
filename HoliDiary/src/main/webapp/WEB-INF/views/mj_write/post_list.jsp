@@ -20,7 +20,7 @@
 			<td class="postLike" style="width: 10%">좋아요</td>
 			<td class="postNo" style="width: 15%">조회수</td>
 		</tr>
-		<c:forEach var="posts" items="${posts }">
+		<c:forEach var="posts" items="${DiaryPost }">
 			<tr class="postList">
 				<td class="postTitle"><a href='post.detail.go?postNum=${posts.postNum }'>${posts.postTitle }</a></td>
 				<td class="postWriter">${posts.postWriter }</td>
