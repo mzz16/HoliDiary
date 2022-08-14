@@ -14,11 +14,11 @@
 .calendar{
   color: #fff;
   margin: 10px auto;
-  background: #04b6e2;
+  background: gray;
   padding: 60px 40px 80px 40px;
   width: 100%;
   max-width: 800px;
-  height: 500px;
+  height: 440px;
   border-radius: 5px;
   box-shadow: 0px 2px 6px rgba(2,2,2,0.2);
   position: relative;
@@ -416,7 +416,7 @@ input.add-event-edit:-ms-input-placeholder {
 <body>
 
 <div class="calaendarBody">
-<div class="calendar" id="calendar-app">
+<div class="calendar" id="calendar-app" style="background: ${Diary.themeColor}">
   <div class="calendar--day-view" id="day-view">
     <span class="day-view-exit" id="day-view-exit">&times;</span>
     <span class="day-view-date" id="day-view-date">MAY 29 2016</span>
