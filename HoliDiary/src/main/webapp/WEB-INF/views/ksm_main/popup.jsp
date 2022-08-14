@@ -73,7 +73,6 @@
 					
 				</div>
 				
-				<input type="button" style="background-color: gray;" value="구독">
 
 				<div class="page-link-list">
 					<a href="popupHomeGo?userId=${sessionScope.loginUser.userID }"
@@ -131,8 +130,12 @@
 				
 
 			</div>
+			
+			
 			<button class="btn-invite"
-				onclick="location.href='updateMyPopup?userId=${sessionScope.loginUser.userID }'">다이어리 설정</button>
+				onclick="location.href='updateMyPopup?userId=${sessionScope.loginUser.userID }'" 
+				style="background: ${Diary.themeColor}">다이어리 설정
+			</button>
 
 		</div>
 
@@ -160,10 +163,14 @@
 					</button>
 				</div>
 
+			
 				<div class="action-buttons-wrapper">
 					<button class="action-buttons btn-upload"
-						onclick="location.href='write.go?postWriter=${sessionScope.loginUser.userID }'">포스트 작성</button>
+						onclick="location.href='write.go?postWriter=${sessionScope.loginUser.userID }'" 
+						style="background: ${Diary.themeColor}">포스트 작성</button>
 				</div>
+				
+				
 			</div>
 
 			<div class="page-right-content">
