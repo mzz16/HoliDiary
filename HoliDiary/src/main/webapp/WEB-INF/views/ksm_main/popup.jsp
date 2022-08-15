@@ -67,6 +67,7 @@
 					<details>
 						<summary>
 							<span class="profile-name">${sessionScope.loginUser.userNickname }</span>
+						<%-- <span class="profile-name">${sessionScope.loginUser.userNickname }</span> --%>
 						</summary>
 						<p class="profile-introduce">${Diary.diaryIntroduce }</p>
 					</details>
@@ -132,11 +133,15 @@
 			</div>
 			
 			
+			
+			<c:if test="${Diary.diaryUserId eq sessionScope.loginUser.userID }">
 			<button class="btn-invite"
 				onclick="location.href='updateMyPopup?userId=${sessionScope.loginUser.userID }'" 
 				style="background: ${Diary.themeColor}">다이어리 설정
 			</button>
-
+			</c:if>
+			
+			
 		</div>
 
 		<div class="right-area">
@@ -163,12 +168,19 @@
 					</button>
 				</div>
 
-			
+
+			<c:choose>
+			<c:when test="${Diary.diaryUserId eq sessionScope.loginUser.userID }">
 				<div class="action-buttons-wrapper">
 					<button class="action-buttons btn-upload"
 						onclick="location.href='write.go?postWriter=${sessionScope.loginUser.userID }'" 
 						style="background: ${Diary.themeColor}">포스트 작성</button>
 				</div>
+			</c:when>
+			<c:otherwise>
+				<button class="action-buttons btn-upload" style="background: ${Diary.themeColor}">구독</button>
+			</c:otherwise>
+			</c:choose>	
 				
 				
 			</div>

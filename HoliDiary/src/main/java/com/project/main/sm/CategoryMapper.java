@@ -6,6 +6,6 @@ public interface CategoryMapper {
 
 	void categoryUserInsert(User u);
 
-	Object addCategory(Category c);
+	void addCategory(Category c);
 
 }

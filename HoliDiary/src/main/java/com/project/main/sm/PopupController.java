@@ -101,8 +101,8 @@ public class PopupController {
 	public String updateCategoryAdd(HttpServletRequest req, Diary d, @RequestParam("diaryUserId") String userId, Category c) {
 		
 		if (uDAO.loginCheck(req)) {
-			dDAO.updateDiary(req, d, userId);
-//			cDAO.updateCategoryAdd(req, d, userId, c);
+//			dDAO.updateDiary(req, d, userId);
+			cDAO.updateCategoryAdd(req, d, userId, c);
 			dDAO.getDiaryInfo(req, d, userId);
 			req.setAttribute("popupContentPage", "popupHome.jsp");
 		} else {
