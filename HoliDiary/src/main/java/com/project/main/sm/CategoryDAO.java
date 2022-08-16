@@ -24,15 +24,15 @@ public class CategoryDAO {
 			
 			//List<Category> categories = new ArrayList<Category>();
 			
-			System.out.println(c.getCategories());
+				System.out.println(c.getCategories());
 			
 			String categories2 = c.getCategories() + "!";
 			
-			System.out.println(categories2);
+				System.out.println(categories2);
 			
 			c.setCategories(categories2);
 			
-			System.out.println(c.getCategories());
+				System.out.println(c.getCategories());
 			
 			ss.getMapper(CategoryMapper.class).addCategory(c);
 			
@@ -41,6 +41,27 @@ public class CategoryDAO {
 		}
 
 		
+	}
+
+	// 카테고리 업데이트 (수정)
+	public void updateCategoryup(HttpServletRequest req, Diary d, String userId, Category c, String newCategory) {
+
+		try {
+			
+			String newCategories = req.getParameter("newCategory");
+			
+			System.out.println(newCategories);
+			
+			c.setCategories(newCategories);
+			
+			System.out.println(c.getCategories());
+			
+			ss.getMapper(CategoryMapper.class).updateCategory(c);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	

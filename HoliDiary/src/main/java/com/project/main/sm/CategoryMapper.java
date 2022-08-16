@@ -8,4 +8,6 @@ public interface CategoryMapper {
 
 	void addCategory(Category c);
 
+	void updateCategory(Category c);
+
 }

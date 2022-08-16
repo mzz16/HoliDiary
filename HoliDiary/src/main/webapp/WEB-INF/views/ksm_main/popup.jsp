@@ -16,14 +16,10 @@
 <script type="text/javascript">
 	$(function() {
 		document.addEventListener("contextmenu", function(e) {
-
 			e.preventDefault(); // 원래 있던 오른쪽 마우스 이벤트를 무효화한다.
-
 			var x = e.pageX + 'px'; // 현재 마우스의 X좌표
 			var y = e.pageY + 'px'; // 현재 마우스의 Y좌표
-
 			const popMenu = document.getElementById('popMenu'); // 팝업창을 담아옴
-
 			/*
 			    스타일 지정, 우클릭 한 위치에 팝업창 띄워줌..
 			 */
@@ -33,13 +29,28 @@
 			popMenu.style.display = 'block';
 		})
 		document.addEventListener("click", function(e) {
-
+			if(e.keyCode == 3){
 			// 노출 초기화
 			popMenu.style.display = 'none';
 			popMenu.style.top = null;
 			popMenu.style.left = null;
-
+			}
 		});
+	
+	
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	});
 </script>
 </head>

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -113,5 +114,21 @@ public class PopupController {
 		return "ksm_main/popup";
 	}
 	
+	// 다이어리 - 카테고리 업데이트 (수정)
+	@RequestMapping(value = "/category.update", method = RequestMethod.GET)
+	public String updateCategoryUp(HttpServletRequest req, Diary d, @RequestParam("diaryUserId") String userId, 
+			Category c, @RequestParam("newCategory") String newCategory) {
+		
+		if (uDAO.loginCheck(req)) {
+			cDAO.updateCategoryup(req, d, userId, c, newCategory);
+			dDAO.getDiaryInfo(req, d, userId);
+			req.setAttribute("popupContentPage", "popupHome.jsp");
+		} else {
+			req.setAttribute("popupContentPage", "popupBack.jsp");
+			return "ksm_main/popupBack";
+		}
+		
+		return "ksm_main/popup";
+	}
 
 }

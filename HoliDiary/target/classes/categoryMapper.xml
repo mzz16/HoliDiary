@@ -9,5 +9,10 @@
 	<update id="addCategory" parameterType="com.project.main.sm.Category">
 		UPDATE CATEGORY SET CATEGORIES = CATEGORIES||#{categories} WHERE CATEGORYUSERID = 'test4'
 	</update>
+	
+	<update id="updateCategory" parameterType="com.project.main.sm.Category">
+		UPDATE CATEGORY SET CATEGORIES = #{categories} WHERE CATEGORYUSERID = 'test4'
+	</update>
+	
 
 </mapper>
