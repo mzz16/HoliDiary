@@ -66,7 +66,6 @@
 	</ul>
 </c:if>
 
-
 <!-- 유저 이미지/닉네임/소개 -->
 	<div class="app-wrapper">
 		<div class="left-area hide-on-mobile">
@@ -75,12 +74,12 @@
 
 				<div class="profile">
 					<a><img
-						src="resources/kjs_profileImg/${sessionScope.loginUser.userImg }"
+						src="resources/kjs_profileImg/${User.userImg }"
 						alt=""></a>
 						
 					<details>
 						<summary>
-							<span class="profile-name">${sessionScope.loginUser.userNickname }</span>
+							<span class="profile-name">${User.userID}</span>
 						<%-- <span class="profile-name">${sessionScope.loginUser.userNickname }</span> --%>
 						</summary>
 						<p class="profile-introduce">${Diary.diaryIntroduce }</p>
@@ -122,7 +121,7 @@
        
       </div>
        <div>
-        <a href="post-list?userId=${sessionScope.loginUser.userID }" class="item-link" id="pageLink">
+        <a href="post-list?postWriter=${sessionScope.loginUser.userID }" class="item-link" id="pageLink">
           <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list">
             <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
           </svg> POST
@@ -189,7 +188,7 @@
 			<c:when test="${Diary.diaryUserId eq sessionScope.loginUser.userID }">
 				<div class="action-buttons-wrapper">
 					<button class="action-buttons btn-upload"
-						onclick="location.href='write.go?userId=${sessionScope.loginUser.userID }'" 
+						onclick="location.href='write.go?postWriter=${sessionScope.loginUser.userID }'" 
 						style="background: ${Diary.themeColor}">포스트 작성</button>
 				</div>
 			</c:when>
