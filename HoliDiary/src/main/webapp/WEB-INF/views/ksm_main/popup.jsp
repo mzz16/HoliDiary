@@ -56,15 +56,18 @@
 </head>
 <body style="background: ${Diary.themeColor}">
 
+<!-- 우클릭 메뉴 -->
+<c:if test="${Diary.diaryUserId eq sessionScope.loginUser.userID }">
 	<ul class="contextmenu">
 		<li><a href="">포스트 작성</a></li>
 		<li><a href="updateCategory?userId=${sessionScope.loginUser.userID }">카테고리 편집</a></li>
 		<li><a href="updateMyPopup?userId=${sessionScope.loginUser.userID }">다이어리 설정</a></li>
 		<li><a href="#">도움말</a></li>
 	</ul>
+</c:if>
 
 
-
+<!-- 유저 이미지/닉네임/소개 -->
 	<div class="app-wrapper">
 		<div class="left-area hide-on-mobile">
 			<div class="app-header"></div>
@@ -86,6 +89,7 @@
 				</div>
 				
 
+<!-- 좌측 카테고리 리스트 -->
 				<div class="page-link-list">
 					<a href="popupHomeGo?userId=${sessionScope.loginUser.userID }"
 						class="item-link" id="pageLink"> <svg class="link-icon"
@@ -114,7 +118,7 @@
           Map</a>
        </div>
        <div class="list-header">
-        <span class="category-item">Public</span>
+        <span class="category-item">My Diary</span>
        
       </div>
        <div>
@@ -155,6 +159,7 @@
 			
 		</div>
 
+<!-- 우측 타이틀/콘텐트 영역 -->
 		<div class="right-area">
 			<div class="right-area-upper">
 				<button class="menu-button">
