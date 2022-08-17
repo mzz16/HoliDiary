@@ -114,7 +114,7 @@ public class PopupController {
 		return "ksm_main/popup";
 	}
 	
-	// 다이어리 - 카테고리 업데이트 (수정)
+	// 다이어리 - 카테고리 업데이트 (수정 및 삭제)
 	@RequestMapping(value = "/category.update", method = RequestMethod.GET)
 	public String updateCategoryUp(HttpServletRequest req, Diary d, @RequestParam("diaryUserId") String userId, 
 			Category c, @RequestParam("newCategory") String newCategory) {
@@ -131,4 +131,5 @@ public class PopupController {
 		return "ksm_main/popup";
 	}
 
+	
 }
