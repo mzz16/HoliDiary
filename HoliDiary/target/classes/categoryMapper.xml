@@ -7,11 +7,11 @@
 	</insert>
 	
 	<update id="addCategory" parameterType="com.project.main.sm.Category">
-		UPDATE CATEGORY SET CATEGORIES = CATEGORIES||#{categories} WHERE CATEGORYUSERID = #{diaryUserId}
+		UPDATE CATEGORY SET CATEGORIES = CATEGORIES||#{categories} WHERE CATEGORYUSERID = #{categoryUserId} <!-- 'test4' -->
 	</update>
 	
 	<update id="updateCategory" parameterType="com.project.main.sm.Category">
-		UPDATE CATEGORY SET CATEGORIES = #{categories} WHERE CATEGORYUSERID = #{diaryUserId}
+		UPDATE CATEGORY SET CATEGORIES = #{categories} WHERE CATEGORYUSERID = #{categoryUserId} <!-- 'test4' -->
 	</update>
 	
 
