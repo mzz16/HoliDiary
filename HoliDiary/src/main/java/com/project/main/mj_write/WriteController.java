@@ -54,7 +54,7 @@ public class WriteController {
 
 		if (uDAO.loginCheck(req)) {
 			dDAO.getDiaryInfo(req, d, userId, u, cate);
-			pDAO.detailPost(p, req);
+			pDAO.detailPost(p, req, c);
 		}
 		req.setAttribute("popupContentPage", "../mj_write/post_detail.jsp");
 
@@ -153,7 +153,7 @@ public class WriteController {
 
 		if (uDAO.loginCheck(req)) {
 			dDAO.getDiaryInfo(req, d, userId, u, cate);
-			pDAO.detailPost(p, req);
+			pDAO.detailPost(p, req, c);
 		}
 		req.setAttribute("popupContentPage", "../mj_write/post_update.jsp");
 		return "ksm_main/popup";
@@ -179,4 +179,5 @@ public class WriteController {
 
 		return "mj_map/map";
 	}
+	
 }
