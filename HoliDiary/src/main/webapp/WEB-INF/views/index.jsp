@@ -65,6 +65,7 @@
 			</a>
 			<a class="menu_bar_li_first" href="#" id="modal_btn" onclick=popup()>My Diary</a>
 			<input type="hidden" value="${sessionScope.loginUser.userID }" id="userID">
+			<input type="hidden" value="${Category.categoryUserId }" id="CuserID">
 			<span class="menu_bar_border"></span>
 			<a class="menu_bar_li" href="javascript:void(0);" onclick="return mypageCheckUser();">마이페이지</a>
 			<a class="menu_bar_li" href="javascript:void(0)" onclick="goHolinow()">홀리 NOW</a>
