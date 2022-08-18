@@ -38,9 +38,9 @@ public class WriteController {
 	
 	// 게시글 목록 불러오기
 	@RequestMapping(value = "/post-list", method = RequestMethod.GET)
-	public String listGo(HttpServletRequest req, DiaryPost p, Diary d, @RequestParam("userId") String userId, User u, Category c) {
+	public String listGo(HttpServletRequest req, DiaryPost p, Diary d, @RequestParam("userId") String userId, User u, Category cate) {
 		if (uDAO.loginCheck(req)) {
-			dDAO.getDiaryInfo(req, d, userId, u, c);
+			dDAO.getDiaryInfo(req, d, userId, u, cate);
 			pDAO.getAllList(req, userId);
 		}
 
@@ -50,10 +50,10 @@ public class WriteController {
 
 	// 게시글 상세보기
 	@RequestMapping(value = "/post.detail.go", method = RequestMethod.GET)
-	public String postDetailGo(DiaryPost p, Diary d, @RequestParam("userId") String userId, HttpServletRequest req, User u, Category c) {
+	public String postDetailGo(DiaryPost p, Diary d, @RequestParam("userId") String userId, HttpServletRequest req, User u, Category cate) {
 
 		if (uDAO.loginCheck(req)) {
-			dDAO.getDiaryInfo(req, d, userId, u, c);
+			dDAO.getDiaryInfo(req, d, userId, u, cate);
 			pDAO.detailPost(p, req);
 		}
 		req.setAttribute("popupContentPage", "../mj_write/post_detail.jsp");
@@ -63,10 +63,10 @@ public class WriteController {
 
 	// 글쓰기 페이지 바로가기
 	@RequestMapping(value = "/write.go", method = RequestMethod.GET)
-	public String writeGo(HttpServletRequest req, Diary d, @RequestParam("userId") String userId, User u, Category c) {
+	public String writeGo(HttpServletRequest req, Diary d, @RequestParam("userId") String userId, User u, Category cate) {
 
 		if (uDAO.loginCheck(req)) {
-			dDAO.getDiaryInfo(req, d, userId, u, c);
+			dDAO.getDiaryInfo(req, d, userId, u, cate);
 			System.out.println(userId);
 		}
 		req.setAttribute("popupContentPage", "../mj_write/post_write2.jsp");
@@ -117,10 +117,10 @@ public class WriteController {
 	@RequestMapping(value = "/diaryPost.reg.do", method = RequestMethod.POST)
 	public String postRegDo(Diary d, @RequestParam("userId") String userId, HttpServletRequest req, @RequestParam("postImg") String postImg,
 			@RequestParam("postTitle") String postTitle, @RequestParam("postTxt") String postTxt,
-			@RequestParam("postCategory") String postCategory, @RequestParam("postCountry") String postCountry, User u, Category c) {
+			@RequestParam("postCategory") String postCategory, @RequestParam("postCountry") String postCountry, User u, Category cate) {
 		
 		if (uDAO.loginCheck(req)) {
-			dDAO.getDiaryInfo(req, d, userId, u, c);
+			dDAO.getDiaryInfo(req, d, userId, u, cate);
 			pDAO.regPost(req, userId, postImg, postTitle, postTxt, postCategory, postCountry);
 		}
 		TokenMaker.make(req);
@@ -133,13 +133,13 @@ public class WriteController {
 	// 글 삭제
 	@RequestMapping(value = "/diaryPost.delete", method = RequestMethod.GET)
 	public String deleteDiaryPost(HttpServletRequest req, DiaryPost p, Diary d,
-			@RequestParam("postWriter") String postWriter, @RequestParam("userId") String userId, User u, Category c) {
+			@RequestParam("postWriter") String postWriter, @RequestParam("userId") String userId, User u, Category cate) {
 
 		// dDAO.getDiaryInfo(req, d, userId);
 		System.out.println(p.getPostNum());
 		System.out.println(postWriter);
 		if (uDAO.loginCheck(req)) {
-			dDAO.getDiaryInfo(req, d, userId, u, c);
+			dDAO.getDiaryInfo(req, d, userId, u, cate);
 			pDAO.deleteDiaryPost(req, p);
 			pDAO.getAllList(req, userId);
 		}
@@ -149,10 +149,10 @@ public class WriteController {
 
 	// 글 수정하러 가기
 	@RequestMapping(value = "/diaryPost.update.go", method = RequestMethod.GET)
-	public String updateDiaryPost(HttpServletRequest req, Diary d, DiaryPost p, @RequestParam("userId") String userId, User u, Category c) {
+	public String updateDiaryPost(HttpServletRequest req, Diary d, DiaryPost p, @RequestParam("userId") String userId, User u, Category cate) {
 
 		if (uDAO.loginCheck(req)) {
-			dDAO.getDiaryInfo(req, d, userId, u, c);
+			dDAO.getDiaryInfo(req, d, userId, u, cate);
 			pDAO.detailPost(p, req);
 		}
 		req.setAttribute("popupContentPage", "../mj_write/post_update.jsp");
@@ -161,10 +161,10 @@ public class WriteController {
 	
 	// 글 수정하기
 	@RequestMapping(value = "/diaryPost.update.do", method = RequestMethod.POST)
-	public String updateDiaryPostDo(Diary d, DiaryPost p, @RequestParam("userId") String userId, HttpServletRequest req, User u, Category c) {
+	public String updateDiaryPostDo(Diary d, DiaryPost p, @RequestParam("userId") String userId, HttpServletRequest req, User u, Category cate) {
 		
 		if (uDAO.loginCheck(req)) {
-			dDAO.getDiaryInfo(req, d, userId, u, c);
+			dDAO.getDiaryInfo(req, d, userId, u, cate);
 			pDAO.diaryPostUpdate(req, p, userId);
 		}
 		pDAO.getAllList(req, userId);

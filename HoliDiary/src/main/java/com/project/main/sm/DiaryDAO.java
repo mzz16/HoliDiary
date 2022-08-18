@@ -16,11 +16,11 @@ public class DiaryDAO {
 	private SqlSession ss;
 
 	// 다이어리 정보 불러오기
-	public void getDiaryInfo(HttpServletRequest req, Diary d, String userId, User u, Category c) {
+	public void getDiaryInfo(HttpServletRequest req, Diary d, String userId, User u, Category cate) {
 		try {
 			d.setDiaryUserId(userId);
 			u.setUserID(userId);
-			c.setCategoryUserId(userId);
+			cate.setCategoryUserId(userId);
 			
 			Diary dd = (Diary) ss.getMapper(DiaryMapper.class).getDiaryInfo(d);
 			User uu = (User) ss.getMapper(DiaryMapper.class).getUserInfo(u);
