@@ -482,7 +482,7 @@ button.content__close:hover {
 					<a href="#" class="grid__item">
 						<div class="grid__item-bg"></div>
 						<div class="grid__item-wrap">
-							<img class="grid__item-img" src="C:\sej\SpringWS\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\HoliDiary\resources\images" alt="Paris" />
+							<img class="grid__item-img" src="${hn.postimg }" alt="Paris" />
 						</div>
 						<h3 class="grid__item-title">${hn.posttitle }</h3>
 						<h4 class="grid__item-number">London</h4>
