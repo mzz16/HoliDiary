@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -344,6 +345,7 @@ button.content__close:hover {
 	}
 }
 </style>
+<!-- css 적용 문제로 직접 css 적용 -->
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -476,15 +478,17 @@ button.content__close:hover {
 
 			<div class="grid-wrap">
 				<div class="grid">
+				<c:forEach var="hn" items="${holinows }">
 					<a href="#" class="grid__item">
 						<div class="grid__item-bg"></div>
 						<div class="grid__item-wrap">
-							<img class="grid__item-img" src="resources/sej_img/holinow/GettyImages-503564070.jpg" alt="Paris" />
+							<img class="grid__item-img" src="C:\sej\SpringWS\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\HoliDiary\resources\images" alt="Paris" />
 						</div>
-						<h3 class="grid__item-title">Amazing Lond</h3>
+						<h3 class="grid__item-title">${hn.posttitle }</h3>
 						<h4 class="grid__item-number">London</h4>
 					</a>
-					<a href="#" class="grid__item">
+				</c:forEach>	
+					<!-- <a href="#" class="grid__item">
 						<div class="grid__item-bg"></div>
 						<div class="grid__item-wrap">
 							<img class="grid__item-img" src="resources/sej_img/holinow/GettyImages-532667921.jpg" alt="Eagle" />
@@ -571,7 +575,7 @@ button.content__close:hover {
 						</div>
 						<h3 class="grid__item-title">Common Ostrich</h3>
 						<h4 class="grid__item-number">Ostrich</h4>
-					</a>
+					</a> -->
 				</div>
 			</div>
 
