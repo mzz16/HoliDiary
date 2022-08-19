@@ -31,10 +31,12 @@
 
 	<div>
 		<button>좋아요</button>
+		<c:if test="${DiaryPost.postWriter eq sessionScope.loginUser.userID }">
 		<button
 			onclick="updateDiaryPost('${DiaryPost.postWriter }', '${DiaryPost.postNum}')">수정</button>
 		<button
 			onclick="deleteDiaryPost('${DiaryPost.postNum}', '${DiaryPost.postWriter }', '${DiaryPost.postWriter }')">삭제</button>
+		</c:if>
 
 	</div>
 	<div>
