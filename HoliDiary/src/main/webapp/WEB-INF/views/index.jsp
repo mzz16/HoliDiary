@@ -69,7 +69,7 @@
 			<span class="menu_bar_border"></span>
 			<a class="menu_bar_li" href="javascript:void(0);" onclick="return mypageCheckUser();">마이페이지</a>
 			<a class="menu_bar_li" href="javascript:void(0)" onclick="goHolinow()">홀리 NOW</a>
-			<a class="menu_bar_li" href="">Best 홀리</a>
+			<a class="menu_bar_li" href="javascript:void(0)" onclick="goBestHoli()">Best 홀리</a>
 			<a class="menu_bar_li" href="">아이템샵</a>
 			<a class="menu_bar_li" href="">Map(임시)</a>
 			
