@@ -6,8 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="resources/jquery/jquery.js"></script>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="resources/mj_css/postDetail.css">
+<link rel="stylesheet" href="resources/mj_css/likeButton.css">
+<script type="text/javascript" src="resources/mj_js/likeButton.js"></script>
 </head>
 <body>
 
@@ -15,22 +17,30 @@
 		<h1>${DiaryPost.postTitle }</h1>
 	</div>
 
-	<table id="postDetail" border="1" style="width: 100%; height: 90%;">
-		<tr style="height: 50px">
-			<td class="postDetailWriter">작성자 : ${DiaryPost.postWriter }</td>
-			<td class="postDetailDate">${DiaryPost.postDate }</td>
-		</tr>
-		<tr style="height: 50px">
-			<td class="postDetailWriter">카테고리 : ${DiaryPost.postCategory }</td>
-			<td class="postDetailDate">국가 : ${DiaryPost.postCountry }</td>
-		</tr>
-		<tr>
-			<td class="postDetailTxt" colspan="2">${DiaryPost.postTxt }</td>
-		</tr>
-	</table>
+	<div id="#postDetail" style="width: 100%">
+		<div>
+			<div id="leftSide" style="width: 100%">
+				<div style="width: 10%"></div>
+				<div class="postDetailWriter">작성자 : ${DiaryPost.postWriter }</div>
+				<div class="postDetailDate">${DiaryPost.postDate }</div>
+				<div class="postDetailCategory">카테고리 : ${DiaryPost.postCategory }</div>
+				<div class="postDetailCountry">국가 : ${DiaryPost.postCountry }</div>
+				<div class="postDetailView">조회수  0</div>
+			</div>
+		</div>
+		<hr>
+		<div class="postDetailTxt">${DiaryPost.postTxt }</div>
+	</div>
+
+
 
 	<div>
-		<button>좋아요</button>
+		<!-- 좋아요 -->
+		<div class="placement">
+			<div class="heart"></div>
+		</div>
+
+		<!-- 수정/삭제버튼 -->
 		<button
 			onclick="updateDiaryPost('${DiaryPost.postWriter }', '${DiaryPost.postNum}')">수정</button>
 		<button
@@ -81,10 +91,6 @@
 						+ "&postNum=" + n;
 			}
 		}
-		
-		
-		
-		
 	</script>
 
 
