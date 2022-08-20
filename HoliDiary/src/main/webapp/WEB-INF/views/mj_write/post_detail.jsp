@@ -47,11 +47,15 @@
 
 		<!-- 수정/삭제버튼 -->
 		<div id="rightSide">
-			<button
-				onclick="updateDiaryPost('${DiaryPost.postWriter }', '${DiaryPost.postNum}')">수정</button>
-			<button
-				onclick="deleteDiaryPost('${DiaryPost.postNum}', '${DiaryPost.postWriter }', '${DiaryPost.postWriter }')">삭제</button>
-		</div>
+    <c:if test="${DiaryPost.postWriter eq sessionScope.loginUser.userID }">
+		<button
+			onclick="updateDiaryPost('${DiaryPost.postWriter }', '${DiaryPost.postNum}')">수정</button>
+		<button
+			onclick="deleteDiaryPost('${DiaryPost.postNum}', '${DiaryPost.postWriter }', '${DiaryPost.postWriter }')">삭제</button>
+		</c:if>
+    
+    
+			</div>
 	</div>
 	<br>
 	<br>
