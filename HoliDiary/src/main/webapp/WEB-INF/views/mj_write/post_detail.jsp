@@ -13,6 +13,8 @@
 </head>
 <body>
 
+<h1>${Like}</h1>
+<h1>${Like.likeCount }</h1>
 	<div>
 		<h1>${DiaryPost.postTitle }</h1>
 	</div>
@@ -23,9 +25,10 @@
 				<div style="width: 10%"></div>
 				<div class="postDetailWriter">작성자 : ${DiaryPost.postWriter }</div>
 				<div class="postDetailDate">${DiaryPost.postDate }</div>
-				<div class="postDetailCategory">카테고리 : ${DiaryPost.postCategory }</div>
+				<div class="postDetailCategory">카테고리 :
+					${DiaryPost.postCategory }</div>
 				<div class="postDetailCountry">국가 : ${DiaryPost.postCountry }</div>
-				<div class="postDetailView">조회수  0</div>
+				<div class="postDetailView">조회수 0</div>
 			</div>
 		</div>
 		<hr>
@@ -36,25 +39,30 @@
 
 	<div>
 		<!-- 좋아요 -->
-		<div class="placement">
+		<!-- 로그인 상태일때 하트 클릭가능 -->
+		<div id="placement">
 			<div class="heart"></div>
+			<div class="like_result">${Like.likeCount }</div>
 		</div>
 
 		<!-- 수정/삭제버튼 -->
-		<button
-			onclick="updateDiaryPost('${DiaryPost.postWriter }', '${DiaryPost.postNum}')">수정</button>
-		<button
-			onclick="deleteDiaryPost('${DiaryPost.postNum}', '${DiaryPost.postWriter }', '${DiaryPost.postWriter }')">삭제</button>
-
+		<div id="rightSide">
+			<button
+				onclick="updateDiaryPost('${DiaryPost.postWriter }', '${DiaryPost.postNum}')">수정</button>
+			<button
+				onclick="deleteDiaryPost('${DiaryPost.postNum}', '${DiaryPost.postWriter }', '${DiaryPost.postWriter }')">삭제</button>
+		</div>
 	</div>
+	<br>
+	<br>
 	<div>
-		<button onclick="history.go(-1)">목록으로</button>
+		<button onclick="history.go(-1)" id="GoToList">목록으로</button>
 	</div>
-
+	<br>
 
 	<hr>
 
-	<h3>Comment</h3>
+	<h2>Comment</h2>
 
 	<div>
 		<textarea name="commentTxt" id="commentTxt"></textarea>
@@ -67,7 +75,7 @@
 				<ul>${c.commentWriter }</ul>
 				<ul>${c.commentTxt }</ul>
 				<ul>${c.commentDate }</ul>
-				<div style="text-align: right; margin-right: 50px">좋아요</div>
+				<div style="text-align: right; margin-right: 50px">삭제</div>
 				<div style="text-align: right; margin-top: -17.5px;">답글</div>
 			</div>
 			<hr>

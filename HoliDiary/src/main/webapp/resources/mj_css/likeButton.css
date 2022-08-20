@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
 .heart {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
   background-position: 0 0;
   cursor: pointer;
@@ -15,10 +15,10 @@
 }
 
 
-.placement {
+#placement {
   position: relative;
   z-index: 10;
-  top: 50%;
-  left: 50%;
+  margin-left: -25px;
+  margin-bottom: -80px;
   /*transform: translate(-50%, -50%);*/
 }
