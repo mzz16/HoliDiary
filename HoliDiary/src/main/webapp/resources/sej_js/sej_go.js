@@ -11,3 +11,11 @@ function goSearch() {
 function goHolinow() {
 	location.href='holinow.go';
 }
+
+function goBestHoli() {
+	location.href='bestHoli.go';
+}
+
+function goItemShop() {
+	location.href='itemShop.go';
+}

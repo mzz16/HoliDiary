@@ -12,7 +12,8 @@
 <body>
 
 	<h1>POST</h1>
-	<table id="postListTbl" border=1 style="width: 100%; text-align: center;">
+	<table id="postListTbl" border=1
+		style="width: 100%; text-align: center;">
 		<tr class="postTbl">
 			<td class="postTitle" style="width: 30%">글제목</td>
 			<td class="postWriter" style="width: 20%">작성자</td>
@@ -20,17 +21,18 @@
 			<td class="postLike" style="width: 10%">좋아요</td>
 			<td class="postNo" style="width: 15%">조회수</td>
 		</tr>
-		<c:forEach var="posts" items="${DiaryPost }">
+		<c:forEach var="posts" items="${DiaryPost }" varStatus="status">
 			<tr class="postList">
-				<td class="postTitle"><a href='post.detail.go?postNum=${posts.postNum } + &userId=${posts.postWriter }'>${posts.postTitle }</a></td>
+				<td class="postTitle"><a
+					href='post.detail.go?postNum=${posts.postNum } + &userId=${posts.postWriter }'>${posts.postTitle }</a></td>
 				<td class="postWriter">${posts.postWriter }</td>
 				<td class="postDate">${posts.postDate }</td>
 				<td class="postDate">${posts.postRecommend }</td>
-				<td class="postViewCount">조회수</td>
+				<td class="postViewCount">${posts.postView }</td>
 			</tr>
 		</c:forEach>
 	</table>
-	
+
 
 	<script type="text/javascript">
 		$(document).ready(function() {

@@ -34,6 +34,12 @@ public interface UserMapper {
 
 	int updatePW(User u);
 
+	int pwCheck(User u);
+
+	int updateUser(User u);
+
+	int updateKakao(User u);
+
 
 
 

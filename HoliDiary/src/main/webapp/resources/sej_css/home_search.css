@@ -60,12 +60,12 @@
 	height: 600px;
 	font-family: 'Noto Sans Light','sans-serif';
 	/* border-bottom: 1px solid black; */
-	margin-right: 50px;
+	margin-right: 70px;
 }
 
 
 #home_search_content_place {
-	width: 1200px;
+	width: 1300px;
 	display: flex;
 	position: relative;
 	left: 30px;
@@ -94,7 +94,7 @@
 	display: block;
   	width: 100%;
   	height: 100%;
-  	object-fit: fill;
+  	object-fit: cover;
   	box-shadow: 3px 2px 5px #c5c5c5;
 }
 
@@ -113,39 +113,60 @@
 
 .home_search_text_box {
 	margin-bottom: 120px;
-	letter-spacing: 1.5px;
+	/* letter-spacing: 1px; */
     line-height: 20px;
     text-align: justify;
+    display: inline-block;
+    overflow : hidden;
+	text-overflow : ellipsis; /* (width를 설정하지 않고 여기까진 위와 동일하다.) */
+	height : 200px; /* (대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
+	word-wrap : brek-word; 
+	display : -webkit-box;
+	-webkit-line-clamp : 1; /* (줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
+	-webkit-box-orient: vertical; 
 }
-
+.home_search_writer {
+	display: block;
+	width: 50px;
+	position: absolute;
+	
+}
 .home_search_recommend {
-	margin-left: 148px;
+	position: absolute;
+	margin-left: 190px; 
+	display: block;
 }
 
 .home_search_category {
-	position: relative;
-	top: -470px;
-	left: 250px;
-	width: 50px;
+	position: absolute;
+	display: inline-block;
+	top: 118px;
+	margin-left: 250px;
+	/* top: -470px;
+	left: 250px; */
+	width: 80px;
 	color: #FFDE59;
 	font-weight: bold;
 	background-color: #6667AB;
 	padding: 10px;
 	font-size: 13px;
 	letter-spacing: 0.2px;
+	text-align: center;
 }
 
 .home_search_country {
-	position: relative;
-	top: -430px;
-	left: 170px;
-	width: 50px;
+	position: absolute;
+	display: inline-block;
+	top: 75px;
+	margin-left: 250px;
+	width: 75px;
 	color: #FFDE59;
 	font-weight: bold;
 	background-color: #6667AB;
 	padding: 10px;
 	font-size: 13px;
 	letter-spacing: 0.2px;
+	text-align: center;
 }
 .home_search_null_place {
 	width: 1200px;

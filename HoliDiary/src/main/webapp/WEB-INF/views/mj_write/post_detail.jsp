@@ -6,8 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="resources/jquery/jquery.js"></script>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="resources/mj_css/postDetail.css">
+<link rel="stylesheet" href="resources/mj_css/likeButton.css">
 </head>
 <body>
 
@@ -15,38 +16,72 @@
 		<h1>${DiaryPost.postTitle }</h1>
 	</div>
 
-	<table id="postDetail" border="1" style="width: 100%; height: 90%;">
-		<tr style="height: 50px">
-			<td class="postDetailWriter">작성자 : ${DiaryPost.postWriter }</td>
-			<td class="postDetailDate">${DiaryPost.postDate }</td>
-		</tr>
-		<tr style="height: 50px">
-			<td class="postDetailWriter">카테고리 : ${DiaryPost.postCategory }</td>
-			<td class="postDetailDate">국가 : ${DiaryPost.postCountry }</td>
-		</tr>
-		<tr>
-			<td class="postDetailTxt" colspan="2">${DiaryPost.postTxt }</td>
-		</tr>
-	</table>
-
-	<div>
-		<button>좋아요</button>
-		<c:if test="${DiaryPost.postWriter eq sessionScope.loginUser.userID }">
-		<button
-			onclick="updateDiaryPost('${DiaryPost.postWriter }', '${DiaryPost.postNum}')">수정</button>
-		<button
-			onclick="deleteDiaryPost('${DiaryPost.postNum}', '${DiaryPost.postWriter }', '${DiaryPost.postWriter }')">삭제</button>
-		</c:if>
-
-	</div>
-	<div>
-		<button onclick="history.go(-1)">목록으로</button>
+	<div id="#postDetail" style="width: 100%">
+		<div>
+			<div id="leftSide" style="width: 100%">
+				<div style="width: 10%"></div>
+				<div class="postDetailWriter">작성자 : ${DiaryPost.postWriter }</div>
+				<div class="postDetailDate">${DiaryPost.postDate }</div>
+				<div class="postDetailCategory">카테고리 :
+					${DiaryPost.postCategory }</div>
+				<div class="postDetailCountry">국가 : ${DiaryPost.postCountry }</div>
+				<div class="postDetailView">조회수 ${DiaryPost.postView }</div>
+			</div>
+		</div>
+		<hr>
+		<div class="postDetailTxt">${DiaryPost.postTxt }</div>
 	</div>
 
+
+
+	<div>
+		<!-- 좋아요 -->
+		<!-- 로그인 상태일때 하트 클릭가능 -->
+		<div id="placement">
+			<div class="heart"></div>
+			<div class="like_result">${DiaryPost.postRecommend }</div>
+			<input type="hidden" id="postNum" value="${DiaryPost.postNum }">
+			<input type="hidden" id="userID"
+				value="${sessionScope.loginUser.userID}"> <input
+				type="hidden" id="postWriter" value="${DiaryPost.postWriter}">
+		</div>
+
+		<!-- 모달창 -->
+		<div class="modal hidden">
+			<div class="bg"></div>
+			<div class="modalBox">
+				<p>
+					<c:forEach items="${Like }" var="Like">
+						<li>${Like.userId }</li>
+					</c:forEach>
+				</p>
+				<button class="closeBtn">✖</button>
+			</div>
+		</div>
+		
+		<!-- 수정/삭제버튼 -->
+		<div id="rightSide">
+			<c:if
+				test="${DiaryPost.postWriter eq sessionScope.loginUser.userID }">
+				<button
+					onclick="updateDiaryPost('${DiaryPost.postWriter }', '${DiaryPost.postNum}')">수정</button>
+				<button
+					onclick="deleteDiaryPost('${DiaryPost.postNum}', '${DiaryPost.postWriter }', '${DiaryPost.postWriter }')">삭제</button>
+			</c:if>
+
+
+		</div>
+	</div>
+	<br>
+	<br>
+	<div id="goToListDiv">
+		<button onclick="location.href='post-list?userId=${User.userID}'" id="GoToList">목록으로</button>
+	</div>
+	<br>
 
 	<hr>
 
-	<h3>Comment</h3>
+	<h2>Comment</h2>
 
 	<div>
 		<textarea name="commentTxt" id="commentTxt"></textarea>
@@ -59,7 +94,7 @@
 				<ul>${c.commentWriter }</ul>
 				<ul>${c.commentTxt }</ul>
 				<ul>${c.commentDate }</ul>
-				<div style="text-align: right; margin-right: 50px">좋아요</div>
+				<div style="text-align: right; margin-right: 50px">삭제</div>
 				<div style="text-align: right; margin-top: -17.5px;">답글</div>
 			</div>
 			<hr>
@@ -83,9 +118,61 @@
 						+ "&postNum=" + n;
 			}
 		}
+
+		$(function() {
+
+			var postNum = document.getElementById("postNum").value;
+			var userID = document.getElementById("userID").value;
+			var postWriter = document.getElementById("postWriter").value;
+
+			$(".heart").on("click", function() {
+				console.log(postNum);
+				console.log(userID);
+				console.log(postWriter);
+
+				$(this).toggleClass("is-active");
+				likeupdate();
+			});
+
+			function likeupdate() {
+				$.ajax({
+					url : "updateLike.do",
+					type : "GET",
+					dataType : "json",
+					data : {
+						'postNum' : postNum,
+						'userId' : userID,
+						'postWriter' : postWriter
+					},
+					success : function(likeCount) {
+						if (likeCount == 0) {
+							alert("추천완료.");
+							location.reload();
+						} else if (likeCount == 1) {
+							alert("추천취소");
+							location.reload();
+						}
+					},
+					error : function(request, status, error) {
+						alert("ajax 실패1");
+					}
+
+				});
+			}
+
+		});
 		
-		
-		
+		const open = () => {
+		    document.querySelector(".modal").classList.remove("hidden");
+		  }
+
+		  const close = () => {
+		    document.querySelector(".modal").classList.add("hidden");
+		  }
+
+		  document.querySelector(".like_result").addEventListener("click", open);
+		  document.querySelector(".closeBtn").addEventListener("click", close);
+		  document.querySelector(".bg").addEventListener("click", close);
 		
 	</script>
 
