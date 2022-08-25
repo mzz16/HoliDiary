@@ -230,6 +230,20 @@ input.add-event-edit:-ms-input-placeholder {
 .event-btn--cancel:hover {
 	box-shadow: 0px 2px 4px rgba(2, 2, 2, 0.2);
 }
+
+.event-btn--lastsave{
+	border-color: #fff;
+	background: #FFDE59;
+	color: #1C1C1C;
+	border-color: transparent;
+	border-radius: 10px 10px 10px 10px;
+	padding: 13px;
+}
+
+.event-btn--lastsave:hover {
+	box-shadow: 0px 2px 4px rgba(2, 2, 2, 0.2);
+}
+
 /* .add-event-btn:hover, .add.event-btn:focus{
   background: #00258e;
   box-shadow: 0px -1px 2px rgba(3,2,2,0.2);
@@ -561,7 +575,7 @@ $(function(){
 		<div class="calendar" id="calendar-app"
 			style="background: ${Diary.themeColor}">
 			<div class="calendar--day-view" id="day-view">
-				<span class="day-view-exit" id="day-view-exit">&times;</span><button id="saveBtn">저장</button> 
+				<span class="day-view-exit" id="day-view-exit">&times;</span><!-- <button id="saveBtn">저장</button>  -->
 				<span class="day-view-date" id="day-view-date">MAY 29 2016</span>
 				<div class="day-view-content">
 					<div class="day-highlight">
@@ -603,7 +617,7 @@ $(function(){
 							<div class="half">
 								<a onkeyup="if(event.keyCode != 13) return; this.click();"
 									tabindex="0" id="add-event-save"
-									class="event-btn--save event-btn">저장</a> <a tabindex="0"
+									class="event-btn--save event-btn">추가</a> <a tabindex="0"
 									id="add-event-cancel" class="event-btn--cancel event-btn">취소</a>
 							</div>
 						</div>
@@ -613,6 +627,7 @@ $(function(){
 					<div class="day-inspiration-quote" id="inspirational-quote">
 						Every child is an artist. The problem is how to remain an artist
 						once he grows up. –Pablo Picasso</div>
+					<button id="saveBtn" class="event-btn--lastsave">스케줄러에 저장</button>
 				</div>
 			</div>
 			<div class="calendar--view" id="calendar-view">
