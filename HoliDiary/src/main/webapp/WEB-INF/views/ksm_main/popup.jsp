@@ -48,6 +48,7 @@
 	<ul class="contextmenu">
 		<li><a href="">포스트 작성</a></li>
 		<li><a href="updateCategory?userId=${sessionScope.loginUser.userID }">카테고리 편집</a></li>
+		<li><a href="mainImg.updateGo?userId=${sessionScope.loginUser.userID }">홈 화면 편집</a></li>
 		<li><a href="updateMyPopup?userId=${sessionScope.loginUser.userID }">다이어리 설정</a></li>
 		<li><a href="#">도움말</a></li>
 	</ul>
@@ -64,12 +65,12 @@
 						src="resources/kjs_profileImg/${User.userImg }"
 						alt=""></a>
 						
-					<details>
-						<summary>
+					<!-- <details>
+						<summary> -->
 							<span class="profile-name">${User.userID}</span>
-						</summary>
+						<%-- </summary>
 						<p class="profile-introduce">${Diary.diaryIntroduce }</p>
-					</details>
+					</details> --%>
 					
 				</div>
 				
@@ -84,11 +85,17 @@
             <defs />
             <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
             <path d="M9 22V12h6v10" /></svg> Home
-					</a> <a href="popupScheduleGo?userId=${User.userID}"
+					</a>
+			
+			<c:if test="${Diary.diaryUserId eq sessionScope.loginUser.userID }">		
+					<a href="popupScheduleGo?userId=${User.userID}"
 						class="item-link" id="pageLink"> <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
             <circle cx="12" cy="12" r="10" />
             <polyline points="12 6 12 12 16 14" /></svg> Schedule
-					</a> <a href="#" class="item-link" id="pageLink"> <svg
+					</a>
+			</c:if>
+					
+					<a href="#" class="item-link" id="pageLink"> <svg
 							class="link-icon" xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24" fill="none" stroke="currentColor"
 							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
