@@ -236,8 +236,10 @@ input.add-event-edit:-ms-input-placeholder {
 	background: #FFDE59;
 	color: #1C1C1C;
 	border-color: transparent;
-	border-radius: 10px 10px 10px 10px;
+	border-radius: 5px 5px 5px 5px;
 	padding: 13px;
+	margin-left: 83%;
+	font-weight: bold;
 }
 
 .event-btn--lastsave:hover {
@@ -499,7 +501,7 @@ keyframes popIn { 100%{
 <script type="text/javascript">
 $(function(){
 	 $('#saveBtn').click(function() {
-		alert(111)
+		//alert(111)
 		let userID = document.getElementById("userID").value;
 		let ScheduleTitle = $("#input-add-event-name").val();
 		//let ScheduleTitle = document.getElementById("input-add-event-name").value;
@@ -542,15 +544,29 @@ $(function(){
 	 
 	 //스케줄러 삭제 - db 내용 동시에 삭제 - pk로 삭제 / 등록날짜 
 	 $('.event-delete').click(function(){
+		 
+		 alert('1111');
+		 
+		 
+		let userID = document.getElementById("userID").value;
+		let ScheduleTitle = $("#input-add-event-name").val();
+		let ScheduleDate1 = document.getElementById("day-events2").value;
+		let ScheduleStartTime1 = document.getElementById("makeStartTime").value;
+		let ScheduleEndTime1 = document.getElementById("makeEndTime").value;
+		let scheduleContent = $("#day-events-list").html();
+		let ScheduleNum = document.getElementById("ScheduleNum").value;
+		 
 		 $.ajax({
 				url : "schedule.delete",
 				type : "GET",
 				dataType : "text",
 				data :	{"ScheduleUserId" : userID,
-					  	"ScheduleTitle" : ScheduleTitle,
-					  	"ScheduleDate" : ScheduleDate1,
-					  	"ScheduleStartTime1" : ScheduleStartTime1,
-					  	"ScheduleEndTime1" : ScheduleEndTime1
+				  	"ScheduleTitle" : ScheduleTitle,
+				  	"ScheduleDate" : ScheduleDate1,
+				  	"ScheduleStartTime1" : ScheduleStartTime1,
+				  	"ScheduleEndTime1" : ScheduleEndTime1,
+				  	"ScheduleContent" : scheduleContent,
+				  	"ScheduleNum" : ScheduleNum
 						},
 				success : function(getData) {
 					console.log(getData);
@@ -579,8 +595,11 @@ $(function(){
 				<span class="day-view-date" id="day-view-date">MAY 29 2016</span>
 				<div class="day-view-content">
 					<div class="day-highlight">
-						<input id="day-events2" name="dayEventsEle2" value=""><span class="day-events"
-							id="day-events">had no events for today</span>. &nbsp; <span
+						<input id="day-events2" name="dayEventsEle2" value="" type="hidden">
+						<input type="hidden" id="ScheduleNum" name="ScheduleNum" value="${Schedule.ScheduleNum }">
+						<!-- <span class="day-events"
+							id="day-events">had no events for today</span>. &nbsp; -->
+							<span
 							tabindex="0"
 							onkeyup="if(event.keyCode != 13) return; this.click();"
 							class="day-events-link" id="add-event" data-date>일정을
@@ -627,10 +646,10 @@ $(function(){
 					<div class="day-inspiration-quote" id="inspirational-quote">
 						Every child is an artist. The problem is how to remain an artist
 						once he grows up. –Pablo Picasso</div>
-					<button id="saveBtn" class="event-btn--lastsave">스케줄러에 저장</button>
+					<button id="saveBtn" class="event-btn--lastsave">스케줄러 저장</button>
 				</div>
 			</div>
-			<div class="calendar--view" id="calendar-view">
+			<div class="calendar--view" id="calendar-view"> <!-- ing -->
 				<div class="cview__month">
 					<span class="cview__month-last" id="calendar-month-last">Apr</span>
 					<span class="cview__month-current" id="calendar-month">May</span> <span
@@ -683,7 +702,9 @@ $(function(){
 	}
 	
 	function CalendarApp(date) {
-		  
+		    
+		
+		
 		  if (!(date instanceof Date)) {
 		    date = new Date();
 		  }
@@ -792,9 +813,28 @@ $(function(){
 		    spacer.className = "cview--spacer";
 		    this.calendarView.appendChild(spacer);
 		  }
-		  
+		  let getArrayData;
+		  $.ajax({
+				url : "schedule.getAllEvents",
+				data : {
+					"month" : m+1,
+					"year" : y.toString().substring(2,4),
+					"userId" : $("#userID").val()
+				},
+				async: false,
+				dataType : "json",
+				success : function(data) {
+					console.log(data + '111111111111');
+					for (var i = 0; i < data.length; i++) {
+						data[i] = data[i].substring(0,10);
+					}
+					getArrayData = data;
+				}
+		  });
+			
+		 
 		  for ( var z = 1; z <= lastDayOfM; z++ ) {
-		   
+			console.log(getArrayData);
 		    var _date = new Date(y, m ,z);
 		    var day = document.createElement("div");
 		    day.className = "cview--date";
@@ -807,14 +847,34 @@ $(function(){
 		      day.classList.add("today");
 		    }
 		    
+		    let myYear = _date.getFullYear();
+		    let myMonth = _date.getMonth() + 1;
+		    let myDay = _date.getDate();
+		    myMonth = myMonth >= 10 ? myMonth : '0' + myMonth;
+		    myDay = myDay >= 10 ? myDay : '0' + myDay;          //day 두자리로 저장
+		    let myDate = myYear + '-' + myMonth + '-' + myDay; 
+		    console.log(myDate);
+		    
+			for (var i = 0; i < getArrayData.length; i++) {
+				if(myDate == getArrayData[i]){
+		      		day.classList.add("has-events");
+				}
+			}
+		    
+		   
 		     // check if has events to show
-		    if ( this.aptDates.indexOf(_date.toString()) !== -1 ) {
+		     /* if ( this.aptDates.indexOf(_date.toString()) !== -1 ) {
 		      day.classList.add("has-events");
-		    }
+		    }   */
+		    
+		    // 도트찍기
+		/*     if(getArrayData){
+		   	day.classList.add("has-events");
+		   }*/ 
 		    
 		    this.calendarView.appendChild(day);
 		  }
-		  
+		 
 		  var _that = this;
 		  setTimeout(function(){
 		    _that.calendarMonthDiv.classList.add("cview__month-activate");
@@ -846,7 +906,24 @@ $(function(){
 		  
 		};
 		CalendarApp.prototype.openDayWindow = function(date){
-		  alert(date)
+		  alert(date) // 날짜 누르면
+		  let id = $("#userID").val();
+		  // ing
+		  let getdayEvents; 
+			  $.ajax({
+			 url : "schedule.get",
+			 data : {"scheduleUserId" : id , "scheduleDate": date},
+			 dataType : "json",
+			 async : false,
+			 success : function (data) {
+				 getdayEvents = data;
+			}
+			 
+			  
+		  });
+//		  console.log(getdayEvents?.scheduleContent);
+		  
+		  
 		  var now = new Date();
 		  var day = new Date(date);
 		  this.dayViewDateEle.textContent = this.days[day.getDay()] + ", " + this.months[day.getMonth()] + " " + day.getDate() + ", " + day.getFullYear();
@@ -857,7 +934,7 @@ $(function(){
 		  var _dayTopbarText = '';
 		  if ( day < new Date(now.getFullYear(), now.getMonth(), now.getDate())) {
 		    _dayTopbarText = "과거 ";
-		    this.addDayEventEle.style.display = "none";
+		    this.addDayEventEle.style.display = "inline";
 		  } else {
 		     _dayTopbarText = "현재 ";
 		     this.addDayEventEle.style.display = "inline";
@@ -865,25 +942,44 @@ $(function(){
 		  this.addDayEventEle.setAttribute("data-date", day);
 		  
 		  var eventsToday = this.showEventsByDay(day);
+		  if(getdayEvents){
+			 eventsToday = true;
+			 /* day.classList.add("has-events"); */ /*여기*/
+		  }
 		  if ( !eventsToday ) {
 		    _dayTopbarText += "0 ";
 		    var _rand = Math.round(Math.random() * ((this.quotes.length - 1 ) - 0) + 0);
 		    this.dayInspirationalQuote.textContent = this.quotes[_rand];
 		  } else {
+			  //alert('명언');
 		    _dayTopbarText += eventsToday.length + " ";
 		    this.dayInspirationalQuote.textContent = null;
+		    
 		  }
 		  //this.dayEventsList.innerHTML = this.showEventsCreateHTMLView(eventsToday);
 		  while(this.dayEventsList.firstChild) {
 		    this.dayEventsList.removeChild(this.dayEventsList.firstChild);
 		  }
+		  if(getdayEvents){
+		  this.dayEventsList.innerHTML = getdayEvents.scheduleContent;
 		  
+		  
+		  
+		  }		  
 		  this.dayEventsList.appendChild(this.showEventsCreateElesView(eventsToday));
 		  
 		  
-		  this.dayEventsEle.textContent = _dayTopbarText + "개의 일정이 있습니다. " + this.months[day.getMonth()] + " " + day.getDate() + ", " + day.getFullYear();
+		  
+		  //this.dayEventsEle.textContent = _dayTopbarText + "개의 일정이 있습니다. " + this.months[day.getMonth()] + " " + day.getDate() + ", " + day.getFullYear();
 		  //this.dayEventsEle2.value = date;
 		  document.getElementById("day-events2").value = date;
+		  
+		 
+		 /*  if ( this.aptDates.indexOf(_date.toString()) !== -1 ) {
+		      day.classList.add("has-events");
+		    } */
+		    
+		  
 		};
 
 		CalendarApp.prototype.showEventsCreateElesView = function(events) {
@@ -891,6 +987,8 @@ $(function(){
 		  ul.className = 'day-event-list-ul';
 		  events = this.sortEventsByTime(events);
 		  var _this = this;
+		  
+		  
 		  events.forEach(function(event){
 		    var _start = new Date(event.startTime); //시작시간
 		    var _end = new Date(event.endTime); //마침시간
@@ -1178,7 +1276,8 @@ $(function(){
 
 		var calendar = new CalendarApp();
 		console.log(calendar);
-
+		
+		
 
 </script>
 

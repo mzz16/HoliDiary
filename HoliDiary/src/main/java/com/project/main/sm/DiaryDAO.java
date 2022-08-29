@@ -1,13 +1,20 @@
 package com.project.main.sm;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.project.main.js.User;
 
 
@@ -82,6 +89,7 @@ public class DiaryDAO {
 
 	}
 
+	// 스케줄러 내용 추가
 	public int insertSchedule(HttpServletRequest req, Schedule s) {
 	try {
 //		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -114,6 +122,97 @@ public class DiaryDAO {
 	}	
 		
 		return 0;
+	}
+
+	
+	// 홈 - 메인 이미지 업데이트
+	public void updateMainImg(HttpServletRequest req, Diary d, String userId, MultipartFile file) {
+		
+		String path = req.getSession().getServletContext().getRealPath("resources/sm_img");
+		MultipartRequest mr = null;
+		
+		System.out.println(path);
+		
+		try {
+			/*mr = new MultipartRequest(req, path, 10 * 1024 * 1024, "utf-8",
+					new DefaultFileRenamePolicy());
+			
+			String diaryImg = mr.getFilesystemName("mainImg");*/
+			
+			
+			String fileName = file.getOriginalFilename();
+			System.out.println(path);
+		
+			String saveFileName = UUID.randomUUID().toString() + fileName.substring(fileName.lastIndexOf("."));
+			System.out.println(fileName);
+			System.out.println(saveFileName);
+			
+			
+			d.setDiaryImg(saveFileName);
+			d.setDiaryUserId(userId);
+			
+			System.out.println(saveFileName);
+			
+			if(!file.getOriginalFilename().isEmpty()) {
+					file.transferTo(new File(path, saveFileName));
+					ss.getMapper(DiaryMapper.class).uploadImg(d);
+					System.out.println("등록 성공");
+				}else {
+					System.out.println("업로드 실패");
+				}
+			
+			
+			/*if (ss.getMapper(DiaryMapper.class).uploadImg(d) == 1) {
+				System.out.println("업로드 성공");
+			} else {
+				System.out.println("업로드 실패");
+			}*/
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	// 스케줄러 정보 얻기
+	public Schedule getSchedule(Schedule s) {
+		return ss.getMapper(ScheduleMapper.class).getSchedule(s);
+	}
+
+	// 스케줄러 전체 정보 얻기
+	public String[] getAllEvent(HttpServletRequest req) {
+		String year = req.getParameter("year");
+		int month = Integer.parseInt(req.getParameter("month"));
+		String userId = req.getParameter("userId");
+		String month2 = String.format("%02d", month);
+		String date = year + "/" + month2;
+		System.out.println(date);
+		
+		
+		Map<String, String> vals = new HashMap<String, String>();
+		
+		vals.put("val1", date);
+		vals.put("val2", userId);
+		return ss.getMapper(ScheduleMapper.class).getAllSchedule(vals);
+	}
+
+	// 스케줄러 내용 삭제
+	public int deleteSchedule(HttpServletRequest req, Schedule s) {
+		try {
+			if (ss.getMapper(ScheduleMapper.class).deleteSchedule(s) == 1) {
+				System.out.println("삭제 성공");
+				return 1;
+			} else {
+				System.out.println("삭제 실패");
+				return 0;
+			}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("내용 삭제 실패");
+		}	
+			
+			return 0;
 	}
 
 
