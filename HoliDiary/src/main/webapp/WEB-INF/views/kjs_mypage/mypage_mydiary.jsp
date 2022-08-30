@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -24,9 +23,24 @@
 				<span style="color: #6667AB;">My Diary</span>
 			</div>
 			<div class="mypage_content_box">
-				<div id="mypage_follower">
-					<div>나를 구독하는 사람들</div>
-					<div>나를 구독하는 통계</div>
+				<div>
+					<div class="mypage_mydiary_title">마이 다이어리 현황</div>
+				</div>
+				<div class="mypage_mydiary_chart">
+					차트/ 방문자 수/ 날짜
+				</div>
+				<div class="mypage_mydiary_follower">
+					<div class="mypage_mydiary_follower_title">나를 구독하는 사람</div>
+					<c:forEach var="info" items="${infos }">
+					<div>
+						<div class="mypage_mydiary_follower_img">
+							<img src="./resources/kjs_profileImg/${info.userImg}">
+						</div>
+						<div>
+							${info.userNickname}
+						</div>
+					</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>

@@ -417,25 +417,73 @@ function mysubSearch(){
 	$.ajax({
 		url: 'mysub.search',
 		type : 'GET',
-		dataType : 'text',
+		dataType : 'json',
 		data : {'mysubSearch': search},
-		success : function(result) {
-			console.log(result);
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		success : function(data) {
+			console.log(JSON.stringify(data))
+			$.each(data, function (i, item){
+				$("#mysub_info_list_box").html(data[i].userImg);
+			})
 		},
-		error : function(request,status,error) {
-			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		error : function(error) {
 			alert('문제가 발생했습니다. 다시 이용해주세요.')
-			flag = false;
 		}
 	});
 }
 
-function subscribeCancel(){
+function subscribeCancel(no){
 	
-	let subNo = $("#subscribeNo").val();
-	//alert(subNo);
+	//alert(no);
+	
 	let ok = confirm('정말 구독 취소하시겠습니까?');
 	if(ok){
-		location.href="mysub.cancel?no="+subNo;
+		
+		$.ajax({
+			url: 'mysub.cancel',
+			type : 'GET',
+			dataType : 'text',
+			data : {'no': no},
+			success : function(data) {
+				if(data == 1){
+					location.reload();
+				}else{
+					alert('구독 취소에 실패했습니다')
+				}
+			},
+			error : function(error) {
+				alert('문제가 발생했습니다. 다시 이용해주세요.')
+			}
+		});
+		
 	}
+}
+
+function mypagePopup(id){
+	let options = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=1000, height=600, top=100, left=270";
+	
+	//alert(id);
+	
+	var url = 'popup.open?userId=' +id;
+	
+	window.open(url,"_blank", options);
+}
+
+function subscribeDo(id){
+	$.ajax({
+		url: 'subscribe.do',
+		type : 'GET',
+		dataType : 'text',
+		data : {'id': id},
+		success : function(data) {
+			if(data == 1){
+				location.reload();
+			}else{
+				alert('구독에 실패했습니다')
+			}
+		},
+		error : function(error) {
+			alert('문제가 발생했습니다. 다시 이용해주세요.')
+		}
+	});
 }
