@@ -74,7 +74,7 @@
 			<a class="menu_bar_li" href="javascript:void(0)" onclick="goHolinow()">홀리 NOW</a>
 			<a class="menu_bar_li" href="javascript:void(0)" onclick="goBestHoli()">Best 홀리</a>
 			<a class="menu_bar_li" href="javascript:void(0)" onclick="goItemShop()">아이템샵</a>
-			<a class="menu_bar_li" href="">Map(임시)</a>
+			<!-- <a class="menu_bar_li" href="">Map(임시)</a> -->
 			
 			<!-- 로그인 페이지 공간 입니다 -->
 			<div class="menu_bar_user_place">
