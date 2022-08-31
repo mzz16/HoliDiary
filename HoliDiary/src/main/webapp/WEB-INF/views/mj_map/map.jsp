@@ -43,11 +43,8 @@
 	</script>
 
 	<div class="pac-card" id="pac-card">
-		<div>
-			<div id="title"><strong>위치 검색</strong></div>
-		</div>
 		<div id="pac-container">
-			<input id="pac-input" type="text" placeholder="Enter a location" />
+			<input id="pac-input" type="text" placeholder="위치 검색" />
 		</div>
 	</div>
 	<div id="map"></div>
@@ -56,9 +53,7 @@
 			id="place-address"></span>
 	</div>
 
-
-
-	<div id="map"></div>
+	<!-- <div id="map"></div> -->
 
 	<p>
 

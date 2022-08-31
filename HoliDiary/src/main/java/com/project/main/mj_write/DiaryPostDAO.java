@@ -419,6 +419,10 @@ public class DiaryPostDAO {
 
 	}
 
+	public int checkLike(HttpServletRequest req, Like l) {
+		return ss.getMapper(LikeMapper.class).checkLike(l);
+	}
+
 	
 
 	/*
