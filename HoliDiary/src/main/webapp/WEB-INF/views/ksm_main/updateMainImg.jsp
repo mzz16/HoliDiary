@@ -17,8 +17,11 @@
 		</tr>
 		<tr>
 			<td>
+				<label for="mainImg">
+					<div class="btn-img-upload">이미지 업로드하기</div>
+				</label>
 				<input type="file" name="mainImg" id="mainImg">
-				<button style="background: gray;">수정</button><br><br>
+				<button class="btn-update-save">수정</button><br><br>
 				<img style="width:80px; height:80px; border-radius: 6px;" src="resources/sm_img/${Diary.diaryImg }">
 				
 				<br>${Diary.diaryImg }

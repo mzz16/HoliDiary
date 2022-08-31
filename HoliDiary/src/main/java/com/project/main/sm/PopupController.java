@@ -1,5 +1,7 @@
 package com.project.main.sm;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +67,8 @@ public class PopupController {
 		return "ksm_main/popup";
 	}
 
+	
+	
 	// 다이어리 - 설정 관리 들어가기
 	@RequestMapping(value = "/updateMyPopup", method = RequestMethod.GET)
 	public String updateMyPopup(HttpServletRequest req, Diary d, User u, Category cate, Subscribe s, @RequestParam("userId") String userId) {
@@ -139,13 +143,7 @@ public class PopupController {
 	@ResponseBody
 	@RequestMapping(value = "/schedule.insert", method = RequestMethod.GET)
 	public int insertSchedule(HttpServletRequest req, Schedule s) {
-		/*System.out.println("==============================");
-		System.out.println(req.getParameter("ScheduleUserId"));
-		System.out.println(req.getParameter("ScheduleTitle"));
-		System.out.println(req.getParameter("ScheduleDate"));
-		System.out.println(req.getParameter("ScheduleStartTime1"));
-		System.out.println(req.getParameter("ScheduleEndTime1"));
-		System.out.println("==============================");*/
+		
 		
 		uDAO.loginCheck(req);
 		return dDAO.insertSchedule(req, s);
@@ -156,7 +154,7 @@ public class PopupController {
 	@RequestMapping(value = "/schedule.delete", method = RequestMethod.GET)
 	public int deleteSchedule(HttpServletRequest req, Schedule s) {
 		
-		System.out.println(req.getParameter("ScheduleNum"));
+		System.out.println(req.getParameter("ScheduleContent"));
 		
 		uDAO.loginCheck(req);
 		return dDAO.deleteSchedule(req, s);
@@ -187,11 +185,8 @@ System.out.println(s.getScheduleUserId());
 	public String updateMainImg(HttpServletRequest req, Diary d, User u, Category cate, Subscribe s,
 			@RequestParam("userId") String userId, @RequestParam("mainImg") MultipartFile file) {
 		
-		System.out.println("ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ");
 		if (uDAO.loginCheck(req)) {
-			System.out.println("ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ");
 			dDAO.updateMainImg(req, d, userId, file);
-			System.out.println("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
 			dDAO.getDiaryInfo(req, d, userId, u, cate, s);
 			req.setAttribute("popupContentPage", "popupHome.jsp");
 		} else {
