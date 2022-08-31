@@ -147,14 +147,40 @@
 			}
 		}
 		
+		function checkLike2(postNum,userID) {
+			
+			$.ajax({
+				url : "checkLike.do",
+				type : "GET",
+				dataType : "text",
+				data : {
+					'postNum' : postNum,
+					'userId' : userID
+				},
+				success : function(check) {
+					if (check == 1) {
+						alert("누른거 그럼 하트 빨강색");
+						$(".heart").toggleClass("is-active");
+					} else  {
+						alert("안누른거 빈하트");
+					}
+				},
+				error : function(request, status, error) {
+					alert("ajax 실패1");
+				}
+
+			});	
+		}
+		
+		
 		/*좋아요 기능*/
 		$(function() {
-
 			var postNum = document.getElementById("postNum").value;
 			var userID = document.getElementById("userID").value;
 			var postWriter = document.getElementById("postWriter").value;
 			var postRecommend = document.getElementById("postRecommend").value;
-
+			checkLike2(postNum,userID);
+			alert(11);
 			$(".heart").on("click", function() {
 				$(this).toggleClass("is-active");
 				likeupdate();
@@ -174,10 +200,8 @@
 					success : function(likeCount) {
 						if (likeCount == 0) {
 							alert("추천완료.");
-							location.reload(true);
 						} else if (likeCount == 1) {
 							alert("추천취소");
-							location.reload(true);
 						}
 					},
 					error : function(request, status, error) {
@@ -190,6 +214,12 @@
 			
 			
 		});
+		
+		
+		
+		
+		
+		
 		
 		/*모달창*/
 		const open = () => {
@@ -252,9 +282,9 @@
 				data : $("#commentForm").serialize(),
 				success : function(data) {
 					var html = "";
-					let postMaster = $("#postWriter").val();
+					let postMaster = $("#postDetailWriter").val();
 					let currentUser = $("#currentUser").val();
-					//alert(currentUser);
+					//alert(postMaster);
 					//alert(data[0]["commentWriter"]);
 					console.log(data);
 					
@@ -265,7 +295,9 @@
 							html += '<ul style="font-size: 11pt"><strong>'+data[i]["commentWriter"]+'</strong></ul>';
 							
 							if (data[i]["commentSecret"] == true) {
-								if(currentUser == data[i]["commentWriter"] || postMaster == data[i]["postWriter"])	{
+								if(currentUser == data[i]["commentWriter"])	{
+									html += '<ul>'+data[i]["commentTxt"]+'</ul>';
+								} else if(postMaster == currentUser) {
 									html += '<ul>'+data[i]["commentTxt"]+'</ul>';
 								} else {
 									html += '<ul>비밀댓글입니다.</ul>';
