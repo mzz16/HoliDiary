@@ -9,9 +9,9 @@ public interface SubscribeMapper {
 
 	SubscribeInfo getSubscribingInfo(Subscribe s);
 
-	List<SubscribeInfo> mysubSearch(Map<String, String> element);
+	List<SubscribeInfo> searchSubscribe(Map<String, String> element);
 
-	int mysubCancel(String subscribeNo);
+	int cancelSubscribe(String subscribeNo);
 
 	Subscribe checkMySubscribe(Subscribe s);
 

@@ -24,6 +24,7 @@
 <script type="text/javascript" src="resources/sej_js/sej_go.js"></script>
 <script type="text/javascript" src="resources/kjs_js/kjs_kakao.js?ver=1"></script>
 <script type="text/javascript" src="resources/kjs_js/kjs_mypage.js?ver=1"></script>
+<script type="text/javascript" src="resources/kjs_js/kjs_subscribe.js"></script>
 <script type="text/javascript" src="resources/kjs_js/kjs_valid.js"></script>
 <script type="text/javascript" src="resources/kjs_js/kjs_validCheck.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
