@@ -15,7 +15,12 @@
 	select scheduledate from scheduleTable where scheduledate like #{val1}||'%' and scheduleuserid = #{val2}
 </select>
 
-<delete id="deleteSchedule">
-</delete>	
+<delete id="deleteSchedule" parameterType="com.project.main.sm.Schedule">
+	delete from scheduletable where ScheduleDate = #{ScheduleDate}
+</delete>
+
+<update id="updateSchedule" parameterType="com.project.main.sm.Schedule">
+	update scheduletable set ScheduleContent = #{ScheduleContent} where ScheduleUserId = #{ScheduleUserId}
+</update>	
 	
 </mapper> 	

@@ -1,5 +1,6 @@
 package com.project.main.sm;
 
+
 import java.util.Map;
 
 public interface ScheduleMapper {
@@ -11,5 +12,7 @@ public interface ScheduleMapper {
 	String[] getAllSchedule(Map<String, String> vals);
 
 	int deleteSchedule(Schedule s);
+
+	int updateSchedule(Schedule s);
 
 }

@@ -3,6 +3,7 @@ package com.project.main.sm;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -109,8 +110,15 @@ public class DiaryDAO {
 		s.setScheduleStartTime(req.getParameter("ScheduleStartTime1"));
 		s.setScheduleEndTime(req.getParameter("ScheduleEndTime1"));
 		
-		if (ss.getMapper(ScheduleMapper.class).insertSchedule(s) == 1) {
-			return 1;
+		if(getSchedule(s)!= null) { //이미 일정이 있으면
+			if(ss.getMapper(ScheduleMapper.class).updateSchedule(s) == 1){
+				System.out.println("일정변경성공");
+				return 1;
+			}
+		} else if (getSchedule(s)== null) { //일정 없으면 
+			if(ss.getMapper(ScheduleMapper.class).insertSchedule(s) == 1) {
+				return 1;
+			}
 		} else {
 			return 0;
 		}
@@ -178,6 +186,11 @@ public class DiaryDAO {
 	public Schedule getSchedule(Schedule s) {
 		return ss.getMapper(ScheduleMapper.class).getSchedule(s);
 	}
+	
+	
+	/*public List<Schedule> getSchedule(Schedule s) {
+		return ss.getMapper(ScheduleMapper.class).getSchedule(s);
+	}*/
 
 	// 스케줄러 전체 정보 얻기
 	public String[] getAllEvent(HttpServletRequest req) {
@@ -195,6 +208,7 @@ public class DiaryDAO {
 		vals.put("val2", userId);
 		return ss.getMapper(ScheduleMapper.class).getAllSchedule(vals);
 	}
+
 
 	// 스케줄러 내용 삭제
 	public int deleteSchedule(HttpServletRequest req, Schedule s) {
@@ -215,6 +229,7 @@ public class DiaryDAO {
 			return 0;
 	}
 
+	
 
 
 

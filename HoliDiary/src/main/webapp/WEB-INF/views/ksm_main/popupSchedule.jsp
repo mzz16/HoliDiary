@@ -13,10 +13,13 @@
 <script type="text/javascript" src="resources/sm_js/sm_scheduleJs.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style type="text/css">
-#saveBtn{
+/* #saveBtn {
 	position: relative;
 }
 
+#rewriteBtn {
+	position: relative;
+} */
 .calendar {
 	color: #fff;
 	margin: 10px auto;
@@ -164,10 +167,22 @@ transform
 
 
 
+
+
+
+
+
+
 :
 
 
+
+
+
  
+
+
+
 
 
 translateX
@@ -175,8 +190,20 @@ translateX
 
 
 
+
+
+
+
+
+
 (-4
 px
+
+
+
+
+
+
 
 
 );
@@ -231,15 +258,19 @@ input.add-event-edit:-ms-input-placeholder {
 	box-shadow: 0px 2px 4px rgba(2, 2, 2, 0.2);
 }
 
-.event-btn--lastsave{
+.event-btn--lastsave {
 	border-color: #fff;
 	background: #FFDE59;
 	color: #1C1C1C;
 	border-color: transparent;
 	border-radius: 5px 5px 5px 5px;
 	padding: 13px;
-	margin-left: 83%;
+	/* margin-left: 70%; */
 	font-weight: bold;
+}
+
+.event-btn--lastsave-all {
+	margin-left: 480px;
 }
 
 .event-btn--lastsave:hover {
@@ -501,19 +532,13 @@ keyframes popIn { 100%{
 <script type="text/javascript">
 $(function(){
 	 $('#saveBtn').click(function() {
-		//alert(111)
 		let userID = document.getElementById("userID").value;
 		let ScheduleTitle = $("#input-add-event-name").val();
-		//let ScheduleTitle = document.getElementById("input-add-event-name").value;
-		
 		let ScheduleDate1 = document.getElementById("day-events2").value;
 		let ScheduleStartTime1 = document.getElementById("makeStartTime").value;
 		let ScheduleEndTime1 = document.getElementById("makeEndTime").value;
-		
 		let scheduleContent = $("#day-events-list").html();
-		alert(ScheduleStartTime1)
-		alert(ScheduleEndTime1)
-		alert(scheduleContent)
+
 		$.ajax({
 			url : "schedule.insert",
 			type : "GET",
@@ -527,12 +552,10 @@ $(function(){
 					},
 			success : function(getData) {
 				console.log(getData);
+				alert('일정이 저장되었습니다.');
 				if (getData == 1) {
 					console.log("성공");
-					
 					$("#input-add-event-name").val('');
-					//$("makeStartTime").value('');
-					//$("makeEndTime").value('');
 					$(".inputText").val("");
 				
 				}else {
@@ -543,10 +566,12 @@ $(function(){
 	 
 	 
 	 //스케줄러 삭제 - db 내용 동시에 삭제 - pk로 삭제 / 등록날짜 
-	 $('.event-delete').click(function(){
-		 
-		 alert('1111');
-		 
+	$('#rewriteBtn').click(function(){
+			 
+		var result = confirm("모두 삭제하시겠습니까?"); 
+		if(result){
+		    alert("일정을 모두 삭제합니다");
+		
 		 
 		let userID = document.getElementById("userID").value;
 		let ScheduleTitle = $("#input-add-event-name").val();
@@ -554,7 +579,6 @@ $(function(){
 		let ScheduleStartTime1 = document.getElementById("makeStartTime").value;
 		let ScheduleEndTime1 = document.getElementById("makeEndTime").value;
 		let scheduleContent = $("#day-events-list").html();
-		let ScheduleNum = document.getElementById("ScheduleNum").value;
 		 
 		 $.ajax({
 				url : "schedule.delete",
@@ -566,17 +590,20 @@ $(function(){
 				  	"ScheduleStartTime1" : ScheduleStartTime1,
 				  	"ScheduleEndTime1" : ScheduleEndTime1,
 				  	"ScheduleContent" : scheduleContent,
-				  	"ScheduleNum" : ScheduleNum
 						},
 				success : function(getData) {
 					console.log(getData);
+					var userID = document.getElementById("userID").value;
+					location.href = "popupScheduleGo?userId="+userID;
 					if (getData == 1) {
 						console.log("성공");
 					}else {
 					}				
 				}
 			});
-	 });     
+		 
+	};
+	 });       
 
 
 });	
@@ -591,16 +618,17 @@ $(function(){
 		<div class="calendar" id="calendar-app"
 			style="background: ${Diary.themeColor}">
 			<div class="calendar--day-view" id="day-view">
-				<span class="day-view-exit" id="day-view-exit">&times;</span><!-- <button id="saveBtn">저장</button>  -->
+				<span class="day-view-exit" id="day-view-exit">&times;</span>
+				<!-- <button id="saveBtn">저장</button>  -->
 				<span class="day-view-date" id="day-view-date">MAY 29 2016</span>
 				<div class="day-view-content">
 					<div class="day-highlight">
-						<input id="day-events2" name="dayEventsEle2" value="" type="hidden">
-						<input type="hidden" id="ScheduleNum" name="ScheduleNum" value="${Schedule.ScheduleNum }">
+						<input id="day-events2" name="dayEventsEle2" value=""
+							type="hidden"> <input type="hidden" id="ScheduleNum"
+							name="ScheduleNum" value="${Schedule.ScheduleNum }">
 						<!-- <span class="day-events"
 							id="day-events">had no events for today</span>. &nbsp; -->
-							<span
-							tabindex="0"
+						<span tabindex="0"
 							onkeyup="if(event.keyCode != 13) return; this.click();"
 							class="day-events-link" id="add-event" data-date>일정을
 							추가하시겠습니까?</span>
@@ -609,28 +637,36 @@ $(function(){
 						data-active="false">
 						<div class="row">
 							<div class="half">
-								<label class="add-event-label"> 일정 제목 
-								<input type="text" class="add-event-edit add-event-edit--long"
+								<label class="add-event-label"> 일정 제목 <input type="text"
+									class="add-event-edit add-event-edit--long"
 									placeholder="새로운 일정" id="input-add-event-name">
-								
+
 
 								</label>
 							</div>
 							<div class="qtr">
-								<label class="add-event-label"> 시작 시간 
-						 <input type="time" id="makeStartTime" class="inputText" onblur="makeST();">
-   <input type="hidden" class="add-event-edit" placeholder="8:15" id="input-add-event-start-time" data-options="1,2,3,4,5,6,7,8,9,10,11,12" data-format="datetime">
-              <input type="hidden" class="add-event-edit" placeholder="am" id="input-add-event-start-ampm" data-options="a,p,am,pm">
+								<label class="add-event-label"> 시작 시간 <input type="time"
+									id="makeStartTime" class="inputText" onblur="makeST();">
+									<input class="add-event-edit" placeholder="8:15"
+									id="input-add-event-start-time"
+									data-options="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24"
+									data-format="datetime"> <input type="hidden"
+									class="add-event-edit" placeholder="am"
+									id="input-add-event-start-ampm" data-options="a,p,am,pm">
 
 								</label>
 							</div>
 							<div class="qtr">
-								<label class="add-event-label"> 마침 시간 
-						 <input type="time"	id="makeEndTime" class="inputText" onblur="makeET()";>
- <input type="hidden" class="add-event-edit" placeholder="9:00" id="input-add-event-end-time" data-options="1,2,3,4,5,6,7,8,9,10,11,12" data-format="datetime">
-              <input type="hidden" class="add-event-edit" placeholder="am" id="input-add-event-end-ampm" data-options="a,p,am,pm">									
-									
-									 <input	type="hidden" value="${User.userID }" id="userID">
+								<label class="add-event-label"> 마침 시간 <input type="time"
+									id="makeEndTime" class="inputText" onblur="makeET()";>
+									<input class="add-event-edit" placeholder="9:00"
+									id="input-add-event-end-time"
+									data-options="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24"
+									data-format="datetime"> <input type="hidden"
+									class="add-event-edit" placeholder="am"
+									id="input-add-event-end-ampm" data-options="a,p,am,pm">
+
+									<input type="hidden" value="${User.userID }" id="userID">
 								</label>
 							</div>
 							<div class="half">
@@ -646,10 +682,15 @@ $(function(){
 					<div class="day-inspiration-quote" id="inspirational-quote">
 						Every child is an artist. The problem is how to remain an artist
 						once he grows up. –Pablo Picasso</div>
-					<button id="saveBtn" class="event-btn--lastsave">스케줄러 저장</button>
+					<div class="event-btn--lastsave-all">
+						<button id="rewriteBtn" class="event-btn--lastsave">모두
+							삭제하기</button>
+						<button id="saveBtn" class="event-btn--lastsave">스케줄러 저장</button>
+					</div>
 				</div>
 			</div>
-			<div class="calendar--view" id="calendar-view"> <!-- ing -->
+			<div class="calendar--view" id="calendar-view">
+				<!-- ing -->
 				<div class="cview__month">
 					<span class="cview__month-last" id="calendar-month-last">Apr</span>
 					<span class="cview__month-current" id="calendar-month">May</span> <span
@@ -663,7 +704,7 @@ $(function(){
 				<div class="cview__header">Fri</div>
 				<div class="cview__header">Sat</div>
 				<div class="calendar--view" id="dates"></div>
-	
+
 			</div>
 			<div class="footer">
 				<span><span id="footer-date" class="footer__link">Today
@@ -671,16 +712,16 @@ $(function(){
 			</div>
 		</div>
 	</div>
-	
 
-	<script type="text/javascript">
+
+	<script type="text/javascript"> /* 오전오후 */
 	function makeST() {
 	let st	=	$("#makeStartTime").val();
 	let hour = st.substring(0,2);
-	let ampm = 'AM';
+	let ampm = 'am';
 	if(hour > 12){
-		hour = hour - 12;
-		ampm = 'PM';
+		//hour = hour - 12;
+		ampm = 'pm';
 	}
 	
 	$("#input-add-event-start-time").val(st);
@@ -690,10 +731,10 @@ $(function(){
 	function makeET() {
 	let et	=	$("#makeEndTime").val();
 	let hour = et.substring(0,2);
-	let ampm = 'AM';
+	let ampm = 'am';
 	if(hour > 12){
-		hour = hour - 12;
-		ampm = 'PM';
+		//hour = hour - 12;
+		ampm = 'pm';
 	}
 	
 	$("#input-add-event-end-time").val(et);
@@ -834,7 +875,7 @@ $(function(){
 			
 		 
 		  for ( var z = 1; z <= lastDayOfM; z++ ) {
-			console.log(getArrayData);
+			//console.log(getArrayData);
 		    var _date = new Date(y, m ,z);
 		    var day = document.createElement("div");
 		    day.className = "cview--date";
@@ -853,7 +894,7 @@ $(function(){
 		    myMonth = myMonth >= 10 ? myMonth : '0' + myMonth;
 		    myDay = myDay >= 10 ? myDay : '0' + myDay;          //day 두자리로 저장
 		    let myDate = myYear + '-' + myMonth + '-' + myDay; 
-		    console.log(myDate);
+//		    console.log(myDate);
 		    
 			for (var i = 0; i < getArrayData.length; i++) {
 				if(myDate == getArrayData[i]){
@@ -908,15 +949,16 @@ $(function(){
 		CalendarApp.prototype.openDayWindow = function(date){
 		  alert(date) // 날짜 누르면
 		  let id = $("#userID").val();
+		  let getdayEvents;
 		  // ing
-		  let getdayEvents; 
-			  $.ajax({
+			 $.ajax({
 			 url : "schedule.get",
 			 data : {"scheduleUserId" : id , "scheduleDate": date},
 			 dataType : "json",
 			 async : false,
 			 success : function (data) {
 				 getdayEvents = data;
+				 
 			}
 			 
 			  
@@ -941,7 +983,8 @@ $(function(){
 		  }
 		  this.addDayEventEle.setAttribute("data-date", day);
 		  
-		  var eventsToday = this.showEventsByDay(day);
+		  var eventsToday;
+		  alert(eventsToday + '=== 1');
 		  if(getdayEvents){
 			 eventsToday = true;
 			 /* day.classList.add("has-events"); */ /*여기*/
@@ -952,21 +995,29 @@ $(function(){
 		    this.dayInspirationalQuote.textContent = this.quotes[_rand];
 		  } else {
 			  //alert('명언');
-		    _dayTopbarText += eventsToday.length + " ";
+		   // eventsToday = this.showEventsByDay(day);
+			//eventsToday = getdayEvents.scheduleContent;
 		    this.dayInspirationalQuote.textContent = null;
 		    
 		  }
+		  eventsToday = this.showEventsByDay(day);
 		  //this.dayEventsList.innerHTML = this.showEventsCreateHTMLView(eventsToday);
-		  while(this.dayEventsList.firstChild) {
+		   while(this.dayEventsList.firstChild) {
 		    this.dayEventsList.removeChild(this.dayEventsList.firstChild);
+		  } 
+
+ 		  this.dayEventsList.appendChild(this.showEventsCreateElesView(eventsToday));
+		   
+ 		  if(getdayEvents){
+		  let myScheduleContent = this.dayEventsList.firstChild;
+		  let myUL = $(getdayEvents.scheduleContent);
+		  $(myScheduleContent).append($(myUL).find('li'));
+		 console.log("getdayEvents 있는 곳");
+		 
+		  }else{
+		 console.log("getdayEvents 없으면!!");
 		  }
-		  if(getdayEvents){
-		  this.dayEventsList.innerHTML = getdayEvents.scheduleContent;
-		  
-		  
-		  
-		  }		  
-		  this.dayEventsList.appendChild(this.showEventsCreateElesView(eventsToday));
+		  	  
 		  
 		  
 		  
@@ -983,10 +1034,19 @@ $(function(){
 		};
 
 		CalendarApp.prototype.showEventsCreateElesView = function(events) {
-		  var ul = document.createElement("ul");
+ 		 // if(getdayEvents){
+		//var ul = getdayEvents.scheduleContent; //쌤!!! 추가된걸 불러오는게 아니라 db에 있는걸 불러와버림
+		//console.log(getdayEvents.scheduleContent);
+ 		 // }	
+		//if(!getdayEvents){
+		  ul = document.createElement("ul");
 		  ul.className = 'day-event-list-ul';
+		//}
+
+		  
 		  events = this.sortEventsByTime(events);
 		  var _this = this;
+		alert(events + '=== 3');
 		  
 		  
 		  events.forEach(function(event){
@@ -1006,21 +1066,24 @@ $(function(){
 		    div.className = "event-dates";
 		    div.innerHTML = html;
 		    
-		    var deleteBtn = document.createElement("span");
-		    var deleteText = document.createTextNode("삭제"); //삭제 버튼
-		    deleteBtn.className = "event-delete"; //삭제 버튼의 class
-		    deleteBtn.setAttribute("data-idx", idx);
-		    deleteBtn.appendChild(deleteText);
-		    deleteBtn.onclick = _this.deleteEvent.bind(_this);
+		  //  var deleteBtn = document.createElement("span");
+		  //  var deleteText = document.createTextNode("삭제"); //삭제 버튼
+		  //  deleteBtn.className = "event-delete"; //삭제 버튼의 class
+		   // deleteBtn.setAttribute("data-idx", idx);
+		   // deleteBtn.appendChild(deleteText);
+		   // deleteBtn.onclick = _this.deleteEvent.bind(_this);
 		    
-		    div.appendChild(deleteBtn);
+		   // div.appendChild(deleteBtn);
 		    
 		    li.appendChild(div);
 		    ul.appendChild(li);
 		  });
 		  return ul;
 		};
+		
+		//삭제 이벤트
 		CalendarApp.prototype.deleteEvent = function(e) {
+		
 		  var deleted = this.apts.splice(e.currentTarget.getAttribute("data-idx"),1);
 		  var deletedDate = new Date(deleted[0].day);
 		  var anyDatesLeft = this.showEventsByDay(deletedDate);
