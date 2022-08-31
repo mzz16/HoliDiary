@@ -64,11 +64,11 @@
 	<div id="menu_bar">
 		<label><img class="menu_bar_logo" src="resources/sej_img/slogo1-removebg-preview.png"></label>
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-			<a class="menu_bar_diary_li" href="#" onclick=popup()>
-			<img class="menu_diary_img" src="resources/sej_img/free-icon-travel-1706019.png">
-			<!-- <p>My 다이어리</p> -->
-			</a>
-			<a class="menu_bar_li_first" href="#" id="modal_btn" onclick=popup()>My Diary</a>
+			
+			<!-- 로그인 페이지 공간 입니다 -->
+			<div class="menu_bar_user_place">
+				<jsp:include page="${loginPage }"></jsp:include>
+			</div>
 			<input type="hidden" value="${sessionScope.loginUser.userID }" id="userID">
 			<input type="hidden" value="${Category.categoryUserId }" id="CuserID">
 			<span class="menu_bar_border"></span>
@@ -78,17 +78,14 @@
 			<a class="menu_bar_li" href="javascript:void(0)" onclick="goItemShop()">아이템샵</a>
 			<!-- <a class="menu_bar_li" href="">Map(임시)</a> -->
 			
-			<!-- 로그인 페이지 공간 입니다 -->
-			<div class="menu_bar_user_place">
-				<jsp:include page="${loginPage }"></jsp:include>
-			</div>
+			
 			
 	</div>
 	
 	<!-- HEADER 영역 -->
 	<header id="top_header">
 		<div class="header_contents_box">
-		<a href="javascript:void(0)" onclick="goHome()">
+		<a class="logo_img_go_home" href="javascript:void(0)" onclick="goHome()">
 		<img class="header_logo_img" src="resources/sej_img/logofit-removebg-preview.png">
 		</a>
 		<div class="search_box">
