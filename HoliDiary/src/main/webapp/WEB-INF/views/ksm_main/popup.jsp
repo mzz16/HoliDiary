@@ -14,6 +14,7 @@
 	href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap"
 	rel="stylesheet">
 <script type="text/javascript" src="resources/sm_js/sm_popupJs.js"></script>
+<script type="text/javascript" src="resources/kjs_js/kjs_mypage.js"></script>
 
 <script type="text/javascript">
 	$(function() {
@@ -312,9 +313,14 @@ p, p a { font-size: 12px;text-align: center; color: #888; }
 						style="background: ${Diary.themeColor}">포스트 작성</button>
 				</div>
 			 </c:when>
+			 <c:when test="${not empty Subcribe}">
+			 	<div class="action-buttons-wrapper">
+					<button class="action-buttons btn-upload" style="background: ${Diary.themeColor}" onclick="subscribeCancel('${Subcribe.subscribeNO}');">구독취소</button>
+				</div>
+			 </c:when>
 			<c:otherwise>
 				<div class="action-buttons-wrapper">
-					<button class="action-buttons btn-upload" style="background: ${Diary.themeColor}">구독</button>
+					<button class="action-buttons btn-upload" style="background: ${Diary.themeColor}" onclick="subscribeDo('${Diary.diaryUserId}');">구독</button>
 				</div>
 			</c:otherwise>
 			</c:choose>	 

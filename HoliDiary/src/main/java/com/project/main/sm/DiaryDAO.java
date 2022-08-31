@@ -16,6 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.project.main.js.Subscribe;
+import com.project.main.js.SubscribeDAO;
+import com.project.main.js.SubscribeInfo;
+import com.project.main.js.SubscribeMapper;
 import com.project.main.js.User;
 
 
@@ -24,23 +28,31 @@ public class DiaryDAO {
 	
 	@Autowired
 	private SqlSession ss;
+	
 
 	// 다이어리 정보 불러오기
-	public void getDiaryInfo(HttpServletRequest req, Diary d, String userId, User u, Category cate) {
+	public void getDiaryInfo(HttpServletRequest req, Diary d, String userId, User u, Category cate, Subscribe s) {
 		try {
 			d.setDiaryUserId(userId);
 			u.setUserID(userId);
 			cate.setCategoryUserId(userId);
 			
+			User loginUser = (User) req.getSession().getAttribute("loginUser");
+			s.setSubscribeTo(userId);
+			s.setSubscribeFrom(loginUser.getUserID());
+			
 			Diary dd = (Diary) ss.getMapper(DiaryMapper.class).getDiaryInfo(d);
 			User uu = (User) ss.getMapper(DiaryMapper.class).getUserInfo(u);
+			Subscribe sub = ss.getMapper(SubscribeMapper.class).checkMySubscribe(s);
 			
 			System.out.println(dd.getCategories());
 			dd.setCategoriesArray(makeCategory(dd.getCategories()));
 			
-			
 			req.setAttribute("Diary", dd);
 			req.setAttribute("User", uu);
+			if(sub != null) {
+				req.setAttribute("Subcribe", sub);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
