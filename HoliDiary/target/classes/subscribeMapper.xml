@@ -32,16 +32,16 @@
 		    and d.diaryuserid = u.userid
 	</select>
 	
-	<select id="mysubSearch" parameterType="map" resultType="com.project.main.js.SubscribeInfo">
+	<select id="searchSubscribe" parameterType="map" resultType="com.project.main.js.SubscribeInfo">
 	    select s.subscribeno, d.diarytitle, u.userid, u.usernickname, u.userimg
 		from subscribetable s, diarytable d, user_table u
 		where subscribefrom = #{id}
-			and (s.subscribeto like '%'||#{search}||'%' or d.diarytitle like '%'||#{search}||'%')
+			and (u.usernickname like '%'||#{search}||'%' or d.diarytitle like '%'||#{search}||'%')
 	    	and s.subscribeto = d.diaryuserid
 	   		and d.diaryuserid = u.userid
 	</select>
 	
-	<delete id="mysubCancel">
+	<delete id="cancelSubscribe">
 		delete from subscribetable where subscribeno = #{subscribeNo}
 	</delete>
 	

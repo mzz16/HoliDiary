@@ -1,5 +1,7 @@
 package com.project.main.js;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,9 +24,13 @@ public class SubscribeController {
 	
 		// 나의구독 검색
 		@RequestMapping(value = "/mysub.search", method = RequestMethod.GET)
-		public @ResponseBody List<SubscribeInfo> mysubSearch(HttpServletRequest req, @RequestParam("mysubSearch") String search) {
+		public @ResponseBody List<SubscribeInfo> mysubSearch(HttpServletRequest req, @RequestParam("mysubSearch") String mysubSearch) throws UnsupportedEncodingException {
 			
-			return sDAO.mysubSearch(req, search);
+			String search = URLDecoder.decode(mysubSearch,"UTF-8");
+			System.out.println(search);
+			
+			
+			return sDAO.searchSubscribe(req, search);
 			
 		}
 
@@ -32,7 +38,7 @@ public class SubscribeController {
 		@RequestMapping(value = "/mysub.cancel", method = RequestMethod.GET)
 		public @ResponseBody int mysubCancel(HttpServletRequest req, @RequestParam("no") String subscribeNo) {
 			
-			return sDAO.mysubCancel(subscribeNo);
+			return sDAO.cancelSubscribe(subscribeNo);
 			
 		}
 		

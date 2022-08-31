@@ -16,6 +16,9 @@ public class MypageController {
 	@Autowired
 	SubscribeDAO sDAO;
 	
+	@Autowired
+	VisitDAO vDAO;
+	
 		// 마이 페이지 들어가기(내정보)
 		@RequestMapping(value = "/mypage.myinfo.go", method = RequestMethod.GET)
 		public String mypageGo(HttpServletRequest req) {
@@ -51,6 +54,8 @@ public class MypageController {
 			if(uDAO.loginCheck(req)) {
 				//나를 구독하는 사람 가져오기
 				sDAO.getSubscriber(req);
+				// 통계를 위한 데이터 가져오기
+				vDAO.getVisit(req);
 				req.setAttribute("contentPage", "kjs_mypage/mypage_mydiary.jsp");
 			}else {
 				req.setAttribute("contentPage", "home.jsp");

@@ -39,7 +39,7 @@ public class SubscribeDAO {
 	}
 
 	// 구독 리스트 검색
-	public List<SubscribeInfo> mysubSearch(HttpServletRequest req, String search) {
+	public List<SubscribeInfo> searchSubscribe(HttpServletRequest req, String search) {
 		
 		User u = (User) req.getSession().getAttribute("loginUser");
 		
@@ -51,16 +51,16 @@ public class SubscribeDAO {
 		element.put("search", search);
 		element.put("id", userID);
 		
-		List<SubscribeInfo> infos = ss.getMapper(SubscribeMapper.class).mysubSearch(element);
+		List<SubscribeInfo> infos = ss.getMapper(SubscribeMapper.class).searchSubscribe(element);
 		System.out.println(infos.get(0).getDiaryTitle());
 		
-		return ss.getMapper(SubscribeMapper.class).mysubSearch(element);
+		return ss.getMapper(SubscribeMapper.class).searchSubscribe(element);
 		
 	}
 
 	// 구독 취소
-	public int mysubCancel(String subscribeNo) {
-		return ss.getMapper(SubscribeMapper.class).mysubCancel(subscribeNo);
+	public int cancelSubscribe(String subscribeNo) {
+		return ss.getMapper(SubscribeMapper.class).cancelSubscribe(subscribeNo);
 	}
 
 	// 구독
