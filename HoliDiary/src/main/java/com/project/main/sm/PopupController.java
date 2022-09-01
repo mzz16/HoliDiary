@@ -208,4 +208,12 @@ public class PopupController {
 	}
 
 	
+	//뮤직 오픈
+	@RequestMapping(value = "/musicPlayer.open", method = RequestMethod.GET)
+	public String musicPlayerOpen(HttpServletRequest req) {
+		
+		uDAO.loginCheck(req);
+		return "ksm_main/musicPlayer";
+		
+	}
 }
