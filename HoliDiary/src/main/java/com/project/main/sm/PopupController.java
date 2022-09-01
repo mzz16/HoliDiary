@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.project.main.js.Subscribe;
 import com.project.main.js.User;
 import com.project.main.js.UserDAO;
+import com.project.main.js.VisitDAO;
 
 @Controller
 public class PopupController {
@@ -28,6 +29,9 @@ public class PopupController {
 	
 	@Autowired
 	private CategoryDAO cDAO;
+	
+	@Autowired
+	private VisitDAO vDAO;
 
 	// 팝업창 - 오픈
 	@RequestMapping(value = "/popup.open", method = RequestMethod.GET)
@@ -38,6 +42,7 @@ public class PopupController {
 
 		if (uDAO.loginCheck(req)) {
 			dDAO.getDiaryInfo(req, d, userId, u, cate, s);
+			vDAO.countVisit(userId,req);
 			req.setAttribute("popupContentPage", "popupHome.jsp");
 			return "ksm_main/popup";
 		} else {
