@@ -200,8 +200,6 @@
 				});
 			}
 			
-			
-			
 		});
 		
 		function checkLike2(postNum,userID) {
@@ -228,10 +226,6 @@
 
 			});	
 		}
-		
-		
-		
-		
 		
 		/*모달창*/
 		const open = () => {
@@ -278,13 +272,6 @@
 
 			});
 		}
-				
-			
-		$(function() {
-			getCommentList();
-			goDiary();
-		});
-		
 			
 		function getCommentList() {
 			
@@ -305,8 +292,25 @@
 						for (var i = 0; i < data.length; i++) {
 						
 							html += '<div style="width: 100%; margin-bottom: 30px; border: 1px solid white">';
-							html += '<ul style="font-size: 11pt"><strong>'+data[i]["commentWriter"]+'</strong></ul>';
-							html += '<p class="arrow_box" value="' + data[i]["commentWriter"] + '" onclick="goDiary()">홈페이지 바로가기</p>';
+							html += '<ul class="commentName" style="font-size: 11pt"><strong>'+data[i]["commentWriter"]+'</strong></ul>';
+							
+							
+							/* html += '<div class="popupLayer">'
+							html += '<div>'
+							html += '<p class="arrow_box" value="' + data[i]["commentWriter"] + '">홈페이지 바로가기</p>';
+							html += '</div>'
+							html += '</div>' */
+							
+							
+							html += '<div class="popupLayer">';
+							html += '<div>';
+							html += '<span onClick="closeLayer(this)" style="cursor:pointer;font-size:1.5em" title="닫기">X</span>';
+							html += '</div>'
+							html += '<p class="arrow_box" value="'+ data[i]["commentWriter"] + '">홈페이지 바로가기</p>';
+							html += '</div>'
+							
+							
+							
 							//html += '<button type="button" onclick="goDiary('+ data[i]["commentWriter"] +')"> 홈페이지 바로가기 </button>';
 							html += '<br>';
 							
@@ -334,7 +338,6 @@
 							html += '<button type="button" onclick="recommentToggle('+ data[i]["commentParent"] + data[i]["postNum"] +')" style="float: right; text-align: right; margin-left: 20px;">답글</button>';
 							html += '</div>';
 							html += '<hr>'
-							
 								
 						}
 						
@@ -346,6 +349,8 @@
 					}
 					
 					$("#commentList").html(html);
+					console.log('댓글로드');
+					goDiary();
 				},
 				error : function(request, status, error){
 					alert("통신실패22222");
@@ -353,16 +358,50 @@
 			});
 			
 		}
+		
+	function closeLayer(obj) {
+		$(obj).parent().parent().hide();
+	}
 			
 	function goDiary() {
-		alert(11);
-		/*document.getElementsByClassName("arrow_box");
-		$(".arrow_box").on("click",function(){
-			alert($(this).text())
-		});*/
+		$(".commentName").on("click", function(e) {
+			
+			/* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
+			var sWidth = window.innerWidth;
+			var sHeight = window.innerHeight;
+			var oWidth = $('.popupLayer').width();
+			var oHeight = $('.popupLayer').height();
+
+			// 레이어가 나타날 위치를 셋팅한다.
+			var divLeft = e.clientX + 10;
+			var divTop = e.clientY + 5;
+
+			// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
+			if( divLeft + oWidth > sWidth ) divLeft -= oWidth;
+			if( divTop + oHeight > sHeight ) divTop -= oHeight;
+
+			// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+			if( divLeft < 0 ) divLeft = 0;
+			if( divTop < 0 ) divTop = 0;
+			
+			$('.popupLayer').css({
+				"top": divTop,
+				"left": divLeft,
+				"position": "absolute"
+			}).show();
+
+			$('.arrow_box').on('click', function() {
+				userId = $('.arrow_box').attr("value");	
+				location.href = "popupHomeGo?userId=" + userId;
+			});
+			
+		});
 	}
 	
-		 
+	$(function() {
+		getCommentList();
+		console.log('레디호출끝')
+	});
 		
 	 function commentDelete(commentNum) {
 		var ok = confirm("정말 삭제하시겠습니까?");
