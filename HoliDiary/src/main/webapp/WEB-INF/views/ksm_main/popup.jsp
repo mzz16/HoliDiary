@@ -314,7 +314,7 @@ p, p a { font-size: 12px;text-align: center; color: #888; }
 			 </c:when>
 			 <c:when test="${not empty Subcribe}">
 			 	<div class="action-buttons-wrapper">
-					<button class="action-buttons btn-upload" style="background: ${Diary.themeColor}" onclick="subscribeCancel('${Subcribe.subscribeNO}');">구독취소</button>
+					<button class="action-buttons btn-upload" style="background: ${Diary.themeColor}" onclick="subscribeCancel('${Diary.diaryUserId}');">구독취소</button>
 				</div>
 			 </c:when>
 			<c:otherwise>
