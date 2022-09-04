@@ -1,0 +1,180 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'GangwonEdu_OTFBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    src: url('../../resources/sej_font/NotoSansKR-Medium.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Noto Sans Light';
+    src: url('../../resources/sej_font/NotoSansKR-Light.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Noto Sans Bold';
+    src: url('../../resources/sej_font/NotoSansKR-Bold.otf') format('opentype');
+}
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../../resources/sej_font/Montserrat-Medium.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Montserrat-Thin';
+    src: url('../../resources/sej_font/Montserrat-Thin.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'sans-serif';
+    src: url('../../resources/sej_font/SansSerifFLF.otf') format('opentype');
+}
+
+.itemContainer {
+	width:1200px;
+	height: 1600px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 100px;
+}
+.itemMenuList {
+	margin-left: 120px;
+	width: 1000px;
+	height: 55px;
+	border-bottom: 5px dashed #FFDE59;
+}
+
+.itemMenuList ul li a:hover {
+	background-color: #6667AB;
+}
+.itemMenuList ul li{
+	float: left;
+	list-style: none;
+	/* width: 130px;
+    height: 55px; */
+    text-align: center;
+    background-color: #FFDE59;
+    border-right: 1px solid #fff;
+    font-family: 'GangwonEdu_OTFBoldA';
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 3px;
+}
+.itemMenuList ul li:first-child {
+	margin-left: -40px;
+}
+.itemMenuList ul li a {
+	width: 130px;
+	height: 55px;
+	display: inline-block;
+	text-decoration: none;
+	color: #fff;
+	line-height: 60px;
+}
+.itemBox {
+	padding-top: 100px;
+}
+.itemBox ul li{
+	list-style: none;
+}
+.itemBox li:first-child, .itemBox li:nth-child(4n + 1) {
+    margin-left: 80px;
+}
+.itemBox li { 
+	display: inline-block;
+    position: relative;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    padding: 9px 9px 0;
+    width: 238px;
+    height: 315px;
+    background: #fff;
+    border: 1px solid #eee;
+    box-sizing: border-box;
+    font-size: 17px;
+    transition: border-color .3s;
+    cursor: pointer;
+}
+.itemBox_img {
+	display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.itemBox_img_file {
+	width: 90%;
+    height: auto;
+}
+.itemBox_new_img {
+	width: 45px;
+	height: 25px;
+	display: inline-block;
+}
+.itemBox_new_img2 {
+	width: 45px;
+	height: 20px;
+	display: inline-block;
+	position: absolute;
+	top: 11px;
+}
+.itemBox_newHot {
+	width: 100px;
+	height: 60px;
+}
+.itemBox_title {
+	display: inline-block;
+	width: 218px;
+	height: 64px;
+	text-align: center;
+	line-height: 64px;
+	font-family: 'GangwonEdu_OTFBoldA';
+	font-size: 18px;
+	color: #737373;
+	border-bottom: 1px solid #eee;
+}
+.itemBox_price_img {
+	width: 20px;
+	height: 20px;
+	position: relative;
+	top: -7px;
+	left: 5px;
+}
+.itemBox_price_and_img {
+	display: inline-block;
+	width: 100px;
+	color: #834e00;
+	font-family: 'Noto Sans Bold';
+	margin-top: 20px;
+}
+.itemBox_price {
+	display: inline-block;
+	position: relative;
+	left: 10px;
+	top: -10px;
+}
+
+.itemBox_Buy, .itemBox_Buy2 {
+	color: #fff;
+	width : 60px;
+	height: 25px;
+	text-decoration: none;
+	font-size: 12px;
+	background-color: #FFDE59;
+	text-align: center;
+	line-height: 25px;
+	border-radius: 5px;
+}
+.itemBox_Buy {
+	position: absolute;
+	left: 100px;
+	top: 267px;
+}
+.itemBox_Buy2  {
+	position: absolute;
+	left: 165px;
+	top: 267px;
+}

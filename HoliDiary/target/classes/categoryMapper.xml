@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.main.sm.CategoryMapper">
+
+	<insert id="categoryUserInsert" parameterType="com.project.main.js.User">
+		insert into CATEGORY values(#{userID}, '카테고리!')
+	</insert>
+	
+	<update id="addCategory" parameterType="com.project.main.sm.Category">
+		UPDATE CATEGORY SET CATEGORIES = CATEGORIES||#{categories} WHERE CATEGORYUSERID = #{categoryUserId} <!-- 'test4' -->
+	</update>
+	
+	<update id="updateCategory" parameterType="com.project.main.sm.Category">
+		UPDATE CATEGORY SET CATEGORIES = #{categories} WHERE CATEGORYUSERID = #{categoryUserId} <!-- 'test4' -->
+	</update>
+	
+	<select id="getCategoryInfo" resultType="com.project.main.sm.Category">
+		select * FROM CATEGORY WHERE CATEGORYUSERID = #{categoryUserId}
+	</select>
+	
+
+</mapper>

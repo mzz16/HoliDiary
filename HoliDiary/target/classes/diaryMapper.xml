@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.main.sm.DiaryMapper">
+
+	<insert id="diaryInsert" parameterType="com.project.main.js.User">
+		insert into DIARYTABLE (DiaryNum, DiaryUrl, DiaryTitle, DiaryIntroduce, DiaryImg, DiaryUserId, DiaryUserNickName, ThemeColor, DiaryCategory)
+		values(diarynum_seq.nextval, #{userDiaryUrl}, 555, 666, 777, #{userID}, #{userNickname}, '#FF92BB', 999)
+	</insert>
+	
+	<select id="getDiaryInfo" parameterType="com.project.main.sm.Diary" resultType="com.project.main.sm.Diary">
+		select * from DIARYTABLE dt, category ct where dt.diaryUserId = ct.categoryuserid and dt.diaryuserid = #{diaryUserId}
+	</select>
+
+	<select id="getUserInfo" parameterType="com.project.main.js.User" resultType="com.project.main.js.User">
+		select *
+		from USER_TABLE
+		where userID = #{userID}
+	</select>
+
+	<update id="diaryUpdate" parameterType="com.project.main.sm.Diary">
+		update DIARYTABLE set diaryTitle=#{diaryTitle}, diaryIntroduce=#{diaryIntroduce}, themeColor=#{themeColor} where diaryUserId=#{diaryUserId}
+	</update>
+	
+	<select id="diaryTheme" parameterType="com.project.main.sm.Diary" resultType="com.project.main.sm.Diary">
+		select themeColor from DIARYTABLE where diaryUserId=#{diaryUserId}
+	</select>
+	
+	<update id="uploadImg" parameterType="com.project.main.sm.Diary">
+		update DIARYTABLE set diaryImg=#{diaryImg} where diaryUserId=#{diaryUserId}
+	</update>
+	
+
+</mapper>

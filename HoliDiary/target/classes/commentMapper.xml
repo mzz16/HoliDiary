@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.main.mj_write.CommentMapper">
+
+	<!-- 코멘트 관련  -->
+	
+	<select id="showAllComments" resultType="com.project.main.mj_write.Comment">
+		select * from commentTable where postNum = #{postNum} order by commentDate desc
+	</select>
+	
+	<insert id="commentWrite" parameterType="com.project.main.mj_write.Comment">
+		insert into commentTable (commentNum, commentTxt, commentWriter, commentDate, postNum, commentSecret, postWriter) 
+		values (commentNum_seq.nextval, #{commentTxt}, #{commentWriter}, sysdate, #{postNum}, #{commentSecret}, #{postWriter})
+	</insert>
+	
+	<delete id="commentDelete" parameterType="com.project.main.mj_write.Comment">
+		delete commentTable where commentNum = #{commentNum}
+	</delete>
+	
+</mapper>

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+<beans:beans
+	xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jee="http://www.springframework.org/schema/jee"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
@@ -23,12 +27,15 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-	<context:component-scan base-package="com.project.main" />
+	<context:component-scan
+		base-package="com.project.main" />
 
-	<beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+	<beans:bean id="dataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource">
+		<beans:property name="driverClassName"
+			value="oracle.jdbc.driver.OracleDriver" />
 		<beans:property name="url"
-			value="jdbc:oracle:thin:@HOLIDIARY_HIGH?TNS_ADMIN=C:\Wallet_HOLIDIARY" />
+			value="jdbc:oracle:thin:@HOLIDIARY_HIGH?TNS_ADMIN=C:/Wallet_HOLIDIARY" />
 		<beans:property name="username" value="ADMIN" />
 		<beans:property name="password" value="Holidiary123" />
 	</beans:bean>
@@ -38,19 +45,43 @@
 		<beans:property name="dataSource" ref="dataSource" />
 	</beans:bean>
 
-	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<beans:bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource" />
-		<beans:property name="typeAliasesPackage" value="com.project.main" />
+		<beans:property name="typeAliasesPackage"
+			value="com.project.main" />
 		<beans:property name="mapperLocations">
 			<beans:list>
-				<beans:value>classpath:testMapper.xml</beans:value>
+				<beans:value>classpath:mapMapper.xml</beans:value>
+				<beans:value>classpath:userMapper.xml</beans:value>
+				<beans:value>classpath:diaryMapper.xml</beans:value>
+				<beans:value>classpath:sej_postMapper.xml</beans:value>
+				<beans:value>classpath:categoryMapper.xml</beans:value>
+				<beans:value>classpath:diaryPostMapper.xml</beans:value>
+				<beans:value>classpath:commentMapper.xml</beans:value>
+				<beans:value>classpath:scheduleMapper.xml</beans:value>
+				<beans:value>classpath:likeMapper.xml</beans:value>
+				<beans:value>classpath:subscribeMapper.xml</beans:value>
+				<beans:value>classpath:guestBookMapper.xml</beans:value>
+				<beans:value>classpath:visitMapper.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
 
-	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+	<beans:bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate">
 		<beans:constructor-arg name="sqlSessionFactory"
 			ref="sqlSessionFactory" />
+	</beans:bean>
+
+	<beans:bean id="so"
+		class="com.project.main.sej.HomeSiteOption">
+		<beans:constructor-arg value="4"></beans:constructor-arg>
+	</beans:bean>
+
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="100000000"></beans:property>
 	</beans:bean>
 
 </beans:beans>

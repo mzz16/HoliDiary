@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.main.mj_write.DiaryPostMapper">
+
+	<!-- 게시글 관련 -->
+	<select id="countPostList" resultType="int">
+		select count(*) from post where postWriter = #{postWriter}
+	</select>
+	
+	<select id="showAllPostList" resultType="com.project.main.mj_write.DiaryPost">
+		select * from 
+		(select rownum as rn, postNum, postTitle, postTxt, postDate, postWriter, postCategory, postCountry, postRecommend, postImg, postWeather, postView
+		from (select * from post where postWriter = #{postWriter} order by postDate desc)) where rn &gt;= #{start} and rn &lt;= #{end}
+		
+	</select>
+	
+	<select id="detailPost" resultType="com.project.main.mj_write.DiaryPost">
+		select * from post where postNum = #{postNum}
+	</select>
+	
+	<insert id="regPost" parameterType="com.project.main.mj_write.DiaryPost">
+		insert into post (postNum, postTitle, postTxt, postDate, postWriter, postImg, postCategory, postCountry) 
+		values(postNum_seq.nextval, #{postTitle}, #{postTxt}, sysdate, #{postWriter}, #{postImg}, #{postCategory}, #{postCountry})
+	</insert>
+	
+	<delete id="deleteDiaryPost" parameterType="com.project.main.mj_write.DiaryPost">
+		delete post where postNum = #{postNum}
+	</delete>
+	
+	<update id="updateDiaryPost" parameterType="com.project.main.mj_write.DiaryPost">
+		update post set postTitle = #{postTitle}, postTxt = #{postTxt}, postWriter = #{postWriter}, 
+		postImg = #{postImg}, postCategory = #{postCategory}, postCountry = #{postCountry}
+		where postNum = #{postNum}
+	</update>
+	
+	<update id="countPostView" parameterType="com.project.main.mj_write.DiaryPost">
+		update post set postView = postView + 1 where postNum = #{postNum}
+	</update>
+	
+	
+	
+</mapper>

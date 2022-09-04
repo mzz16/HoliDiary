@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.main.sej.Sej_postMapper">
+
+	<!-- <select id="getPostCount"
+		parameterType="com.project.main.sej.HomePostSelector"
+		resultType="java.lang.Integer">
+		select count(*)
+		from post, user_table
+		where postwriter = userid
+		and posttxt like '%'||#{search}||'%'
+	</select> -->
+
+	<select id="getPostCountBeta"
+		parameterType="com.project.main.sej.HomePostSelector"
+		resultType="java.lang.Integer">
+		select count(*)
+		from post
+		where posttitle like '%'||#{search}||'%' or postwriter like '%'||#{search}||'%' 
+		or posttxt like '%'||#{search}||'%' or postcountry like '%'||#{search}||'%'or postcategory like '%'||#{search}||'%'
+	</select>
+	
+	<select id="getPostCountFor_HoliByCountry"
+		parameterType="com.project.main.sej.HomePostSelector"
+		resultType="java.lang.Integer">
+		select count(*)
+		from post
+		where postcountry like '%'||#{search}||'%'
+	</select>
+	
+	<select id="getPost" resultType="com.project.main.sej.PostContent" parameterType="HomePostSelector">
+		select *
+		from (
+		select rownum as rn, postnum, posttitle, posttxt, postdate, postwriter, postcategory,
+		postcountry, postrecommend, postimg, postweather
+		from (
+		select * from post
+		where posttitle like '%'||#{search}||'%' or postwriter like '%'||#{search}||'%' 
+		or posttxt like '%'||#{search}||'%' or postcountry like '%'||#{search}||'%'or postcategory like '%'||#{search}||'%'
+		order by postdate desc
+		)
+		)
+		where rn &gt;= #{start} and rn &lt;= #{end}
+		
+	</select>
+	
+	<select id="getHoliByCountry" resultType="com.project.main.sej.PostContent" parameterType="HomePostSelector">
+		select *
+		from (
+		select rownum as rn, postnum, posttitle, posttxt, postdate, postwriter, postcategory,
+		postcountry, postrecommend, postimg, postweather
+		from (
+		select * from post
+		where postcountry like '%'||#{search}||'%' order by postdate desc
+		)
+		)
+		where rn &gt;= #{start} and rn &lt;= #{end}
+		
+	</select>
+
+	<select id="getHolinow" resultType="com.project.main.sej.PostContent">
+		select *
+    	from (
+    	select rownum as rn, postnum, posttitle, posttxt, postdate, postwriter, postcategory,
+    	postcountry, postrecommend, postimg, postweather
+    	from (select * from post order by postdate desc)
+   	 			)
+    	where rn &lt;=12
+	</select>
+	
+	<select id="getBestHoli" resultType="com.project.main.sej.PostContent">
+		select * from (select * from post order by postrecommend desc) where rownum &lt;=4
+	</select>
+	
+	<select id="getBestHoliRanking" resultType="com.project.main.sej.PostContent">
+		select * from (select * from post order by postrecommend desc) where rownum &lt;=3
+	</select>
+
+</mapper>

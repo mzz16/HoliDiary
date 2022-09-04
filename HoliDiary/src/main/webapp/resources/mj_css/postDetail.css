@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+#postDetail {
+	width: 100%;
+}
+
+#leftSide{
+	float: left;
+	margin-bottom: 10px;
+	color: grey;
+}
+
+.postDetailWriter{
+	float: left;
+	width: 10%;
+}
+
+.postDetailDate{
+	float: left;
+	width: 10%;	
+}
+
+.postDetailCategory{
+	float: left;
+	width: 10%;	
+}
+
+.postDetailCountry{
+	float: left;
+	width: 60%;	
+}
+
+#postDetailView {
+	width: 10%;
+}
+
+.postDetailTxt {
+	margin-top: 50px;
+}
+
+#rightSide {
+	float: right;
+}
+
+#GoToList {
+	float: right;
+}
+

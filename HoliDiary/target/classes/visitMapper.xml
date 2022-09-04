@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.main.js.VisitMapper">
+
+	<select id="getVisit" parameterType="map" resultType="int">
+		select count(*) 
+		from diary_visit 
+		where diaryhost = #{host}
+			and to_char(visittime, 'YYYYMMDD') = #{day}
+	</select>
+	
+	<insert id="countVisit" parameterType="map">
+		insert into diary_visit values(diary_visit_seq.nextval, #{diaryID}, #{userID}, sysdate)
+	</insert>
+	
+	<select id="getTodayVisit" parameterType="map" resultType="com.project.main.js.User">
+		select distinct u.usernickname, u.userimg, u.userid
+		from diary_visit d, user_table u
+		where to_char(d.visittime, 'YYYYMMDD') = #{today}
+			and d.diaryhost = #{userID}
+			and d.diaryvisitant = u.userid
+	</select>
+
+</mapper>

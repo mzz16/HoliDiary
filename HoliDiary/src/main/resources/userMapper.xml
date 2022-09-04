@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.main.js.UserMapper">
+
+	<insert id="join" parameterType="com.project.main.js.User">
+		insert into USER_TABLE values(#{userID}, #{userPW}, #{userName}, #{userPhoneNumber}, #{userEmail}, #{userImg}, #{userDiaryUrl}, #{userNickname}, null, null)
+	</insert>
+	
+	<insert id="joinWithKakao" parameterType="com.project.main.js.User">
+		insert into USER_TABLE values(#{userID}, #{userPW}, #{userName}, #{userPhoneNumber}, #{userEmail}, #{userImg}, #{userDiaryUrl}, #{userNickname}, #{kakaoID}, null)
+	</insert>
+	
+	<insert id="joinWithNaver" parameterType="com.project.main.js.User">
+		insert into USER_TABLE values(#{userID}, #{userPW}, #{userName}, #{userPhoneNumber}, #{userEmail}, #{userImg}, #{userDiaryUrl}, #{userNickname}, null, #{naverID})
+	</insert>
+	
+	<select id="getUserByID" resultType="com.project.main.js.User">
+		select * from user_table where userID = #{userID}
+	</select>
+	
+	<select id="getUserByKakaoID" resultType="com.project.main.js.User">
+		select * from user_table where kakaoID = #{kakaoID}
+	</select>
+	
+	<select id="getUserByNaverID" resultType="com.project.main.js.User">
+		select * from user_table where naverID = #{naverID}
+	</select>
+	
+	<update id="fileUpdate">
+		update user_table
+		set USERIMG = #{userImg}
+		where userID=#{userID}
+	</update>
+	
+	<select id="idCheck" resultType="int">
+		select count(*) from user_table where userID = #{userID}
+	</select>
+	
+	<select id="pwCheck" resultType="int">
+		select count(*) from user_table where userID = #{userID} and userPW = #{userPW}
+	</select>
+	
+	<select id="idCheckWithKakao" resultType="int">
+		select count(*) from user_table where kakaoID = #{kakaoID}
+	</select>
+	
+	<select id="idCheckWithNaver" resultType="int">
+		select count(*) from user_table where naverID = #{naverID}
+	</select>
+	
+	<select id="nickCheck" resultType="string">
+		select userNickname from user_table where userNickname = #{userNickname}
+	</select>
+	
+	<select id="findID" resultType="com.project.main.js.User">
+		select * from user_table where userName = #{userName} and userPhoneNumber = #{userPhoneNumber}
+	</select>
+	
+	<select id="findPW" resultType="com.project.main.js.User">
+		select * from user_table where userID = #{userID} and userEmail = #{userEmail}
+	</select>
+	
+	<update id="updatePW">
+		update user_table
+		set userPW = #{userPW}
+		where userID = #{userID}
+	</update>
+	
+	<delete id="deleteUser">
+		delete user_table where userID = #{userID}
+	</delete>
+	
+	<update id="disconnectKakao">
+		update user_table
+		set kakaoID = ''
+		where userID = #{userID}
+	</update>
+	
+	<update id="disconnectNaver">
+		update user_table
+		set naverID = ''
+		where userID = #{userID}
+	</update>
+	
+	<update id="updateUser">
+		update user_table
+		set userName = #{userName}, 
+			userPhoneNumber = #{userPhoneNumber}, 
+			userEmail = #{userEmail}, 
+			userNickname = #{userNickname},
+			userImg = #{userImg}
+		where userID = #{userID}
+	</update>
+	
+	<update id="updateKakao">
+		update user_table
+		set kakaoID = #{kakaoID}
+		where userID = #{userID}
+	</update>
+	
+	<update id="updateNaver">
+		update user_table
+		set naverID = #{naverID}
+		where userID = #{userID}
+	</update>
+	
+
+</mapper>
