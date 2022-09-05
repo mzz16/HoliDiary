@@ -31,7 +31,7 @@
   margin-top: 180px;
 }
 .bestHoliSliderPlace {
-  height: 1500px;
+  height: 700px;
   width: 100%;
   display: flex;
   font-family: "Montserrat", sans-serif;
@@ -39,14 +39,24 @@
  /*  justify-content: center; */
   align-items: center;
   /* margin-top: 180px; */
+  margin-top: 400px;
 }
 .bestHoliTitle {
  	font-family: 'Ballet Hormony';
  	color: #FFDE59;
  	letter-spacing: 1px;
- 	font-size: 50px;
+ 	font-size: 40px;
  	position: relative;
  	/* top: -100px; */
+}
+.bestHoliTitle h1 {
+	position: relative;
+	top: -140px;
+	left: 530px;
+}
+.bestHoliTitle img {
+	position: relative;
+	left: 600px;
 }
 .bestHoliTitle span {
  	color: #6667AB;
@@ -54,7 +64,7 @@
 .bestHoliRanking {
 	display: flex;
 	margin-bottom: 200px;
-	width: 1200px;
+	width: 1400px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -68,6 +78,16 @@
 .bestHoliRankingImg {
 	width: 391px;
 	height: 315px;
+	position: relative;
+	top: 110px;
+	left: -200px;
+}
+.bestHoliRankingImg img {
+	padding-right: 50px;
+}
+.bestHoliRankingImg:first-child {
+	position: relative;
+	top: 100px;
 }
 .bestHoliRankingImg img {
 	width: 100%;
