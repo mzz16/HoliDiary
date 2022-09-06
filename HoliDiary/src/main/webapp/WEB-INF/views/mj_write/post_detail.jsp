@@ -12,28 +12,31 @@
 </head>
 <body>
 
-	<div>
+	<div class="postTitle">
 		<h1>${DiaryPost.postTitle }</h1>
 	</div>
 
-	<div id="#postDetail" style="width: 100%">
-		<div>
-			<div id="leftSide" style="width: 100%">
-				<div style="width: 10%"></div>
-				<div class="postDetailWriter">작성자 : ${DiaryPost.postWriter }</div>
-				<input type="hidden" id="postDetailWriter" name="postDetailWriter"
-					value="${DiaryPost.postWriter }">
-				<div class="postDetailDate">${DiaryPost.postDate }</div>
-				<div class="postDetailCategory">카테고리 :
-					${DiaryPost.postCategory }</div>
-				<div class="postDetailCountry">국가 : ${DiaryPost.postCountry }</div>
-				<div class="postDetailView">조회수 ${DiaryPost.postView }</div>
+	<div>
+		<div id="#postDetail" style="width: 100%">
+			<div>
+				<div id="leftSide" style="width: 100%">
+					<div class="postDetailWriter">Writer: ${DiaryPost.postWriter }</div>
+					<input type="hidden" id="postDetailWriter" name="postDetailWriter"
+						value="${DiaryPost.postWriter }">
+					<div class="postDetailDate">Date: ${DiaryPost.postDate }</div>
+					<div class="postDetailCategory">Category:
+						${DiaryPost.postCategory }</div>
+					<div class="postDetailCountry">Country:
+						${DiaryPost.postCountry }</div>
+					<div class="postDetailView">Views ${DiaryPost.postView }</div>
+				</div>
 			</div>
 		</div>
-		<hr>
-		<div class="postDetailTxt">${DiaryPost.postTxt }</div>
+		<div>
+			<hr>
+			<div class="postDetailTxt">${DiaryPost.postTxt }</div>
+		</div>
 	</div>
-
 
 
 
@@ -69,20 +72,22 @@
 		<div id="rightSide">
 			<c:if
 				test="${DiaryPost.postWriter eq sessionScope.loginUser.userID }">
-				<button
+				<button class="postDetailUpDel-Btn"
 					onclick="updateDiaryPost('${DiaryPost.postWriter }', '${DiaryPost.postNum}', '${DiaryPostPaging.nowPage }', '${DiaryPostPaging.cntPerPage }')">수정</button>
-				<button
+				<button class="postDetailUpDel-Btn"
 					onclick="deleteDiaryPost('${DiaryPost.postNum}', '${DiaryPost.postWriter }', '${DiaryPost.postWriter }', '${DiaryPostPaging.nowPage }', '${DiaryPostPaging.cntPerPage }')">삭제</button>
 			</c:if>
+			
 			<!-- 공유버튼 -->
-			<a href="javascript:doDisplay();" style="float: right; font-size: 10pt; margin-left: 10px; color: black;"> 공유하기</a><br />
-			<br />
-			<div id="myDIV" style="display: none; float: right; text-align: right; position: relative;">
+			<a href="javascript:doDisplay();" class="postDetailShare-Btn">공유하기</a><br /> <br />
+			<div id="myDIV"
+				style="display: none; float: right; text-align: right; position: relative;">
 				<div id="mapage_mydiaryURL">
 					<input id="mp_mydiary_copyURL"
 						value="localhost/main/post.detail.go?postNum=${DiaryPost.postNum }&userId=${DiaryPost.postWriter }"
 						readonly />
 					<button type="button" id="mp_mydiary_copy_btn">copy</button>
+					
 					<div style="float: right;">
 						<div style="margin-right: 15px;">
 							<img alt="트위터" src="resources/btnDesign/icon-twitter.png">
@@ -90,8 +95,8 @@
 						</div>
 						<div style="margin-top: -50px;">
 							<a id="btnTwitter" class="link-icon2 twitter"
-								href="javascript:shareTwitter()">트위터</a> <a id="btnFacebook"
-								class="link-icon2 facebook" href="javascript:shareFacebook()">페이스북</a><br>
+								href="javascript:shareTwitter()">twitter</a> <a id="btnFacebook"
+								class="link-icon2 facebook" href="javascript:shareFacebook()">facebook</a><br>
 						</div>
 					</div>
 				</div>
@@ -101,25 +106,22 @@
 	</div>
 
 	<div id="goToListDiv" style="margin-top: 165px;">
-		<button
+		<button class="goToList-Btn" 
 			onclick="location.href='post-list?userId=${User.userID}&nowPage=1&cntPerPage=15'"
 			id="GoToList">목록으로</button>
 		<br>
 	</div>
-	<br>
-
-	<hr>
-	
-	
+		<hr>
 	<input type="hidden" value="${sessionScope.loginUser.userID }"
 		id="currentUser">
+
 	<h2>Comment</h2>
 	<!-- 댓글작성 -->
 	<form id="commentForm" name="commentForm">
 		<div style="font-size: 11pt;">
 			<strong>${sessionScope.loginUser.userID }</strong>
 		</div>
-		<div>
+		<div style="float: right;">
 			<input type="checkbox" id="commentSecret" name="commentSecret">
 			<label for="commentSecret">비밀댓글</label>
 		</div>
@@ -129,11 +131,12 @@
 				id="postWriter" name="postWriter" value="${DiaryPost.postWriter }">
 			<input type="hidden" id="commentWriter" name="commentWriter"
 				value="${sessionScope.loginUser.userID}">
-			<textarea name="commentTxt" id="commentTxt" placeholder="댓글을 입력해주세요." maxlength="800"
-				style="width: 95%; height: 100px; resize: none;"></textarea>
-			<button type="button" onclick="commentSubmit()">등록</button>
+			<textarea name="commentTxt" id="commentTxt" placeholder="댓글을 입력해주세요 (800자 이내)"
+				maxlength="800" style="width: 100%; height: 80px; resize: none;"></textarea>
+			<button class="postDetailReg-Btn" style="float: right" type="button" onclick="commentSubmit()">등록</button>
 		</div>
 	</form>
+	<div style="height: 50px;"></div>
 
 	<!-- 댓글목록 -->
 	<form id="commentListForm" name="commentListForm" method="GET">
@@ -372,7 +375,7 @@
 							html += '<span onclick="closeLayer(this)" style="cursor:pointer; font-size:1.5em" title="닫기">X</span>';
 							html += '</div>'
 //							html += '<p class="arrow_box" onclick="'+'location.href="popupHomeGo?userId="'+ data[i]["commentWriter"] + '>홈페이지 바로가기</p>';
-							html += '<p class="arrow_box" onclick="goThere('+data[i]["commentWriter"]+')">홈페이지 바로가기'+data[i]["commentWriter"]+'456</p>';
+							html += '<p class="arrow_box" onclick="goThere('+data[i]["commentWriter"]+')">홈페이지 바로가기 > '+data[i]["commentWriter"]+'456</p>';
 							html += '</div>'
 							
 							
@@ -395,13 +398,13 @@
 							html += '<input type="hidden" id="commentNum" value='+data[i]["commentNum"]+'>';
 							html += '<input type="hidden" id="commentParent" value='+data[i]["commentParent"]+'>';
 							html += '<input type="hidden" id="postNum" value='+data[i]["postNum"]+'>';
-							html += '<ul>'+data[i]["commentDate"]+'</ul>';
+							html += '<br><ul>'+data[i]["commentDate"]+'</ul>';
 							
 							if(currentUser == data[i]["commentWriter"])	{
-								html += '<button type="button" onclick="commentDelete('+ data[i]["commentNum"] +')" style="float: right; text-align: right; margin-left: 20px;">삭제</button>'; 
+								html += '<button class="postDetailUpDel-Btn" type="button" onclick="commentDelete('+ data[i]["commentNum"] +')" style="float: right; text-align: right; margin-left: 10px; margin-top: -20px;">삭제</button>'; 
 							}
 							
-							html += '<button type="button" onclick="recommentToggle('+ data[i]["commentParent"] + data[i]["postNum"] +')" style="float: right; text-align: right; margin-left: 20px;">답글</button>';
+							html += '<button class="postDetailUpDel-Btn" type="button" onclick="recommentToggle('+ data[i]["commentParent"] + data[i]["postNum"] +')" style="float: right; text-align: right; margin-left: 20px; margin-top: -20px;">답글</button>';
 							html += '</div>';
 							html += '<hr>'
 								
@@ -509,8 +512,5 @@
 			
 		 
 	</script>
-
-
-
 </body>
 </html>
