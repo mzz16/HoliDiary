@@ -81,6 +81,8 @@
 	position: relative;
 	top: 110px;
 	left: -200px;
+	background-color: #FFDE59;
+	border: 5px dashed #6667AB;
 }
 .bestHoliRankingImg img {
 	padding-right: 50px;
@@ -131,6 +133,15 @@
   .swiper-slide.swiper-slide-next .slide-image, .swiper-slide.swiper-slide-prev .slide-image, .swiper-slide.swiper-slide-duplicate-next .slide-image, .swiper-slide.swiper-slide-duplicate-prev .slide-image {
     transform: scale3d(1, 1, 1);
   }
+  .bestHoliRankingImg {
+	width: 391px;
+	height: 315px;
+	position: relative;
+	top: 110px;
+	left: -200px;
+	background-color: #FFDE59;
+	border: 5px dashed #6667AB;
+}
 }
 @media (min-width: 1024px) {
   .swiper-slide {
