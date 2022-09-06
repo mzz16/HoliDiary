@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="resources/mj_css/postDetail.css">
 <link rel="stylesheet" href="resources/mj_css/likeButton.css">
 </head>
-<body>
+<body">
 
 	<div>
 		<h1>${DiaryPost.postTitle }</h1>
@@ -137,7 +137,7 @@
 
 	<!-- 댓글목록 -->
 	<form id="commentListForm" name="commentListForm" method="GET">
-		<div id="commentList"></div>
+		<div id="commentList" style="position: relative;"></div>
 	</form>
 
 	<!-- 대댓글작성 -->
@@ -357,7 +357,7 @@
 						for (var i = 0; i < data.length; i++) {
 						
 							html += '<div class ="commentBox" style="width: 100%; margin-bottom: 30px; border: 1px solid white">';
-							html += '<ul class="commentName" style="font-size: 11pt"><strong>'+data[i]["commentWriter"]+'123</strong></ul>';
+							html += '<ul class="commentName" style="font-size: 11pt"><strong>'+data[i]["commentWriter"]+'</strong></ul>';
 							
 							
 							/* html += '<div class="popupLayer">'
@@ -367,14 +367,11 @@
 							html += '</div>' */
 							
 							
-							html += '<div class="popupLayer" tabindex="1" onblur="closeLayer2(this)">';
-							html += '<div>';
-							html += '<span onclick="closeLayer(this)" style="cursor:pointer; font-size:1.5em" title="닫기">X</span>';
-							html += '</div>'
+							html += '<div class="popupLayer" tabindex="1">';
+							html += '<span onclick="closeLayer(this)" style="float:right; cursor:pointer; font-size:1.5em" title="닫기"></span>';
 //							html += '<p class="arrow_box" onclick="'+'location.href="popupHomeGo?userId="'+ data[i]["commentWriter"] + '>홈페이지 바로가기</p>';
-							html += '<p class="arrow_box" onclick="goThere('+data[i]["commentWriter"]+')">홈페이지 바로가기'+data[i]["commentWriter"]+'456</p>';
+							html += '<p class="arrow_box" style="float:left; margin-top: -7px;" onclick="goThere('+"'"+data[i]["commentWriter"]+"'"+')">'+data[i]["commentWriter"]+'의 다이어리 바로가기</p>';
 							html += '</div>'
-							
 							
 							
 							//html += '<button type="button" onclick="goDiary('+ data[i]["commentWriter"] +')"> 홈페이지 바로가기 </button>';
@@ -392,16 +389,36 @@
 								html += '<ul>'+data[i]["commentTxt"]+'</ul>';
 							}
 							
-							html += '<input type="hidden" id="commentNum" value='+data[i]["commentNum"]+'>';
+							html += '<input type="hidden" id="commentNum" class="commentNum" value='+data[i]["commentNum"]+'>';
 							html += '<input type="hidden" id="commentParent" value='+data[i]["commentParent"]+'>';
 							html += '<input type="hidden" id="postNum" value='+data[i]["postNum"]+'>';
 							html += '<ul>'+data[i]["commentDate"]+'</ul>';
 							
 							if(currentUser == data[i]["commentWriter"])	{
 								html += '<button type="button" onclick="commentDelete('+ data[i]["commentNum"] +')" style="float: right; text-align: right; margin-left: 20px;">삭제</button>'; 
+								html += '<button id="commentUpdateBtn" type="button" onclick="commentUpdate('+ data[i]["postNum"] + ',' + data[i]["commentNum"] + ',' + "'" + data[i]["commentWriter"] + "'" + ',' + "'" + data[i]["commentTxt"] + "'" + ')" style="float: right; text-align: right; margin-left: 20px;">수정</button>';
+							}  else if(postMaster == currentUser) {
+								html += '<button type="button" onclick="commentDelete('+ data[i]["commentNum"] +')" style="float: right; text-align: right; margin-left: 20px;">삭제</button>'; 
 							}
 							
-							html += '<button type="button" onclick="recommentToggle('+ data[i]["commentParent"] + data[i]["postNum"] +')" style="float: right; text-align: right; margin-left: 20px;">답글</button>';
+							html += '<div id="updateCommentDIV" style="position: relative;">';
+							html += '<form id="commentUpdateForm" name="commentUpdateForm">';
+							html += '<div style="font-size: 11pt;">';
+							html += '<strong>' + data[i]["commentWriter"] + '</strong>';
+							html += '</div>';
+							html += '<div>';
+							html +=	'<input type="hidden" id="postNum_update" name="postNum" value="' + data[i]["postNum"] + '">'; 
+							html +=	'<input type="hidden" id="commentNum_update" name="commentNum" value="' + data[i]["commentNum"] + '">'; 
+							html +=	'<input type="hidden" id="commentWriter_update" name="commentWriter" value="' + data[i]["commentWriter"] + '">';
+							html +=	'<textarea name="commentTxt" id="commentTxt_update" maxlength="800" style="width: 95%; height: 100px; resize: none;">';
+							html += data[i]["commentTxt"];
+							html += '</textarea>';
+//							html +=	'<button type="button" onclick="commentTxtUpdate('+ data[i]["postNum"] + ',' + data[i]["commentNum"] + ',' + "'" + data[i]["commentWriter"] + "'" + ',' + "'" + data[i]["commentTxt"] + "'" + ')">수정</button>';
+							html +=	'<button type="button" onclick="commentTxtUpdate('+ data[i]["commentNum"] + ',' + "'" + data[i]["commentTxt"] + "'" + ')">수정</button>';
+							html += '</div>';
+							html += '</form>';
+							html += '</div>'
+							
 							html += '</div>';
 							html += '<hr>'
 								
@@ -424,6 +441,37 @@
 			});
 			
 		}
+		
+		
+	var bDisplay2 = true;	
+	function commentUpdate(postNum, commentNum, commentWriter, commentTxt) {
+		
+		console.log(commentNum);
+		console.log(postNum);
+		console.log(commentWriter);
+		console.log(commentTxt);
+		
+		var con = document.getElementById("updateCommentDIV"); 	
+        if(bDisplay2){ 		
+            con.style.display = 'none';
+            bDisplay2 = !bDisplay2;
+            
+        }else{ 		
+            con.style.display = 'block'; 	
+            bDisplay2 = !bDisplay2;
+        } 
+		
+		alert('33333333333333333');
+		
+		
+		//$("#commentNum" + commentNum).replaceWith(html);
+		//$("commentNum" + commentNum + "#commentTxt").focus();
+		
+		alert('안돼????????');
+	}
+		
+	
+		
 	function goThere(a) {
 		location.href="popupHomeGo?userId="+a;
 	}	
@@ -432,15 +480,12 @@
 		$(obj).parent().parent().hide();
 	}
 
-	function closeLayer2(obj) {
-		alert(111);
-		$(obj).css("display","none");
-	}
 			
 	function goDiary() {
 			let myStrong = $(".commentName").children();
+			let popupLayer;
 		$(myStrong).on("click", function(e) {
-			let popupLayer = $(this).parent().parent().find(".popupLayer");
+			popupLayer = $(this).parent().parent().find(".popupLayer");
 			console.log(popupLayer);
 			/* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
 			var sWidth = window.innerWidth;
@@ -449,25 +494,33 @@
 			var oHeight = $(popupLayer).height();
 
 			// 레이어가 나타날 위치를 셋팅한다.
-			var divLeft = e.clientX + 10;
-			var divTop = e.clientY + 5;
+//			var divLeft = e.clientX;
+//			var divTop = e.clientY;
+			var divLeft = e.offsetX;
+			var divTop = e.offsetYY;
 
+ 			console.log(divLeft);
+ 			console.log(divTop);
 			// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
-			if( divLeft + oWidth > sWidth ) divLeft -= oWidth;
-			if( divTop + oHeight > sHeight ) divTop -= oHeight;
+			//if( divLeft + oWidth > sWidth ) divLeft -= oWidth;
+			//if( divTop + oHeight > sHeight ) divTop -= oHeight;
 
 			// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
-			if( divLeft < 0 ) divLeft = 0;
-			if( divTop < 0 ) divTop = 0;
+			//if( divLeft < 0 ) divLeft = 0;
+			//if( divTop < 0 ) divTop = 0;
 			
 			$(popupLayer).css({
+				"width": 200,
+				"height": 30,
 				"top": divTop,
 				"left": divLeft,
 				"position": "absolute"
 			}).show();
 
-			
-			
+			$(popupLayer).focus();
+			$(popupLayer).blur(function() {
+				$(this).hide();
+			});
 			
 		});
 	}
@@ -494,16 +547,29 @@
 		}
 	}
 	 
-	 // 답글 작성칸 생성
-	 
-	 
-	 function recommentToggle(commentParent, postNum) {
-		 alert(commentParent);
-		 alert(postNum);
-		/* $("#recommentToggleBtn").click(function() {
-			$("#recommentVisible").toggle();
-		}); */
+	 function commentTxtUpdate(commentNum, commentTxt) {
+		 
+			$.ajax({
+				url : "commentUpdate.do",
+				type : "GET",
+				dataType : "text",
+				data : {
+					"commentNum": commentNum,
+					"commentTxt" : commentTxt
+				},
+				success : function(data) {
+					console.log(data);
+					if (data == 1){
+						alert('댓글 수정 성공');
+						getCommentList();
+					} else {
+						alert("댓글 수정 실패");
+					}
+				}
+
+			});
 	}
+	 
 			 
 			
 			
