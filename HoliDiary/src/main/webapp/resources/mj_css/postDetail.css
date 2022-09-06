@@ -4,34 +4,38 @@
 	width: 100%;
 }
 
-#leftSide{
-	float: left;
-	margin-bottom: 10px;
+#leftSide {
 	color: grey;
-}
-
-.postDetailWriter{
 	float: left;
-	width: 10%;
+	font-family: "DM Sans", sans-serif;
 }
 
-.postDetailDate{
+.postDetailWriter {
 	float: left;
-	width: 10%;	
+	padding-right: 15px;
+	font-family: "DM Sans", sans-serif;
 }
 
-.postDetailCategory{
+.postDetailDate {
 	float: left;
-	width: 10%;	
+	padding-right: 15px;
+	font-family: "DM Sans", sans-serif;
 }
 
-.postDetailCountry{
+.postDetailCategory {
 	float: left;
-	width: 60%;	
+	padding-right: 15px;
+	font-family: "DM Sans", sans-serif;
 }
 
-#postDetailView {
-	width: 10%;
+.postDetailCountry {
+	float: left;
+	font-family: "DM Sans", sans-serif;
+}
+
+.postDetailView {
+	float: right;
+	font-family: "DM Sans", sans-serif;
 }
 
 .postDetailTxt {
@@ -40,9 +44,196 @@
 
 #rightSide {
 	float: right;
+	text-align: right;
+	font-family: "DM Sans", sans-serif;
 }
 
 #GoToList {
 	float: right;
+	text-align: right;
 }
 
+.commentName {
+	cursor: pointer;
+	font-family: "DM Sans", sans-serif;
+}
+
+.popupLayer {
+	position: absolute;
+	display: none;
+	background-color: #ffffff;
+	border: solid 2px #d0d0d0;
+	width: 300px;
+	height: 60px;
+	padding: 10px;
+	text-align: center;
+	font-family: "DM Sans", sans-serif;
+}
+
+.popupLayer div {
+	position: absolute;
+	top: 5px;
+	right: 5px
+}
+
+.link-icon2 {
+	position: relative;
+	display: inline-block;
+	width: auto;
+	font-size: 10px;
+	font-weight: 500;
+	color: #333;
+	margin-right: 10px;
+	padding-top: 50px;
+}
+
+.link-icon2.twitter {
+	background-repeat: no-repeat;
+}
+
+.link-icon2.facebook {
+	background-repeat: no-repeat;
+}
+
+.mypage_myinfo_mydiaryURL {
+	text-align: right;
+	position: relative;
+}
+
+#mapage_mydiaryURL_box {
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	background-color: #FFDE59;
+	width: 130px;
+	height: 40px;
+	border-radius: 10px;
+	font-family: 'GangwonEdu_OTFBoldA';
+	font-size: 15pt;
+	cursor: pointer;
+}
+
+#mapage_mydiaryURL_box:hover {
+	background-color: #ffd737;
+}
+
+#mapage_mydiaryURL_box span {
+	position: absolute;
+	top: 28%;
+	left: 14%;
+}
+
+#mapage_mydiaryURL_box img {
+	width: 28px;
+	position: absolute;
+	top: 23%;
+	right: 10%;
+}
+
+.mypage_myinfo_mydiaryURL div:nth-child(2) {
+	display: none;
+	position: absolute;
+	top: 50px;
+	right: 0;
+	width: 300px;
+	height: 50px;
+	background-color: #fbf8f4;
+	border-radius: 10px;
+	box-shadow: 0 5px 18px -7px rgba(0, 0, 0, 1);
+}
+
+#mp_mydiary_copyURL {
+	width: 200px;
+	height: 30px;
+	border-radius: 5px;
+	padding: 5px;
+	margin-top: 10px;
+	border: 2px solid #c0c0c0;
+	outline: none;
+}
+
+#mp_mydiary_copy_btn {
+	font-family: "DM Sans", sans-serif;
+	width: 50px;
+	height: 30px;
+	border-radius: 10px;
+	border: none;
+	background-color: #7d7d7d;
+	color: #fff;
+	font-size: 12px;
+	margin-top: 10px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+/* -------------추가 css 작업-------------- */
+.postTitle {
+	font-family: "DM Sans", sans-serif;
+}
+
+#likeCnt {
+	font-family: "DM Sans", sans-serif;
+}
+
+.postDetailUpDel-Btn {
+	font-family: "DM Sans", sans-serif;
+	background-color: #7d7d7d;
+	border: none;
+	color: #fff;
+	border-radius: 10px;
+	font-size: 12px;
+	line-height: 20px;
+	margin: 0 auto;
+}
+
+.postDetailShare-Btn {
+	font-family: "DM Sans", sans-serif;
+	background-color: #6667AB;
+	border: none;
+	color: #ffffff;
+	border-radius: 10px;
+	font-size: 12px;
+	line-height: 30px;
+	padding: 3.5px;
+	/* float: right; */
+}
+
+.postDetailReg-Btn {
+	font-family: "DM Sans", sans-serif;
+	background-color: #7d7d7d;
+	border: none;
+	color: #ffffff;
+	border-radius: 10px;
+	font-size: 12px;
+	line-height: 30px;
+	padding: 3.5px;
+	width: 100px;
+}
+
+#myDIV {
+	margin-top: -15px;
+	padding: 20px 10px 10px 10px;
+	background-color: #e3e3e3;
+	border-radius: 10px;
+}
+
+.goToList-Btn {
+	font-family: "DM Sans", sans-serif;
+}
+
+h2 {
+	font-family: "DM Sans", sans-serif;
+}
+
+strong {
+	font-family: "DM Sans", sans-serif;
+}
+
+textarea::placeholder {
+	font-family: "DM Sans", sans-serif;
+}
+
+hr {
+	border: 0;
+	border-top: 1px solid gray;
+}

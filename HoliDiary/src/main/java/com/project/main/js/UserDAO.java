@@ -183,11 +183,10 @@ public class UserDAO {
 		if(u != null) {
 			req.setAttribute("loginPage", "kjs_user/after_login.jsp");
 			return true;
+		} else {
+			req.setAttribute("loginPage", "kjs_user/before_login.jsp");
+			return false;
 		}
-		
-		req.setAttribute("loginPage", "kjs_user/before_login.jsp");
-		return false;
-		
 	}
 
 	public void logout(HttpServletRequest req) {

@@ -12,26 +12,30 @@
 </head>
 <body>
 
-	<div>
+	<div class="postTitle">
 		<h1>${DiaryPost.postTitle }</h1>
 	</div>
 
-	<div id="#postDetail" style="width: 100%">
-		<div>
-			<div id="leftSide" style="width: 100%">
-				<div style="width: 10%"></div>
-				<div class="postDetailWriter">작성자 : ${DiaryPost.postWriter }</div>
-				<input type="hidden" id="postDetailWriter" name="postDetailWriter"
-					value="${DiaryPost.postWriter }">
-				<div class="postDetailDate">${DiaryPost.postDate }</div>
-				<div class="postDetailCategory">카테고리 :
-					${DiaryPost.postCategory }</div>
-				<div class="postDetailCountry">국가 : ${DiaryPost.postCountry }</div>
-				<div class="postDetailView">조회수 ${DiaryPost.postView }</div>
+	<div>
+		<div id="#postDetail" style="width: 100%">
+			<div>
+				<div id="leftSide" style="width: 100%">
+					<div class="postDetailWriter">Writer: ${DiaryPost.postWriter }</div>
+					<input type="hidden" id="postDetailWriter" name="postDetailWriter"
+						value="${DiaryPost.postWriter }">
+					<div class="postDetailDate">Date: ${DiaryPost.postDate }</div>
+					<div class="postDetailCategory">Category:
+						${DiaryPost.postCategory }</div>
+					<div class="postDetailCountry">Country:
+						${DiaryPost.postCountry }</div>
+					<div class="postDetailView">Views ${DiaryPost.postView }</div>
+				</div>
 			</div>
 		</div>
-		<hr>
-		<div class="postDetailTxt">${DiaryPost.postTxt }</div>
+		<div>
+			<hr>
+			<div class="postDetailTxt">${DiaryPost.postTxt }</div>
+		</div>
 	</div>
 
 
@@ -68,34 +72,56 @@
 		<div id="rightSide">
 			<c:if
 				test="${DiaryPost.postWriter eq sessionScope.loginUser.userID }">
-				<button
+				<button class="postDetailUpDel-Btn"
 					onclick="updateDiaryPost('${DiaryPost.postWriter }', '${DiaryPost.postNum}', '${DiaryPostPaging.nowPage }', '${DiaryPostPaging.cntPerPage }')">수정</button>
-				<button
+				<button class="postDetailUpDel-Btn"
 					onclick="deleteDiaryPost('${DiaryPost.postNum}', '${DiaryPost.postWriter }', '${DiaryPost.postWriter }', '${DiaryPostPaging.nowPage }', '${DiaryPostPaging.cntPerPage }')">삭제</button>
 			</c:if>
-
+			
+			<!-- 공유버튼 -->
+			<a href="javascript:doDisplay();" class="postDetailShare-Btn">공유하기</a><br /> <br />
+			<div id="myDIV"
+				style="display: none; float: right; text-align: right; position: relative;">
+				<div id="mapage_mydiaryURL">
+					<input id="mp_mydiary_copyURL"
+						value="localhost/main/post.detail.go?postNum=${DiaryPost.postNum }&userId=${DiaryPost.postWriter }"
+						readonly />
+					<button type="button" id="mp_mydiary_copy_btn">copy</button>
+					
+					<div style="float: right;">
+						<div style="margin-right: 15px;">
+							<img alt="트위터" src="resources/btnDesign/icon-twitter.png">
+							<img alt="페이스북" src="resources/btnDesign/icon-facebook.png">
+						</div>
+						<div style="margin-top: -50px;">
+							<a id="btnTwitter" class="link-icon2 twitter"
+								href="javascript:shareTwitter()">twitter</a> <a id="btnFacebook"
+								class="link-icon2 facebook" href="javascript:shareFacebook()">facebook</a><br>
+						</div>
+					</div>
+				</div>
+			</div>
 
 		</div>
 	</div>
-	<br>
-	<br>
-	<div id="goToListDiv">
-		<button
+
+	<div id="goToListDiv" style="margin-top: 165px;">
+		<button class="goToList-Btn" 
 			onclick="location.href='post-list?userId=${User.userID}&nowPage=1&cntPerPage=15'"
 			id="GoToList">목록으로</button>
+		<br>
 	</div>
-	<br>
-
-	<hr>
+		<hr>
 	<input type="hidden" value="${sessionScope.loginUser.userID }"
 		id="currentUser">
+
 	<h2>Comment</h2>
 	<!-- 댓글작성 -->
 	<form id="commentForm" name="commentForm">
 		<div style="font-size: 11pt;">
 			<strong>${sessionScope.loginUser.userID }</strong>
 		</div>
-		<div>
+		<div style="float: right;">
 			<input type="checkbox" id="commentSecret" name="commentSecret">
 			<label for="commentSecret">비밀댓글</label>
 		</div>
@@ -105,11 +131,12 @@
 				id="postWriter" name="postWriter" value="${DiaryPost.postWriter }">
 			<input type="hidden" id="commentWriter" name="commentWriter"
 				value="${sessionScope.loginUser.userID}">
-			<textarea name="commentTxt" id="commentTxt" placeholder="댓글을 입력해주세요."
-				style="width: 95%; height: 100px;"></textarea>
-			<button type="button" onclick="commentSubmit()">등록</button>
+			<textarea name="commentTxt" id="commentTxt" placeholder="댓글을 입력해주세요 (800자 이내)"
+				maxlength="800" style="width: 100%; height: 80px; resize: none;"></textarea>
+			<button class="postDetailReg-Btn" style="float: right" type="button" onclick="commentSubmit()">등록</button>
 		</div>
 	</form>
+	<div style="height: 50px;"></div>
 
 	<!-- 댓글목록 -->
 	<form id="commentListForm" name="commentListForm" method="GET">
@@ -155,7 +182,48 @@
 			}
 		}
 		
+		/*공유기능*/
+		var bDisplay = true;
+		function doDisplay(){ 	
+            var con = document.getElementById("myDIV"); 	
+            if(bDisplay){ 		
+                con.style.display = 'none';
+                bDisplay = !bDisplay;
+                
+            }else{ 		
+                con.style.display = 'block'; 	
+                bDisplay = !bDisplay;
+            } 
+        } 
 		
+		// 마이다이어리 복붙
+		$("#mp_mydiary_copy_btn").click(function() {
+		    // input에 담긴 데이터를 선택
+		    $('#mp_mydiary_copyURL').select();
+		    //  clipboard에 데이터 복사
+		    var copy = document.execCommand('copy');
+		    // 사용자 알림
+		    if(copy) {
+		    	alert("마이다이어리 주소가 복사되었습니다.");
+		    }
+		});
+		
+		/*트위터*/
+		function shareTwitter() {
+			var postNum = document.getElementById("postNum").value;
+			var userId = document.getElementById("postWriter").value;
+   			var sendUrl = "localhost/main/post.detail.go?postNum="+postNum+"&userId="+userId; // 전달할 URL
+   			console.log(sendUrl);
+   			window.open("https://twitter.com/intent/tweet?text=HoliDiary에서 나만의 여행 후기를 남겨보세요!😊 &url=" + sendUrl);
+		}
+		
+		/*페이스북*/
+		function shareFacebook() {
+			var postNum = document.getElementById("postNum").value;
+			var userId = document.getElementById("postWriter").value;
+    		var sendUrl = "localhost/main/post.detail.go?postNum="+postNum+"&userId="+userId; // 전달할 URL
+    		window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
+		}
 		
 		/*좋아요 기능*/
 		$(function() {
@@ -200,8 +268,6 @@
 				});
 			}
 			
-			
-			
 		});
 		
 		function checkLike2(postNum,userID) {
@@ -216,10 +282,10 @@
 				},
 				success : function(check) {
 					if (check == 1) {
-						alert("누른거 그럼 하트 빨강색");
+						//alert("누른거 그럼 하트 빨강색");
 						$(".heart").toggleClass("is-active");
 					} else  {
-						alert("안누른거 빈하트");
+						//alert("안누른거 빈하트");
 					}
 				},
 				error : function(request, status, error) {
@@ -228,10 +294,6 @@
 
 			});	
 		}
-		
-		
-		
-		
 		
 		/*모달창*/
 		const open = () => {
@@ -278,13 +340,6 @@
 
 			});
 		}
-				
-			
-		$(function() {
-			getCommentList();
-			goDiary();
-		});
-		
 			
 		function getCommentList() {
 			
@@ -304,9 +359,27 @@
 					if(data.length > 0) {
 						for (var i = 0; i < data.length; i++) {
 						
-							html += '<div style="width: 100%; margin-bottom: 30px; border: 1px solid white">';
-							html += '<ul style="font-size: 11pt"><strong>'+data[i]["commentWriter"]+'</strong></ul>';
-							html += '<p class="arrow_box" value="' + data[i]["commentWriter"] + '" onclick="goDiary()">홈페이지 바로가기</p>';
+							html += '<div class ="commentBox" style="width: 100%; margin-bottom: 30px; border: 1px solid white">';
+							html += '<ul class="commentName" style="font-size: 11pt"><strong>'+data[i]["commentWriter"]+'123</strong></ul>';
+							
+							
+							/* html += '<div class="popupLayer">'
+							html += '<div>'
+							html += '<p class="arrow_box" value="' + data[i]["commentWriter"] + '">홈페이지 바로가기</p>';
+							html += '</div>'
+							html += '</div>' */
+							
+							
+							html += '<div class="popupLayer" tabindex="1" onblur="closeLayer2(this)">';
+							html += '<div>';
+							html += '<span onclick="closeLayer(this)" style="cursor:pointer; font-size:1.5em" title="닫기">X</span>';
+							html += '</div>'
+//							html += '<p class="arrow_box" onclick="'+'location.href="popupHomeGo?userId="'+ data[i]["commentWriter"] + '>홈페이지 바로가기</p>';
+							html += '<p class="arrow_box" onclick="goThere('+data[i]["commentWriter"]+')">홈페이지 바로가기 > '+data[i]["commentWriter"]+'456</p>';
+							html += '</div>'
+							
+							
+							
 							//html += '<button type="button" onclick="goDiary('+ data[i]["commentWriter"] +')"> 홈페이지 바로가기 </button>';
 							html += '<br>';
 							
@@ -325,16 +398,15 @@
 							html += '<input type="hidden" id="commentNum" value='+data[i]["commentNum"]+'>';
 							html += '<input type="hidden" id="commentParent" value='+data[i]["commentParent"]+'>';
 							html += '<input type="hidden" id="postNum" value='+data[i]["postNum"]+'>';
-							html += '<ul>'+data[i]["commentDate"]+'</ul>';
+							html += '<br><ul>'+data[i]["commentDate"]+'</ul>';
 							
 							if(currentUser == data[i]["commentWriter"])	{
-								html += '<button type="button" onclick="commentDelete('+ data[i]["commentNum"] +')" style="float: right; text-align: right; margin-left: 20px;">삭제</button>'; 
+								html += '<button class="postDetailUpDel-Btn" type="button" onclick="commentDelete('+ data[i]["commentNum"] +')" style="float: right; text-align: right; margin-left: 10px; margin-top: -20px;">삭제</button>'; 
 							}
 							
-							html += '<button type="button" onclick="recommentToggle('+ data[i]["commentParent"] + data[i]["postNum"] +')" style="float: right; text-align: right; margin-left: 20px;">답글</button>';
+							html += '<button class="postDetailUpDel-Btn" type="button" onclick="recommentToggle('+ data[i]["commentParent"] + data[i]["postNum"] +')" style="float: right; text-align: right; margin-left: 20px; margin-top: -20px;">답글</button>';
 							html += '</div>';
 							html += '<hr>'
-							
 								
 						}
 						
@@ -346,6 +418,8 @@
 					}
 					
 					$("#commentList").html(html);
+					console.log('댓글로드');
+					goDiary();
 				},
 				error : function(request, status, error){
 					alert("통신실패22222");
@@ -353,16 +427,58 @@
 			});
 			
 		}
+	function goThere(a) {
+		location.href="popupHomeGo?userId="+a;
+	}	
+		
+	function closeLayer(obj) {
+		$(obj).parent().parent().hide();
+	}
+
+	function closeLayer2(obj) {
+		alert(111);
+		$(obj).css("display","none");
+	}
 			
 	function goDiary() {
-		alert(11);
-		/*document.getElementsByClassName("arrow_box");
-		$(".arrow_box").on("click",function(){
-			alert($(this).text())
-		});*/
+			let myStrong = $(".commentName").children();
+		$(myStrong).on("click", function(e) {
+			let popupLayer = $(this).parent().parent().find(".popupLayer");
+			console.log(popupLayer);
+			/* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
+			var sWidth = window.innerWidth;
+			var sHeight = window.innerHeight;
+			var oWidth = $(popupLayer).width();
+			var oHeight = $(popupLayer).height();
+
+			// 레이어가 나타날 위치를 셋팅한다.
+			var divLeft = e.clientX + 10;
+			var divTop = e.clientY + 5;
+
+			// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
+			if( divLeft + oWidth > sWidth ) divLeft -= oWidth;
+			if( divTop + oHeight > sHeight ) divTop -= oHeight;
+
+			// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+			if( divLeft < 0 ) divLeft = 0;
+			if( divTop < 0 ) divTop = 0;
+			
+			$(popupLayer).css({
+				"top": divTop,
+				"left": divLeft,
+				"position": "absolute"
+			}).show();
+
+			
+			
+			
+		});
 	}
 	
-		 
+	$(function() {
+		getCommentList();
+		console.log('레디호출끝')
+	});
 		
 	 function commentDelete(commentNum) {
 		var ok = confirm("정말 삭제하시겠습니까?");
@@ -396,8 +512,5 @@
 			
 		 
 	</script>
-
-
-
 </body>
 </html>

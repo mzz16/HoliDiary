@@ -12,22 +12,25 @@
 <script type="text/javascript">
 	function countPostChange() {
 		var countPost = document.getElementById('cntPerPage').value;
-		location.href="post-list?userId=${User.userID}&nowPage=${paging.nowPage}&cntPerPage="+countPost;
+		var category = document.getElementById('categoryName').value;
+		location.href="category-list?userId=${User.userID}&nowPage=${paging.nowPage}&cntPerPage="+countPost+"&category="+category;
 	}
 	
 	function getList() {
-		location.href="post-list?userId=${User.userID}&nowPage=1&cntPerPage=10";
+		var category = document.getElementById('categoryName').value;
+		location.href="category-list?userId=${User.userID}&nowPage=1&cntPerPage=10&category="+category;
 	}
 
 	function getGallery() {
-		location.href="post-Gallery?userId=${User.userID}&nowPage=1&cntPerPage=9";
+		var category = document.getElementById('categoryName').value;
+		location.href="category-gallery?userId=${User.userID}&nowPage=1&cntPerPage=9&category="+category;
 	}
 </script>
 
 <body>
-
-	<h1>POST</h1>
 	
+	<h1>POST</h1>
+
 	<div class="checks" style="text-align: right; margin-top: -25px;">
 	<input type="radio" id="ex_rd1" name="listType" value="List" checked="checked" onclick="getList()"/>
 	<label for="ex_rd1">List</label>&nbsp;
@@ -36,6 +39,7 @@
 	</div>
 
 	<input type="hidden" id="postWriter" name="postWriter" value="${User.userID}">
+	<input type="hidden" id="categoryName" name="categoryName" value="${param.category }">
 
 	<div id="countPost" style="height: 50px;">
 		<div style="float: right; margin-top: 10px;">
@@ -73,7 +77,7 @@
 
 	<div style="text-align: center; margin-top: 15px; font-size: 10pt;">
 		<c:if test="${paging.startPage != 1 }">
-			<a href="post-list?userId=${User.userID}&nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage }">&lt;</a>
+			<a href="category-list?userId=${User.userID}&nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage }&category=${param.category }">&lt;</a>
 		</c:if>
 		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 			<c:choose>
@@ -81,12 +85,12 @@
 					<b>${p }</b>
 				</c:when>
 				<c:when test="${p != paging.nowPage }">
-					<a href="post-list?userId=${User.userID}&nowPage=${p }&cntPerPage=${paging.cntPerPage }">${p }</a>
+					<a href="category-list?userId=${User.userID}&nowPage=${p }&cntPerPage=${paging.cntPerPage }&category=${param.category }">${p }</a>
 				</c:when>
 			</c:choose>
 		</c:forEach>
 		<c:if test="${paging.endPage != paging.lastPage }">
-			<a href="post-list?userId=${User.userID}&nowPage=${paging.endPage + 1}&cntPerPage=${paging.cntPerPage }">&gt;</a>
+			<a href="category-list?userId=${User.userID}&nowPage=${paging.endPage + 1}&cntPerPage=${paging.cntPerPage }&category=${param.category }">&gt;</a>
 		</c:if>
 	</div>
 	

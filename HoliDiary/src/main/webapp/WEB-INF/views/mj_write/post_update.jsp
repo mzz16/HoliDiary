@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,10 +40,18 @@
 
 			<div class="diaryPostCategory"
 				style="width: 10%; height: 20px; float: right; margin-top: -12px; font-size: 12px">
+				
+				<c:if test="${!empty Diary.categoriesArray }">
 				<select name="postCategory" id="postCategory">
 					<option selected>분류</option>
 					<option value="post">Post</option>
-				</select>                  
+					<c:forEach var="category" varStatus="status" items="${Diary.categoriesArray }">
+					<option class="item-link il-${status.count }" id="pageLink" value="${category }"> 
+					${category }
+					</option>
+					</c:forEach>
+				</select>
+				</c:if>                  
 			</div>
 
 			<div class="diaryPostCountry">
@@ -60,7 +69,7 @@
 			</div>
 
 			<div style="margin-top: 30px">
-				<textarea id="postTxt" name="postTxt"></textarea>
+				<textarea id="postTxt" name="postTxt" maxlength="10000"></textarea>
 			</div>
 			
 			<input type="hidden" id="postImg" name="postImg" value="${DiaryPost.postImg }">
@@ -77,7 +86,7 @@
 		$(document).ready(function() {
 			//여기 아래 부분
 			$('#postTxt').summernote({
-				height : 500,
+				height : 450,
 				focus : true,
 				lang : "ko-KR",
 				placeholder : '포스트를 작성해주세요',
