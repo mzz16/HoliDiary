@@ -211,14 +211,17 @@ public class WriteController {
 		} else {
 			req.setAttribute("popupContentPage", "popupBack.jsp");
 			return "ksm_main/popupBack";
+			
 		}
 		
 		
 		TokenMaker.make(req);
 		pDAO.getAllList(req, userId, pp, total, nowPage, cntPerPage);
 
-		req.setAttribute("popupContentPage", "../mj_write/post_list.jsp");
-		return "ksm_main/popup";
+		p.setPostWriter(userId);
+		return "redirect:post.detail.go?postNum=" + pDAO.getPostNum(p) + "&userId=" + userId;
+		/*req.setAttribute("popupContentPage", "../mj_write/post_list.jsp");
+		return "ksm_main/popup";*/
 	}
 
 	// 글 삭제
@@ -337,7 +340,7 @@ public class WriteController {
 	@ResponseBody
 	@RequestMapping(value = "/commentUpdate.do", method = RequestMethod.GET, produces = "application/json")
 	public int commentUpdateDo(HttpServletRequest req, User u, DiaryPost p, Comment c) {
-
+		
 		return pDAO.commentUpdate(req, u, p, c);
 	}
 
