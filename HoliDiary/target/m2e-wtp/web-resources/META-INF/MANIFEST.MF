@@ -1,6 +1,5 @@
 Manifest-Version: 1.0
-Built-By: narin
-Built-By: yumm5
+Built-By: user
 Build-Jdk: 14
 Created-By: Maven Integration for Eclipse
 
