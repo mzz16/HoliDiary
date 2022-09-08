@@ -488,9 +488,9 @@ public class DiaryPostDAO {
 			return ss.getMapper(LikeMapper.class).checkLike(l);
 	}
 
-	public String getPostNum(Diary d) {
+	public String getPostNum(DiaryPost p) {
 		
-		return ss.getMapper(DiaryPostMapper.class).getPostNum(d);
+		return ss.getMapper(DiaryPostMapper.class).getPostNum(p);
 		
 	}
 
