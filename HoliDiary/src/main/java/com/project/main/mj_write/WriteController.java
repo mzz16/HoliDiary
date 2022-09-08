@@ -209,8 +209,10 @@ public class WriteController {
 			dDAO.getDiaryInfo(req, d, userId, u, cate, s, c, p);
 			pDAO.regPost(req, userId, postImg, postTitle, postTxt, postCategory, postCountry);
 		} else {
-			req.setAttribute("popupContentPage", "popupBack.jsp");
-			return "ksm_main/popupBack";
+			//req.setAttribute("popupContentPage", "popupBack.jsp");
+			//return ksm_main/popupBack";
+			d.setDiaryUserId(userId);
+			return "redirect:post.detail.go?postNum=" + pDAO.getPostNum() + "&userId=" + userId;
 		}
 		
 		

@@ -56,7 +56,8 @@
 		</div>
 
 		<!-- 모달창 -->
-		<div class="modal hidden">
+		<!-- tabindex 속성을 주게되면 해당 속성을 가진 태그에 focus할 수 있게되고 focus가 가는 순간부터 키보드 입력이 가능해진다 -->
+		<div class="modal hidden" tabindex="0" >
 			<div class="bg"></div>
 			<div class="modalBox" style="z-index: 100">
 				<p>
@@ -267,24 +268,37 @@
 				},
 				error : function(request, status, error) {
 					alert("ajax 실패1");
+					console.log(request.responseText);
+					console.log(request.status);
+					console.log(error);
 				}
 
 			});	
 		}
 		
-		/*모달창*/
+		/*모달창*/	
+		const $modal = document.querySelector('.modal');
+
+		//$modal.style.display ='flex';
+		
 		const open = () => {
-		    document.querySelector(".modal").classList.remove("hidden");
+			$modal.classList.remove("hidden");
+			$modal.focus();
 		  }
 
-		  const close = () => {
-		    document.querySelector(".modal").classList.add("hidden");
-		  }
+		const close = () => {
+			$modal.classList.add("hidden");
+			
+		}
 
 		  document.querySelector(".like_result").addEventListener("click", open);
 		  document.querySelector(".closeBtn").addEventListener("click", close);
 		  document.querySelector(".bg").addEventListener("click", close);
-		
+		  $modal.addEventListener("keydown", close, e => {
+	    		console.log(e);
+	    		 if(e.key==='Escape') $modal.style.display = 'none';
+			});
+		  
 		  
 		 /*댓글창*/
 		function commentSubmit() {
