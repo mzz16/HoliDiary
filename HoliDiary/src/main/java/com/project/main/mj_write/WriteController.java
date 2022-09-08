@@ -209,18 +209,19 @@ public class WriteController {
 			dDAO.getDiaryInfo(req, d, userId, u, cate, s, c, p);
 			pDAO.regPost(req, userId, postImg, postTitle, postTxt, postCategory, postCountry);
 		} else {
-			//req.setAttribute("popupContentPage", "popupBack.jsp");
-			//return ksm_main/popupBack";
-			d.setDiaryUserId(userId);
-			return "redirect:post.detail.go?postNum=" + pDAO.getPostNum() + "&userId=" + userId;
+			req.setAttribute("popupContentPage", "popupBack.jsp");
+			return "ksm_main/popupBack";
+			
 		}
 		
 		
 		TokenMaker.make(req);
 		pDAO.getAllList(req, userId, pp, total, nowPage, cntPerPage);
 
-		req.setAttribute("popupContentPage", "../mj_write/post_list.jsp");
-		return "ksm_main/popup";
+		p.setPostWriter(userId);
+		return "redirect:post.detail.go?postNum=" + pDAO.getPostNum(p) + "&userId=" + userId;
+		/*req.setAttribute("popupContentPage", "../mj_write/post_list.jsp");
+		return "ksm_main/popup";*/
 	}
 
 	// 글 삭제

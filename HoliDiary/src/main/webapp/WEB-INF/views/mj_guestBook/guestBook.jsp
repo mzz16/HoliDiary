@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" href="resources/mj_css/postDetail.css">
 <link rel="stylesheet" href="resources/mj_css/guestBook.css">
 </head>
@@ -55,7 +56,7 @@
 			
 
 			if ($("#guestBookTxt").val() == '') {
-				alert('내용을 입력해주세요!');
+				alert == swal('내용을 입력해주세요!');
 				$("#guestBookTxt").focus();
 			}
 
@@ -72,8 +73,9 @@
 					if (data == 1) {
 						getGuestBookList();
 						$("#guestBookTxt").val('');
+						alert == swal("방명록이 등록되었습니다");
 					} else {
-						alert("방명록 등록 실패");
+						alert == swal("방명록 등록이 실패하였습니다");
 					}
 				}
 
@@ -97,7 +99,7 @@
 					var html = "";
 					let currentUser = $("#currentUser").val();
 					let guestBookMaster = $("#guestBookOwner").val();
-					console.log(data);
+					//console.log(data);
 					
 					if(data.length > 0) {
 						for (var i = 0; i < data.length; i++) {
@@ -138,7 +140,7 @@
 					goDiary();
 				},
 				error : function(request, status, error){
-					alert("통신실패22222");
+					//alert("통신실패22222");
 				}
 			});
 	
@@ -158,7 +160,7 @@
 				let popupLayer2;
 			$(bookWriter).on("click", function(e) {
 				popupLayer2 = $(this).parent().parent().find(".popupLayer");
-				console.log(popupLayer2);
+				//console.log(popupLayer2);
 				/* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
 				var sWidth = window.innerWidth;
 				var sHeight = window.innerHeight;
@@ -169,8 +171,8 @@
 				var divLeft = e.offsetX;
 				var divTop = e.offsetYY;
 
-	 			console.log(divLeft);
-	 			console.log(divTop);
+	 			//console.log(divLeft);
+	 			//console.log(divTop);
 				
 				$(popupLayer2).css({
 					"width": 200,
@@ -188,20 +190,38 @@
 		}
 		
 		function guestBookDelete(guestBookNum) {
-			var ok = confirm("정말 삭제하시겠습니까?");
-			//alert(guestBookNum);
-			if (ok) {
-				$.ajax({
-					type: "GET",
-					url: "guestBookDelete.do",
-					data : {"guestBookNum": guestBookNum},
-					dataType: "text",
-					success: function(data) {
-						console.log("삭제성공")
-						getGuestBookList();
-					}
-				});
-			}
+			confirm == swal("정말 삭제하시겠습니까?", {
+	            buttons: {
+	                  cancel: {
+	                        text: "취소",
+	                        value: false,
+	                        visible: true,
+	                        closeModal: true,
+	                      },
+	                      confirm: {
+	                        text: "삭제",
+	                        value: true,
+	                        visible: true,
+	                        closeModal: true
+	                      }
+	            }
+	                }).then((result) => {
+	                	if (result) {
+	        				$.ajax({
+	        					type: "GET",
+	        					url: "guestBookDelete.do",
+	        					data : {"guestBookNum": guestBookNum},
+	        					dataType: "text",
+	        					success: function(data) {
+	        						//console.log("삭제성공")
+	        						alert == swal("방명록이 삭제되었습니다.")
+	        						getGuestBookList();
+	        					}
+	        				});
+	        			}
+	                });
+			
+			
 		}
 	
 		
