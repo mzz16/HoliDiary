@@ -28,8 +28,8 @@
 	<form action="diaryPost.reg.do?nowPage=1&cntPerPage=15" method="post">
 		<div id="container" style="width: 100%">
 			<div class="postTitleWrite" style="font-size: 12pt;">
-				title : <input type="text" name="postTitle" class="postTitleWriteContent"
-					style="width: 70%; margin-left: 5px; border-bottom: 1px solid grey;">                     
+				<input type="text" name="postTitle" class="postTitleWriteContent" placeholder="제목을 입력하세요" 
+					style="width: 75%; margin-left: 5px; font-size:17pt; border-bottom: 1px solid grey;">                     
 			</div>
 
 			<div>
@@ -53,6 +53,7 @@
 				</select>
 				</c:if>                  
 			</div>
+			
 
 			<div class="diaryPostCountry">
 				<div class="diaryPostCountry"
@@ -89,7 +90,7 @@
 				height: 450,
 				focus: true,                
 				lang: "ko-KR",	
-				placeholder: '포스트를 작성해주세요',
+				placeholder: '포스트를 작성하세요',
 				callbacks : { 
 	            	onImageUpload : function(files, editor, welEditable) {
 	            // 파일 업로드(다중업로드를 위해 반복문 사용)
