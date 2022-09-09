@@ -24,6 +24,12 @@ public interface DiaryPostMapper {
 
 	public List<DiaryPost> showCategoryPostList(DiaryPost p);
 
+	public String getPostNum(DiaryPost p);
+
+	public List<DiaryPost> showAllPastList(DiaryPost p);
+
+	public List<DiaryPost> showAllRecommendList(DiaryPost p);
+
 	
 
 
