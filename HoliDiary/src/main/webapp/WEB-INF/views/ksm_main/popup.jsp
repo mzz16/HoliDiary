@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>HOLIDIARY</title>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript" src="resources/sm_js/sm_musicJs.js"></script>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
