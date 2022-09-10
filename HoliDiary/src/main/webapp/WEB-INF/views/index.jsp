@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>HOLIDIARY</title>
 
 <link rel="stylesheet" href="resources/sej_css/index.css">
 <link rel="stylesheet" href="resources/sej_css/home.css">
