@@ -346,14 +346,13 @@ body {
   /* padding: 20px 8px 8px 40px; */
   text-align: center;
   margin-left: 45px;
-  margin-bottom: 45px;
+  margin-bottom: 55px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 30px;
   color: #FFDE59;
   display: block;
   transition: 0.3s;
   font-family: 'GangwonEdu_OTFBoldA','Noto Sans KR',sans-serif;
-  font-size: 27px;
   width: 200px; 
 }
 #menu_bar .menu_bar_li:hover {

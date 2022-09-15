@@ -79,10 +79,10 @@
 			<input type="hidden" value="${sessionScope.loginUser.userID }" id="userID">
 			<input type="hidden" value="${Category.categoryUserId }" id="CuserID">
 			<span class="menu_bar_border"></span>
-			<a class="menu_bar_li" href="javascript:void(0);" onclick="return mypageCheckUser();">マイページ</a>
-			<a class="menu_bar_li" href="javascript:void(0)" onclick="goJP_Holinow()">ホリー NOW</a>
-			<a class="menu_bar_li" href="javascript:void(0)" onclick="goJP_BestHoli()">Best ホリー</a>
-			<a class="menu_bar_li" href="javascript:void(0)" onclick="goJP_ItemShop()">アイテムショップ</a>
+			<a class="menu_bar_li" href="javascript:void(0);" onclick="return mypageCheckUser();">MY PAGE</a>
+			<a class="menu_bar_li" href="javascript:void(0)" onclick="goJP_Holinow()">Holi Now</a>
+			<a class="menu_bar_li" href="javascript:void(0)" onclick="goJP_BestHoli()">Best Holi</a>
+			<a class="menu_bar_li" href="javascript:void(0)" onclick="goJP_ItemShop()">Item Shop</a>
 			<!-- <a class="menu_bar_li" href="">Map(임시)</a> -->
 			
 			
