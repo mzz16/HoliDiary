@@ -228,7 +228,7 @@ public class jp_WriteController {
 		return "jp_ksm_main/jp_popup";
 	}
 
-	@RequestMapping(value = "/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
+	@RequestMapping(value = "/jp_uploadSummernoteImageFile", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile,
 			HttpServletRequest request) {
