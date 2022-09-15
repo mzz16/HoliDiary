@@ -100,11 +100,11 @@
 		</div>
 		<div class="search_box">
 		<div class="search_img">
-		<a href="javascript:void(0)" onclick="goSearch()">
+		<a href="javascript:void(0)" onclick="goJPSearch()">
 		<img src="resources/sej_img/search_berry.png">
 		</a>
 		</div>
-		<input class="search_input" type="text" placeholder="検索">
+		<input class="search_input" type="text" placeholder="search">
 		</div>
 
 		<div class="top_menu_img_box">
