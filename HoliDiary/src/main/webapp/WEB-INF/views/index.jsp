@@ -98,6 +98,7 @@
 		<div>
 			<a class="japan_home_button" href="javascript:void(0)" onclick="goJP_home()">JAPAN</a>
 		</div>
+		<!-- 일본어 버튼 추가 -->
 		<div class="search_box">
 		<div class="search_img">
 		<a href="javascript:void(0)" onclick="goSearch()">
