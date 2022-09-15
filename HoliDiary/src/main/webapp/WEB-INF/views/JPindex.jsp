@@ -96,7 +96,7 @@
 		<img class="header_logo_img" src="resources/sej_img/logofit-removebg-preview.png">
 		</a>
 		<div>
-			<a class="japan_home_button" href="javascript:void(0)" onclick="goHome()">KOREA</a>
+			<a class="quick_home_button" href="javascript:void(0)" onclick="goHome()">KOREA</a>
 		</div>
 		<div class="search_box">
 		<div class="search_img">

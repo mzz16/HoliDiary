@@ -95,10 +95,10 @@
 		<a class="logo_img_go_home" href="javascript:void(0)" onclick="goHome()">
 		<img class="header_logo_img" src="resources/sej_img/logofit-removebg-preview.png">
 		</a>
-		<div>
-			<a class="japan_home_button" href="javascript:void(0)" onclick="goJP_home()">JAPAN</a>
-		</div>
 		<!-- 일본어 버튼 추가 -->
+		<div>
+			<a class="quick_home_button" href="javascript:void(0)" onclick="goJP_home()">JAPAN</a>
+		</div>
 		<div class="search_box">
 		<div class="search_img">
 		<a href="javascript:void(0)" onclick="goSearch()">

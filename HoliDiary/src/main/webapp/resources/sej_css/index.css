@@ -78,7 +78,7 @@ body {
 }
 
 .search_box {
-	margin-left: 800px;
+	margin-left: 750px;
 	margin-top: 100px;
 	width: 200px;
 	height: 50px;
@@ -105,6 +105,17 @@ body {
 
 .search_input::placeholder {
 	color: gray;
+}
+.quick_home_button {
+	text-decoration: none;
+	padding: 10px 15px 10px 15px;
+	height: 50px;
+	background-color: #6667AB;
+	color: #FFDE59;
+	position: relative;
+	top: 100px;
+	border-radius: 10px;
+	font-family: 'Montserrat';
 }
 /* 반응형 설정 부분 */
 /* PC (해상도 1024px)*/ 
