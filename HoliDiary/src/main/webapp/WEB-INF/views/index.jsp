@@ -24,6 +24,7 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="resources/sej_js/sej_go.js"></script>
+<script type="text/javascript" src="resources/sej_js/JP_sej_go.js"></script>
 <script type="text/javascript" src="resources/sej_js/sej_popup.js"></script>
 <script type="text/javascript" src="resources/kjs_js/kjs_kakao.js?ver=1"></script>
 <script type="text/javascript" src="resources/kjs_js/kjs_mypage.js?ver=1"></script>
@@ -94,6 +95,9 @@
 		<a class="logo_img_go_home" href="javascript:void(0)" onclick="goHome()">
 		<img class="header_logo_img" src="resources/sej_img/logofit-removebg-preview.png">
 		</a>
+		<div>
+			<a class="japan_home_button" href="javascript:void(0)" onclick="goJP_home()">JAPAN</a>
+		</div>
 		<div class="search_box">
 		<div class="search_img">
 		<a href="javascript:void(0)" onclick="goSearch()">
