@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="resources/kjs_css/kjs_find_user.css?ver=1">
 <link rel="styleSheet" href="resources/summernote/summernote-lite.css">
 <link rel="stylesheet" href="resources/mj_css/mj_write.css">
-<script type="text/javascript" src="resources/sm_js/sm_popupJs.js"></script>
+<script type="text/javascript" src="resources/jp_sm_js/jp_sm_popupJs.js"></script>
 <script type="text/javascript" src="resources/sej_js/jquery.js"></script>
 <script type="text/javascript" src="resources/sej_js/sej_home.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
