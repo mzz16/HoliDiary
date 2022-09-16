@@ -291,10 +291,10 @@
 }
 
 .join_file_reg_btn{
-	width: 100px;
+	display: inline-block;
 	height: 40px;
 	font-size: 12pt;
-	font-family: 'M PLUS Rounded 1c', sans-serif;
+	font-family: 'M PLUS Rounded 1c';
 	background-color: #6667AB;
 	color: white;
 	cursor: pointer;
@@ -302,10 +302,10 @@
 }
 
 .join_go_home_btn{
-	width: 150px;
+	display: inline-block;
 	height: 40px;
 	font-size: 12pt;
-	font-family: 'M PLUS Rounded 1c', sans-serif;
+	font-family: 'M PLUS Rounded 1c';
 	border: 2px solid #6667AB;
 	background-color: transparent;
 	color: #6667AB;

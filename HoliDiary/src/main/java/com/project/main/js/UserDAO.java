@@ -600,7 +600,7 @@ public class UserDAO {
 		if(ss.getMapper(UserMapper.class).findPW(u) != null) {
 			User dbUser = ss.getMapper(UserMapper.class).findPW(u);
 
-			String name = dbUser.getUserNickname();
+			String name = dbUser.getUserName();
 			String email = dbUser.getUserEmail();
 			// 8자리 랜덤 문자열 생성
 			String temporaryPW = getRandomString(8);
@@ -632,7 +632,7 @@ public class UserDAO {
 			if(ss.getMapper(UserMapper.class).findPW(u) != null) {
 				User dbUser = ss.getMapper(UserMapper.class).findPW(u);
 
-				String name = dbUser.getUserNickname();
+				String name = dbUser.getUserName();
 				String email = dbUser.getUserEmail();
 				// 8자리 랜덤 문자열 생성
 				String temporaryPW = getRandomString(8);
@@ -663,7 +663,7 @@ public class UserDAO {
 	public void mailSend(String userName, String userEmail, String pw) {
 		// Mail Server 설정
 		String charSet = "utf-8";
-		String hostSMTP = "smtp.naver.com";		
+		String hostSMTP = "smtp.gmail.com";		
 		String hostSMTPid = ""; // 본인의 아이디 입력		
 		String hostSMTPpwd = ""; // 비밀번호 입력
 			
@@ -703,7 +703,7 @@ public class UserDAO {
 			// Mail Server 설정
 			String charSet = "utf-8";
 			String hostSMTP = "smtp.gmail.com";		
-			String hostSMTPid = "tlawl912@gmail.com"; // 본인의 아이디 입력		
+			String hostSMTPid = ""; // 본인의 아이디 입력		
 			String hostSMTPpwd = ""; // 비밀번호 입력
 				
 			// 보내는 사람 EMail, 제목, 내용 

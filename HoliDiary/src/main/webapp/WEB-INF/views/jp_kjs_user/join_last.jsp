@@ -52,7 +52,7 @@
 						</div>
 					</div>
 					<div class="join_file_btn_box">
-						<button　type="button" class="join_go_home_btn" onclick="goJP_home()">後で登録します</button>
+						<button type="button" class="join_go_home_btn" onclick="goJP_home()">後で登録します</button>
 						<button class="join_file_reg_btn">登録します</button>
 					</div>
 				</div>
