@@ -668,7 +668,7 @@ public class UserDAO {
 		String hostSMTPpwd = ""; // 비밀번호 입력
 			
 		// 보내는 사람 EMail, 제목, 내용 
-		String fromEmail = "tlawl912@naver.com"; // 보내는 사람 eamil
+		String fromEmail = ""; // 보내는 사람 eamil
 		String fromName = "홀리다이어리";  // 보내는 사람 이름
 		String subject = "[홀리다이어리]임시 비밀번호가 발급되었습니다"; // 제목
 				
@@ -707,7 +707,7 @@ public class UserDAO {
 			String hostSMTPpwd = ""; // 비밀번호 입력
 				
 			// 보내는 사람 EMail, 제목, 내용 
-			String fromEmail = "tlawl912@gmail.com"; // 보내는 사람 eamil
+			String fromEmail = ""; // 보내는 사람 eamil
 			String fromName = "HOLIDIARY";  // 보내는 사람 이름
 			String subject = "[HOLIDIARY]臨時パスワードが発行されました。"; // 제목
 					
